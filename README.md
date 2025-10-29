@@ -118,13 +118,22 @@ From the Dimensions menu, select a mobile device preset (e.g., iPhone 12 Pro, Pi
 
 ![Device Selection](https://raw.githubusercontent.com/manighahrmani/sandwich_shop/refs/heads/main/images/screenshot_chrome_devtools_device_selection.png)
 
-### Assessment Criteria
+## Assessment Criteria
 
-In short, your objective is to reimplement the features and functionality of the existing Union Shop website ([https://shop.upsu.net](https://shop.upsu.net)) using Flutter. For detailed task requirements and marking criteria, please refer to the coursework document:
+Your objective is to reimplement as many features from the existing [Union Shop website](https://shop.upsu.net) as you can in your forked repository using Flutter.
+
+Here is non-exhaustive list of features you need to implement:
+
+- Homepage layout and design
+- Product listing page
+- Product detail page
+- Shopping cart functionality
+- User authentication (login/signup)
+- Responsive design for mobile and desktop
+
+The coursework document (also available on Moodle and the [homepage](https://manighahrmani.github.io/sandwich_shop/)) provided more details on the assessment criteria:
 
 **[Coursework Document](https://portdotacdotuk-my.sharepoint.com/:w:/g/personal/mani_ghahremani_port_ac_uk/EbM1UcwOHMRLmcKeI0btHqYBeZ3ADWjyN0EXBWdHLhsO_g?e=FDEQLt)**
-
-This document outlines the specification for your coursework, the breakdown of marks, submission guidelines, and deadlines.
 
 ## Project Structure
 
