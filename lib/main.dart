@@ -366,7 +366,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 12),
                             ElevatedButton(
-                              onPressed: null, // Button does not need to work
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
                                     const Color.fromARGB(255, 77, 41, 99),
