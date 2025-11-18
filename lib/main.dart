@@ -298,6 +298,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Opening Times
+                  // ignore: duplicate_ignore
                   // ignore: prefer_const_constructors
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,8 +320,10 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   // Newsletter Section
+                  // ignore: duplicate_ignore
                   // ignore: prefer_const_constructors
                   Expanded(
+                    // ignore: duplicate_ignore
                     // ignore: prefer_const_constructors
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -335,15 +338,18 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const TextField(
-                          // ignore: prefer_const_constructors
-                          decoration: InputDecoration(
-                            hintText: 'Enter your email',
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 12),
+                        // ignore: prefer_const_constructors
+                        SizedBox(
+                          width: 220, // Set your desired width here
+                          child: const TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Enter your email',
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 12),
+                            ),
+                            keyboardType: TextInputType.emailAddress,
                           ),
-                          keyboardType: TextInputType.emailAddress,
                         ),
                       ],
                     ),
