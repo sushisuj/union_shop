@@ -338,18 +338,52 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        // ignore: prefer_const_constructors
-                        SizedBox(
-                          width: 220, // Set your desired width here
-                          child: const TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Enter your email',
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 220,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.grey.shade300),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: const TextField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Enter your email',
+                                    border: InputBorder.none,
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 4),
+                                  ),
+                                  keyboardType: TextInputType.emailAddress,
+                                ),
+                              ),
                             ),
-                            keyboardType: TextInputType.emailAddress,
-                          ),
+                            const SizedBox(width: 12),
+                            ElevatedButton(
+                              onPressed: null, // Button does not need to work
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 77, 41, 99),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
+                              child: const Text(
+                                'Subscribe',
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
