@@ -318,6 +318,36 @@ class HomeScreen extends StatelessWidget {
                       Text('Sun: Closed', style: TextStyle(color: Colors.grey)),
                     ],
                   ),
+                  // Newsletter Section
+                  // ignore: prefer_const_constructors
+                  Expanded(
+                    // ignore: prefer_const_constructors
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        const Text(
+                          'Be the first to hear about offers',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const TextField(
+                          // ignore: prefer_const_constructors
+                          decoration: InputDecoration(
+                            hintText: 'Enter your email',
+                            isDense: true,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                      ],
+                    ),
+                  ),
                   // Help & Information
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
