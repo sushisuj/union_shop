@@ -327,8 +327,7 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Hydroflask with straw',
                           price: '£11.99',
-                          imageUrl:
-                              'assets/jug.png',
+                          imageUrl: 'assets/jug.jpg',
                         ),
                       ],
                     ),
