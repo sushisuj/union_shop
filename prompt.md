@@ -14,11 +14,13 @@
 
 - Private Notes: A GestureDetector in Flutter is a widget that detects and responds to user touch interactions, such as taps, drags, and swipes. A MouseRegion in Flutter is a widget that detects when the mouse pointer enters, exits, or hovers over its child, enabling hover effects and cursor changes.
 
+
 2. I want to add an "About Us" tab to my navigation bar at the top of the page. Use image attached for context. This tab should be clickable and, when clicked, should navigate the user to a separate About Us page. Please indicate where I should insert the destination route in the code.
 
 - Explanation of Generation: Added a clickable "About Us" tab to the navigation bar using a GestureDetector, and indicated where to insert the navigation route (Navigator.pushNamed(context, '/about')) to open the About Us page.
 
 - Private Notes: A navigation tab can be made clickable using a GestureDetector, and navigation between pages in Flutter is handled with Navigator.pushNamed and defined routes. Always import the target page and add its route to MaterialApp for seamless navigation.
+
 
 3. I have two product images ("Essential Grey Hoodie Mens" and "Essential Grey Hoodie Womens") in my online shop, but they appear at different sizes. How can I ensure both images display at the same size for a consistent layout, regardless of their original dimensions?
 
