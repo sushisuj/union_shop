@@ -1,1 +1,1 @@
-hello
+- [x] Example: Set up Flutter project structure
