@@ -76,6 +76,7 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
+                          // Logo
                           GestureDetector(
                             onTap: () {
                               navigateToHome(context);
@@ -98,6 +99,51 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
+                          // Centered navigation tabs
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  navigateToHome(
+                                      context); // Navigates to homepage
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/about');
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    'About Us',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          // Icons (search, person, bag, menu)
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
                             child: Row(
@@ -156,25 +202,6 @@ class HomeScreen extends StatelessWidget {
                                   onPressed: placeholderCallbackForButtons,
                                 ),
                               ],
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context,
-                                  '/about'); // <-- Insert your route here
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                'About Us',
-                                style: TextStyle(
-                                  color: Colors.deepPurple,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
                             ),
                           ),
                         ],
