@@ -1,3 +1,8 @@
+## Checklist Page
+- This documents acts as a guide for development as it covers all aspects of the marking rubric. Clear documentation of which tasks have been completed and which have not.
+
+
+## Basic (40%)
 - [ ] Static Homepage: Homepage layout and widgets with static content
 - [x] About Us Page: Static about us page with company information
 - [x] Footer: Footer with dummy links and information
@@ -7,3 +12,12 @@
 - [ ] Sale Collection: Page showing sale products with discounted prices and messaging
 - [ ] Authentication UI: Login/signup page with relevant forms
 - [ ] Static Navbar: Top navigation bar on desktop view
+
+## Intermediate (35%)
+
+- [ ] Cart: Shopping cart page showing selected products and totals
+- [ ] Checkout: Checkout page with form for delivery and payment details
+- [ ] Order Confirmation: Page confirming order details after checkout
+- [ ] Product Search: Search bar or page to find products by name or category
+- [ ] Product Filtering: Filter products by category, price, or other attributes
+- [ ] Responsive Design: Pages adapt for desktop and mobile screens
