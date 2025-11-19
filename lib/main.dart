@@ -318,13 +318,14 @@ class HomeScreen extends StatelessWidget {
                       Text('Sun: Closed', style: TextStyle(color: Colors.grey)),
                     ],
                   ),
-                  // Gap (Middle)
+
                   Expanded(child: Container()),
                   // Help and Information (Right)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const [
-                      Text(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
                         'Help and Information',
                         style: TextStyle(
                           color: Colors.black,
@@ -332,12 +333,11 @@ class HomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text('Search', style: TextStyle(color: Colors.grey)),
-                      Text('Terms and Conditions',
-                          style: TextStyle(color: Colors.grey)),
-                      Text('Contact Us', style: TextStyle(color: Colors.grey)),
-                      Text('FAQ', style: TextStyle(color: Colors.grey)),
+                      const SizedBox(height: 8),
+                      _FooterLink(text: 'Search'),
+                      _FooterLink(text: 'Terms and Conditions'),
+                      _FooterLink(text: 'Contact Us'),
+                      _FooterLink(text: 'FAQ'),
                     ],
                   ),
                 ],
@@ -402,6 +402,38 @@ class ProductCard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+// Add this widget below your HomeScreen class (outside any other class)
+class _FooterLink extends StatefulWidget {
+  final String text;
+  const _FooterLink({required this.text});
+
+  @override
+  State<_FooterLink> createState() => _FooterLinkState();
+}
+
+class _FooterLinkState extends State<_FooterLink> {
+  bool _isHovering = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovering = true),
+      onExit: (_) => setState(() => _isHovering = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {}, // Dummy link, does nothing
+        child: Text(
+          widget.text,
+          style: TextStyle(
+            color: _isHovering ? Colors.deepPurple : Colors.blue,
+            decoration: TextDecoration.underline,
+          ),
+        ),
       ),
     );
   }
