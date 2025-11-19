@@ -1,3 +1,7 @@
+
+## Prompt Bank
+
+## Layout Of Document
 - Prompt (What I said to the LLM)
 - Explanation (Explanation of what changes were made to my file by AI)
 - Private Notes (Notes so I can understand what the AI has generated, including new concepts)
