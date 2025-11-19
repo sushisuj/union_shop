@@ -415,7 +415,7 @@ class ProductCard extends StatelessWidget {
     if (title == 'Essential Grey Hoodie Mens' ||
         title == 'Essential Grey Hoodie Womens') {
       imageWidget = SizedBox(
-        height: 300, // Set desired height
+        height: 320, // Set desired height
         width: double.infinity,
         child: Image.asset(
           imageUrl,
@@ -432,14 +432,14 @@ class ProductCard extends StatelessWidget {
       );
     } else {
       imageWidget = SizedBox(
-        height: 300, // Same height for consistency
+        height: 320, // Same height for consistency
         width: double.infinity,
         child: Image.network(
           imageUrl,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
             return Container(
-              color: Colors.grey[300],
+              color: Colors.grey[320],
               child: const Center(
                 child: Icon(Icons.image_not_supported, color: Colors.grey),
               ),
