@@ -320,15 +320,15 @@ class HomeScreen extends StatelessWidget {
                           imageUrl: 'assets/grey_hoodie_woman.png',
                         ),
                         ProductCard(
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
+                          title: 'Black Baseball Cap',
+                          price: '£7.99',
                           imageUrl: 'assets/black_cap.png',
                         ),
                         ProductCard(
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
+                          title: 'Hydroflask with straw',
+                          price: '£11.99',
                           imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                              'assets/jug.png',
                         ),
                       ],
                     ),
