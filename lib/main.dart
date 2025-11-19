@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 
-// test commit for file migration
-
 void main() {
   runApp(const UnionShopApp());
 }
