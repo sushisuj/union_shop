@@ -14,3 +14,4 @@
 
 - Private Notes: A GestureDetector in Flutter is a widget that detects and responds to user touch interactions, such as taps, drags, and swipes. A MouseRegion in Flutter is a widget that detects when the mouse pointer enters, exits, or hovers over its child, enabling hover effects and cursor changes.
 
+2. I want to add a navbar element. i.e i want clickable titles at the top of the page mimicing the one in the image pasted. only create 1 element in this nav bar and call it "About Us" this needs to be clickable but i will provide the destination address if you indicate where in the code i must insert it.
