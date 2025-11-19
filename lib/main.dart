@@ -312,14 +312,12 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Essential Grey Hoodie Mens',
                           price: '£29.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/grey_hoodie.png',
                         ),
                         ProductCard(
                           title: 'Essential Grey Hoodie Womens',
                           price: '£29.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/grey_hoodie_woman.png',
                         ),
                         ProductCard(
                           title: 'Placeholder Product 3',
@@ -414,6 +412,44 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget imageWidget;
+    if (title == 'Essential Grey Hoodie Mens' ||
+        title == 'Essential Grey Hoodie Womens') {
+      imageWidget = SizedBox(
+        height: 300, // Set desired height
+        width: double.infinity,
+        child: Image.asset(
+          imageUrl,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              color: Colors.grey[300],
+              child: const Center(
+                child: Icon(Icons.image_not_supported, color: Colors.grey),
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      imageWidget = SizedBox(
+        height: 300, // Same height for consistency
+        width: double.infinity,
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              color: Colors.grey[300],
+              child: const Center(
+                child: Icon(Icons.image_not_supported, color: Colors.grey),
+              ),
+            );
+          },
+        ),
+      );
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/product');
@@ -421,20 +457,7 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
-                  ),
-                );
-              },
-            ),
-          ),
+          imageWidget,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

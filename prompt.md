@@ -19,3 +19,9 @@
 - Explanation of Generation: Added a clickable "About Us" tab to the navigation bar using a GestureDetector, and indicated where to insert the navigation route (Navigator.pushNamed(context, '/about')) to open the About Us page.
 
 - Private Notes: A navigation tab can be made clickable using a GestureDetector, and navigation between pages in Flutter is handled with Navigator.pushNamed and defined routes. Always import the target page and add its route to MaterialApp for seamless navigation.
+
+3. I have two product images ("Essential Grey Hoodie Mens" and "Essential Grey Hoodie Womens") in my online shop, but they appear at different sizes. How can I ensure both images display at the same size for a consistent layout, regardless of their original dimensions?
+
+- Explanation of Generation: Wrapped both product images in a SizedBox with a fixed height and width, ensuring they display at the same size regardless of their original dimensions, which creates a consistent layout in your product grid.
+
+- Private Notes: Next time you have 2 or more images of different sizes, you can contain them in a sized box which should restrict/resize images.
