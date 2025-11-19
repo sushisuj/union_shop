@@ -21,3 +21,17 @@
 - [ ] Product Search: Search bar or page to find products by name or category
 - [ ] Product Filtering: Filter products by category, price, or other attributes
 - [ ] Responsive Design: Pages adapt for desktop and mobile screens
+
+## Advanced (25%)
+
+- [ ] Authentication System: Full user authentication and account management
+- [ ] Cart Management: Full cart functionality with quantity editing, price calculations, and persistence
+- [ ] Search System: Complete search functionality on navbar and footer
+
+
+## Software Practices
+
+- [ ] Git: Regular, small, meaningful commits with clear commit messages
+- [ ] README: A comprehensive, well-formatted and accurate README file
+- [ ] Testing: Tests covering all or almost all of the application; passing tests
+- [ ] External Services: Integration and utilization of cloud services
