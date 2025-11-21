@@ -3,7 +3,7 @@
 
 
 ## Basic (40%)
-- [ ] Static Homepage: Homepage layout and widgets with static content
+- [x] Static Homepage: Homepage layout and widgets with static content
 - [x] About Us Page: Static about us page with company information
 - [x] Footer: Footer with dummy links and information
 - [ ] Dummy Collections Page: Page displaying various collections of products
