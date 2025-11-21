@@ -27,3 +27,9 @@
 - Explanation of Generation: Wrapped both product images in a SizedBox with a fixed height and width, ensuring they display at the same size regardless of their original dimensions, which creates a consistent layout in your product grid.
 
 - Private Notes: Next time you have 2 or more images of different sizes, you can contain them in a sized box which should restrict/resize images.
+
+4. I have added a "Shop" dropdown tab to my navbar. I want the dropdown menu to appear above all page content, including the hero section, so that it overlays the hero and avoids any overflow errors when expanded.
+
+- Explanation of Generation: Implemented the "Shop" dropdown using an OverlayEntry so the menu appears above all page content, including the hero section, preventing overflow errors when expanded.
+
+- Private Notes: OverlayEntry lets you display widgets above all other content, making it ideal for dropdowns and popups that need to overlay sections like the hero without causing layout or overflow issues.

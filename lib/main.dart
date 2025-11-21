@@ -526,76 +526,104 @@ class _ShopDropdownState extends State<_ShopDropdown> {
     // Add more options as needed
   ];
 
+  OverlayEntry? _dropdownOverlay;
   bool _isDropdownOpen = false;
+
+  void _showDropdown(BuildContext context) {
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final position = renderBox.localToGlobal(Offset.zero);
+
+    _dropdownOverlay = OverlayEntry(
+      builder: (context) => Positioned(
+        left: position.dx,
+        top: position.dy + renderBox.size.height,
+        child: Material(
+          elevation: 4,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.deepPurple),
+              borderRadius: BorderRadius.circular(6),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 4,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: options.map((option) {
+                return GestureDetector(
+                  onTap: () {
+                    // TODO: Add navigation logic here
+                    _removeDropdown();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: Text(
+                      option,
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(_dropdownOverlay!);
+    setState(() => _isDropdownOpen = true);
+  }
+
+  void _removeDropdown() {
+    _dropdownOverlay?.remove();
+    _dropdownOverlay = null;
+    setState(() => _isDropdownOpen = false);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (_) => setState(() => _isDropdownOpen = true),
-      onExit: (_) => setState(() => _isDropdownOpen = false),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GestureDetector(
-            onTap: () => setState(() => _isDropdownOpen = !_isDropdownOpen),
-            child: Row(
-              children: [
-                Text(
-                  'Shop',
-                  style: TextStyle(
-                    color: Colors.deepPurple,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-                Icon(
-                  _isDropdownOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                  color: Colors.deepPurple,
-                ),
-              ],
-            ),
-          ),
-          if (_isDropdownOpen)
-            Container(
-              margin: const EdgeInsets.only(top: 4),
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.deepPurple),
-                borderRadius: BorderRadius.circular(6),
-                // ignore: prefer_const_literals_to_create_immutables
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: options.map((option) {
-                  return GestureDetector(
-                    onTap: () {
-                    
-                      setState(() => _isDropdownOpen = false);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6),
-                      child: Text(
-                        option,
-                        style: TextStyle(
-                          color: Colors.deepPurple,
-                          fontSize: 15,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
+      onEnter: (_) {
+        if (!_isDropdownOpen) _showDropdown(context);
+      },
+      onExit: (_) {
+        if (_isDropdownOpen) _removeDropdown();
+      },
+      child: GestureDetector(
+        onTap: () {
+          if (_isDropdownOpen) {
+            _removeDropdown();
+          } else {
+            _showDropdown(context);
+          }
+        },
+        child: Row(
+          children: [
+            Text(
+              'Shop',
+              style: TextStyle(
+                color: Colors.deepPurple,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
               ),
             ),
-        ],
+            Icon(
+              _isDropdownOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+              color: Colors.deepPurple,
+            ),
+          ],
+        ),
       ),
     );
   }
