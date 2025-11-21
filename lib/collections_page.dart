@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -8,19 +8,19 @@ class CollectionsPage extends StatelessWidget {
   final List<_CollectionItem> collections = const [
     _CollectionItem(
       title: 'Essentials',
-      image: 'assets/essentials.jpg',
+      image: 'assets/essentials.png',
     ),
     _CollectionItem(
       title: 'Winter Collection',
-      image: 'assets/winter.jpg',
+      image: 'assets/winter.png',
     ),
     _CollectionItem(
       title: 'Merchandise',
-      image: 'assets/merchandise.jpg',
+      image: 'assets/merchandise.png',
     ),
     _CollectionItem(
       title: 'Personalisation',
-      image: 'assets/personalisation.jpg',
+      image: 'assets/personalisation.png',
     ),
   ];
 
@@ -28,97 +28,110 @@ class CollectionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Purple header
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            color: const Color(0xFF4d2963),
-            child: const Text(
-              'Our Biggest Sale of the Year is Here! Up to 50% Off Selected Items. Shop Now!',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ),
-          // Navbar
-          Container(
-            height: 60,
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          // Main content (everything except footer)
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
               children: [
-                _NavTab(
-                    title: 'Home',
-                    onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/', (route) => false);
-                    }),
-                _NavTab(title: 'Shop', onTap: () {}),
-                _NavTab(
-                    title: 'About Us',
-                    onTap: () {
-                      Navigator.pushNamed(context, '/about');
-                    }),
+                // Purple header
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  color: const Color(0xFF4d2963),
+                  child: const Text(
+                    'Our Biggest Sale of the Year is Here! Up to 50% Off Selected Items. Shop Now!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+                // Navbar
+                Container(
+                  height: 60,
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _NavTab(
+                          title: 'Home',
+                          onTap: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, '/', (route) => false);
+                          }),
+                      _NavTab(title: 'Shop', onTap: () {}),
+                      _NavTab(
+                          title: 'About Us',
+                          onTap: () {
+                            Navigator.pushNamed(context, '/about');
+                          }),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+                const Center(
+                  child: Text(
+                    'Collections',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    crossAxisCount:
+                        MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 32,
+                    children: collections.map((item) {
+                      return GestureDetector(
+                        onTap: () {
+                          // TODO: Add navigation logic for each collection
+                        },
+                        child: Stack(
+                          children: [
+                            // Background image with opacity
+                            Positioned.fill(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.asset(
+                                  item.image,
+                                  fit: BoxFit.cover,
+                                  color: Colors.black.withOpacity(0.7),
+                                  colorBlendMode: BlendMode.darken,
+                                ),
+                              ),
+                            ),
+                            // Overlay text
+                            Center(
+                              child: Text(
+                                item.title,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                const SizedBox(height: 32),
               ],
             ),
           ),
-          // Collections Title
-          const SizedBox(height: 32),
-          const Text(
-            'Collections',
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              letterSpacing: 1,
-            ),
-          ),
-          const SizedBox(height: 32),
-          // Collection boxes
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: MediaQuery.of(context).size.width > 600 ? 2 : 1,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 32,
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              children: collections.map((item) {
-                return GestureDetector(
-                  onTap: () {
-                    // TODO: Add navigation logic for each collection
-                  },
-                  child: Stack(
-                    children: [
-                      // Background image with opacity
-                      Positioned.fill(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            item.image,
-                            fit: BoxFit.cover,
-                            color: Colors.black.withOpacity(0.7),
-                            colorBlendMode: BlendMode.darken,
-                          ),
-                        ),
-                      ),
-                      // Overlay text
-                      Center(
-                        child: Text(
-                          item.title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          // Footer (copy from your main file)
+          // Footer
           Container(
             width: double.infinity,
             color: Colors.grey[50],
@@ -127,7 +140,6 @@ class CollectionsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Opening Times (Left)
-                // ignore: prefer_const_constructors
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [

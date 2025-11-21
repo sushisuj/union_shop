@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/about_page.dart';
+import 'package:union_shop/collections_page.dart'; // Add this import
 
 void main() {
   runApp(const UnionShopApp());
@@ -26,7 +27,8 @@ class UnionShopApp extends StatelessWidget {
       // In your browser, try this link: http://localhost:49856/#/product
       routes: {
         '/product': (context) => const ProductPage(),
-        '/about': (context) => const AboutPage(), // Add this line
+        '/about': (context) => const AboutPage(),
+        '/collections': (context) => const CollectionsPage(), // Add this line
       },
     );
   }
@@ -371,7 +373,6 @@ class HomeScreen extends StatelessWidget {
                   // Help and Information (Right)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                 
                     children: [
                       const Text(
                         'Help and Information',
@@ -559,8 +560,11 @@ class _ShopDropdownState extends State<_ShopDropdown> {
               children: options.map((option) {
                 return GestureDetector(
                   onTap: () {
-                    // TODO: Add navigation logic here
-                    _removeDropdown();
+                    Navigator.pushNamed(context,
+                        '/collections'); // <-- Navigates to collections page
+                    if (_isDropdownOpen) {
+                      _removeDropdown();
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6),
@@ -607,22 +611,31 @@ class _ShopDropdownState extends State<_ShopDropdown> {
             _showDropdown(context);
           }
         },
-        child: Row(
-          children: [
-            Text(
-              'Shop',
-              style: TextStyle(
-                color: Colors.deepPurple,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                decoration: TextDecoration.underline,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(
+                context, '/collections'); // <-- Navigates to collections page
+            if (_isDropdownOpen) {
+              _removeDropdown();
+            }
+          },
+          child: Row(
+            children: [
+              Text(
+                'Shop',
+                style: TextStyle(
+                  color: Colors.deepPurple,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  decoration: TextDecoration.underline,
+                ),
               ),
-            ),
-            Icon(
-              _isDropdownOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-              color: Colors.deepPurple,
-            ),
-          ],
+              Icon(
+                _isDropdownOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                color: Colors.deepPurple,
+              ),
+            ],
+          ),
         ),
       ),
     );
