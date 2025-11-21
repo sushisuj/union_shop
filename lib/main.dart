@@ -122,6 +122,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              // Shop dropdown
+                              _ShopDropdown(),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pushNamed(context, '/about');
@@ -505,6 +507,95 @@ class _FooterLinkState extends State<_FooterLink> {
             decoration: TextDecoration.underline,
           ),
         ),
+      ),
+    );
+  }
+}
+
+// Add this widget below your _FooterLink class (outside any other class)
+class _ShopDropdown extends StatefulWidget {
+  @override
+  State<_ShopDropdown> createState() => _ShopDropdownState();
+}
+
+class _ShopDropdownState extends State<_ShopDropdown> {
+  final List<String> options = [
+    'Hoodies',
+    'Caps',
+    'Hydroflasks',
+    // Add more options as needed
+  ];
+
+  bool _isDropdownOpen = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isDropdownOpen = true),
+      onExit: (_) => setState(() => _isDropdownOpen = false),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GestureDetector(
+            onTap: () => setState(() => _isDropdownOpen = !_isDropdownOpen),
+            child: Row(
+              children: [
+                Text(
+                  'Shop',
+                  style: TextStyle(
+                    color: Colors.deepPurple,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+                Icon(
+                  _isDropdownOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  color: Colors.deepPurple,
+                ),
+              ],
+            ),
+          ),
+          if (_isDropdownOpen)
+            Container(
+              margin: const EdgeInsets.only(top: 4),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.deepPurple),
+                borderRadius: BorderRadius.circular(6),
+                // ignore: prefer_const_literals_to_create_immutables
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: options.map((option) {
+                  return GestureDetector(
+                    onTap: () {
+                    
+                      setState(() => _isDropdownOpen = false);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Text(
+                        option,
+                        style: TextStyle(
+                          color: Colors.deepPurple,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+        ],
       ),
     );
   }
