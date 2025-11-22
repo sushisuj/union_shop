@@ -1,8 +1,65 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 
-class EssentialsPage extends StatelessWidget {
+class EssentialsPage extends StatefulWidget {
   const EssentialsPage({super.key});
+
+  @override
+  State<EssentialsPage> createState() => _EssentialsPageState();
+}
+
+class _EssentialsPageState extends State<EssentialsPage> {
+  final _searchController = TextEditingController();
+  String _selectedCategory = 'All';
+
+  final List<_Product> _products = [
+    _Product(
+      title: 'Essential Grey Hoodie Mens',
+      price: '£29.99',
+      imageUrl: 'assets/grey_hoodie.png',
+      category: 'Jumpers',
+    ),
+    _Product(
+      title: 'Essential Grey Hoodie Womens',
+      price: '£29.99',
+      imageUrl: 'assets/grey_hoodie_woman.png',
+      category: 'Jumpers',
+    ),
+    _Product(
+      title: 'Essential White T-Shirt Mens',
+      price: '£12.99',
+      imageUrl: 'assets/essentials.png',
+      category: 'Tee',
+    ),
+    _Product(
+      title: 'Essential White T-Shirt Womens',
+      price: '£12.99',
+      imageUrl: 'assets/essentials2.png',
+      category: 'Tee',
+    ),
+    _Product(
+      title: 'Lanyard Card Holder',
+      price: '£2.99',
+      imageUrl: 'assets/merchandise.png',
+      category: 'Merchandise',
+    ),
+    _Product(
+      title: 'Essential USB-C Charger',
+      price: '£12.99',
+      imageUrl: 'assets/charger.png',
+      category: 'Merchandise',
+    ),
+  ];
+
+  List<_Product> get _filteredProducts {
+    final query = _searchController.text.toLowerCase();
+    return _products.where((product) {
+      final matchesCategory =
+          _selectedCategory == 'All' || product.category == _selectedCategory;
+      final matchesQuery = product.title.toLowerCase().contains(query);
+      return matchesCategory && matchesQuery;
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,49 +112,79 @@ class EssentialsPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      // Search and Filter
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _searchController,
+                                onChanged: (value) {
+                                  setState(() {});
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Search products...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade400,
+                                    ),
+                                  ),
+                                  prefixIcon: Icon(Icons.search),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            DropdownButton<String>(
+                              value: _selectedCategory,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  _selectedCategory = newValue!;
+                                });
+                              },
+                              items: <String>[
+                                'All',
+                                'Jumpers',
+                                'Tee',
+                                'Merchandise'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.grey.shade400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       // Products
                       Padding(
                         padding: const EdgeInsets.all(40.0),
-                        child: GridView.count(
+                        child: GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount:
-                              MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                          crossAxisSpacing: 24,
-                          mainAxisSpacing: 48,
-                          childAspectRatio: 2.5,
-                          children: const [
-                            ProductCard(
-                              title: 'Essential Grey Hoodie Mens',
-                              price: '£29.99',
-                              imageUrl: 'assets/grey_hoodie.png',
-                            ),
-                            ProductCard(
-                              title: 'Essential Grey Hoodie Womens',
-                              price: '£29.99',
-                              imageUrl: 'assets/grey_hoodie_woman.png',
-                            ),
-                            ProductCard(
-                              title: 'Essential White T-Shirt Mens',
-                              price: '£12.99',
-                              imageUrl: 'assets/essentials.png',
-                            ),
-                            ProductCard(
-                              title: 'Essential White T-Shirt Womens',
-                              price: '£12.99',
-                              imageUrl: 'assets/essentials2.png',
-                            ),
-                            ProductCard(
-                              title: 'Lanyard Card Holder',
-                              price: '£2.99',
-                              imageUrl: 'assets/merchandise.png',
-                            ),
-                            ProductCard(
-                              title: 'Essential USB-C Charger',
-                              price: '£12.99',
-                              imageUrl: 'assets/charger.png',
-                            ),
-                          ],
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount:
+                                MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                            crossAxisSpacing: 24,
+                            mainAxisSpacing: 48,
+                            childAspectRatio: 2.5,
+                          ),
+                          itemCount: _filteredProducts.length,
+                          itemBuilder: (context, index) {
+                            final product = _filteredProducts[index];
+                            return ProductCard(
+                              title: product.title,
+                              price: product.price,
+                              imageUrl: product.imageUrl,
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -292,4 +379,18 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class _Product {
+  final String title;
+  final String price;
+  final String imageUrl;
+  final String category;
+
+  _Product({
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.category,
+  });
 }
