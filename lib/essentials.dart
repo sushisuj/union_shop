@@ -84,6 +84,27 @@ class EssentialsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
+                GridView.count(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  crossAxisCount:
+                      MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                  crossAxisSpacing: 24,
+                  mainAxisSpacing: 48,
+                  children: const [
+                    ProductCard(
+                      title: 'Essential Grey Hoodie Mens',
+                      price: '£29.99',
+                      imageUrl: 'assets/grey_hoodie.png',
+                    ),
+                    ProductCard(
+                      title: 'Essential Grey Hoodie Womens',
+                      price: '£29.99',
+                      imageUrl: 'assets/grey_hoodie_woman.png',
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
               ],
             ),
           ),
@@ -201,6 +222,71 @@ class _FooterLinkState extends State<_FooterLink> {
             decoration: TextDecoration.underline,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final String title;
+  final String price;
+  final String imageUrl;
+
+  const ProductCard({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Product image
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+            child: Image.asset(
+              imageUrl,
+              width: double.infinity,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Product title
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 8),
+                // Product price
+                Text(
+                  price,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
