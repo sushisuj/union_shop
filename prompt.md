@@ -57,3 +57,9 @@
 - Explanation of Generation: Create a login card utilising a rounded container with the appropriate sign in fields. Add given logo above the sign in text.
 
 - Private Notes: Learned how to recreate a branded login card in Flutter by stacking widgets inside a centered, rounded Container, loading an external logo with Image.network, styling form fields with OutlineInputBorder, and customizing ElevatedButton/OutlinedButton colors to match brand guidelines.
+
+9. Update the Essentials page in my Flutter app to support searchable, tag-based filtering. Convert the page to a `StatefulWidget` with an internal `_Product` model that stores `title`, `price`, `imageUrl`, and `category`. Add a filter row under the navbar containing a search `TextField` and a `DropdownButton` with “All”, “Jumpers”, “Tee”, and “Merchandise”. Each product card should belong to one of those categories. The grid must display only products whose title matches the search query and whose category matches the selected dropdown value. Keep the existing layout, promo banner, navbar, and footer intact.
+
+- Explamation of Generatiom: The Essentials page now uses a StatefulWidget with a _Product model storing title, price, imageUrl, and category. A DropdownButton lets users filter by “All,” “Jumpers,” “Tee,” or “Merchandise,” while a TextField captures the search query. The _filteredProducts getter combines both filters—only products whose titles contain the search text and whose category matches the dropdown selection appear in the GridView.
+
+- Private Notes: Understood how to filter products with the dropdown
