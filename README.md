@@ -13,21 +13,24 @@
 ## Installation and Setup
 
 ### Prerequisites
-Windows, macOS, or Linux
-Flutter SDK
-Git
-VS Code
+- Windows, macOS, or Linux
+- [Flutter SDK](https://docs.flutter.dev/get-started/install)
+- [Git](https://git-scm.com/)
+- [VS Code](https://code.visualstudio.com/)
 
 ### Clone the Repository
+```bash
 git clone https://github.com/sushisuj/union_shop.git
 cd union_shop
-
+```
 ### Install Dependencies
+```bash
 flutter pub get
-
+```
 ### Run the Project
+```bash
 flutter run -d chrome
-
+```
 ## Usage Instructions
 - Use the navbar tabs (Home, Shop, About Us) to navigate the site.
 - Hover or tap “Shop” to open the dropdown without causing overflow.
@@ -35,8 +38,9 @@ flutter run -d chrome
 - On the Essentials page, review product cards with enlarged imagery and bottom-aligned details.
 
 ## Running Tests
+```bash
 flutter test
-
+```
 ## Screenshots
 ![alt text](image.png)
 Updated Navbar
@@ -51,6 +55,7 @@ Pressing `Shop` Button takes you to Collections Page
 Pressing `Essentials` Button Displays 2 products in the Essentials Collection
 
 ## Project Structure and Technologies Used
+```
 union_shop/
 ├── lib/
 │   ├── main.dart             # Home, navbar, hero, footer
@@ -59,6 +64,7 @@ union_shop/
 │   └── product_page.dart     # Product detail template
 ├── assets/                   # Product and hero imagery
 └── test/                     # Widget tests
+```
 ### Technologies
 - Technologies: Flutter, Dart
 
