@@ -84,56 +84,6 @@ class EssentialsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 32,
-                    children: collections.map((item) {
-                      return GestureDetector(
-                        onTap: () {
-                          if (item.title == 'Essentials') {
-                            Navigator.pushNamed(context, '/essentials');
-                          }
-                          // Add more navigation logic for other collections if needed
-                        },
-                        child: Stack(
-                          children: [
-                            // Background image with opacity
-                            Positioned.fill(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.asset(
-                                  item.image,
-                                  fit: BoxFit.cover,
-                                  color: Colors.black.withOpacity(0.7),
-                                  colorBlendMode: BlendMode.darken,
-                                ),
-                              ),
-                            ),
-                            // Overlay text
-                            Center(
-                              child: Text(
-                                item.title,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-                const SizedBox(height: 32),
               ],
             ),
           ),
