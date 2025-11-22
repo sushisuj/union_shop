@@ -299,11 +299,13 @@ class ProductDetails {
   final String price;
   final String imageUrl;
   final String description;
+  final List<String> sizes;
 
   const ProductDetails({
     required this.title,
     required this.price,
     required this.imageUrl,
     required this.description,
+    this.sizes = const [], // default: no size choices
   });
 }
