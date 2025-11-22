@@ -10,8 +10,8 @@
 - [x] Dummy Collection Page: Page displaying products within one collection with dropdowns and filters
 - [ ] Dummy Product Page: Product page showing details and images with widgets
 - [ ] Sale Collection: Page showing sale products with discounted prices and messaging
-- [ ] Authentication UI: Login/signup page with relevant forms
-- [ ] Static Navbar: Top navigation bar on desktop view
+- [x] Authentication UI: Login/signup page with relevant forms
+- [x] Static Navbar: Top navigation bar on desktop view
 
 ## Intermediate (35%)
 
@@ -31,7 +31,7 @@
 
 ## Software Practices
 
-- [ ] Git: Regular, small, meaningful commits with clear commit messages
-- [ ] README: A comprehensive, well-formatted and accurate README file
+- [x] Git: Regular, small, meaningful commits with clear commit messages
+- [x] README: A comprehensive, well-formatted and accurate README file
 - [ ] Testing: Tests covering all or almost all of the application; passing tests
 - [ ] External Services: Integration and utilization of cloud services
