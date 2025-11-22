@@ -1,35 +1,14 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 
+class EssentialsPage extends StatelessWidget {
+  const EssentialsPage({super.key});
 
-class CollectionsPage extends StatelessWidget {
-  const CollectionsPage({super.key});
-
-  final List<_CollectionItem> collections = const [
-    _CollectionItem(
-      title: 'Essentials',
-      image: 'assets/essentials.png',
-    ),
-    _CollectionItem(
-      title: 'Winter Collection',
-      image: 'assets/winter.png',
-    ),
-    _CollectionItem(
-      title: 'Merchandise',
-      image: 'assets/merchandise.png',
-    ),
-    _CollectionItem(
-      title: 'Personalisation',
-      image: 'assets/personalisation.png',
-    ),
-    _CollectionItem(
-      title: 'Sale',
-      image: 'assets/sale.png',
-    ),
-  ];
+  // You can keep the same collections or change them for essentials-specific content
+  // For now, let's copy the same structure as collections_page.dart
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +42,9 @@ class CollectionsPage extends StatelessWidget {
                             Navigator.pushNamedAndRemoveUntil(
                                 context, '/', (route) => false);
                           }),
-                      _NavTab(title: 'Shop', onTap: () {}),
+                      _NavTab(title: 'Shop', onTap: () {
+                        Navigator.pushNamed(context, '/collections');
+                      }),
                       _NavTab(
                           title: 'About Us',
                           onTap: () {
@@ -75,7 +56,7 @@ class CollectionsPage extends StatelessWidget {
                 const SizedBox(height: 32),
                 const Center(
                   child: Text(
-                    'Collections',
+                    'Essentials',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -85,57 +66,21 @@ class CollectionsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
+                // You can copy the grid or change it for essentials-specific items
+                // For now, let's just show the essentials image as a placeholder
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 32,
-                    children: collections.map((item) {
-                      return GestureDetector(
-                        onTap: () {
-                          // TODO: Add navigation logic for each collection
-                        },
-                        child: Stack(
-                          children: [
-                            // Background image with opacity
-                            Positioned.fill(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.asset(
-                                  item.image,
-                                  fit: BoxFit.cover,
-                                  color: Colors.black.withOpacity(0.7),
-                                  colorBlendMode: BlendMode.darken,
-                                ),
-                              ),
-                            ),
-                            // Overlay text
-                            Center(
-                              child: Text(
-                                item.title,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
+                  child: Image.asset(
+                    'assets/essentials.png',
+                    fit: BoxFit.cover,
+                    height: 200,
                   ),
                 ),
                 const SizedBox(height: 32),
               ],
             ),
           ),
-          // Footer
+          // Footer (copy exactly as in collections_page.dart)
           Container(
             width: double.infinity,
             color: Colors.grey[50],
@@ -192,11 +137,7 @@ class CollectionsPage extends StatelessWidget {
   }
 }
 
-class _CollectionItem {
-  final String title;
-  final String image;
-  const _CollectionItem({required this.title, required this.image});
-}
+// Add below your EssentialsPage class
 
 class _NavTab extends StatelessWidget {
   final String title;
@@ -241,7 +182,7 @@ class _FooterLinkState extends State<_FooterLink> {
       onExit: (_) => setState(() => _isHovering = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {}, // Dummy link, does nothing
+        onTap: () {},
         child: Text(
           widget.text,
           style: TextStyle(

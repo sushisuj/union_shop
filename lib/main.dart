@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/about_page.dart';
-import 'package:union_shop/collections_page.dart'; 
+import 'package:union_shop/collections_page.dart';
+import 'package:union_shop/essentials.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -28,7 +29,8 @@ class UnionShopApp extends StatelessWidget {
       routes: {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
-        '/collections': (context) => const CollectionsPage(), // Add this line
+        '/collections': (context) => const CollectionsPage(),
+        '/essentials': (context) => const EssentialsPage(), 
       },
     );
   }
@@ -417,7 +419,7 @@ class ProductCard extends StatelessWidget {
     if (title == 'Essential Grey Hoodie Mens' ||
         title == 'Essential Grey Hoodie Womens') {
       imageWidget = SizedBox(
-        height: 320, // Set desired height
+        height: 600, // Set desired height
         width: double.infinity,
         child: Image.asset(
           imageUrl,
@@ -434,7 +436,7 @@ class ProductCard extends StatelessWidget {
       );
     } else {
       imageWidget = SizedBox(
-        height: 320, // Same height for consistency
+        height: 600, // Same height for consistency
         width: double.infinity,
         child: Image.network(
           imageUrl,
