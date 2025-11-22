@@ -22,6 +22,10 @@ class CollectionsPage extends StatelessWidget {
       title: 'Personalisation',
       image: 'assets/personalisation.png',
     ),
+    _CollectionItem(
+      title: 'Sale',
+      image: 'assets/sale.png',
+    ),
   ];
 
   @override
