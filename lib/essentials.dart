@@ -45,7 +45,7 @@ class _EssentialsPageState extends State<EssentialsPage> {
     ),
     _Product(
       title: 'Essential USB-C Charger',
-      price: '£12.99',
+      price: '£6.99',
       imageUrl: 'assets/charger.png',
       category: 'Merchandise',
     ),

@@ -249,7 +249,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'Placeholder Hero Title',
+                          'Welcome to the Union Shop',
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -259,7 +259,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         const Text(
-                          "This is placeholder text for the hero section.",
+                          "Check out all of our collections",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
@@ -269,18 +269,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 32),
                         ElevatedButton(
-                          onPressed: placeholderCallbackForButtons,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                          ),
-                          child: const Text(
-                            'BROWSE PRODUCTS',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
-                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/collections');
+                          },
+                          child: const Text('Browse Products'),
                         ),
                       ],
                     ),
@@ -297,7 +289,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'PRODUCTS SECTION',
+                      'Featured Products',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -332,6 +324,16 @@ class HomeScreen extends StatelessWidget {
                           title: 'Hydroflask with straw',
                           price: '£11.99',
                           imageUrl: 'assets/jug.jpg',
+                        ),
+                        ProductCard(
+                          title: 'Lanyard Card Holder',
+                          price: '£2.99',
+                          imageUrl: 'assets/merchandise.png',
+                        ),
+                        ProductCard(
+                          title: 'Essential USB-C Charger',
+                          price: '£6.99',
+                          imageUrl: 'assets/charger.png',
                         ),
                       ],
                     ),
