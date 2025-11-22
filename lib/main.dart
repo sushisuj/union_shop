@@ -5,6 +5,7 @@ import 'package:union_shop/product_page.dart';
 import 'package:union_shop/about_page.dart';
 import 'package:union_shop/collections_page.dart';
 import 'package:union_shop/essentials.dart';
+import 'package:union_shop/login_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -30,7 +31,8 @@ class UnionShopApp extends StatelessWidget {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
-        '/essentials': (context) => const EssentialsPage(), 
+        '/essentials': (context) => const EssentialsPage(),
+        '/login': (context) => const LoginPage(),
       },
     );
   }
@@ -171,15 +173,11 @@ class HomeScreen extends StatelessWidget {
                                 IconButton(
                                   icon: const Icon(
                                     Icons.person_outline,
-                                    size: 18,
                                     color: Colors.grey,
                                   ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/login');
+                                  },
                                 ),
                                 IconButton(
                                   icon: const Icon(
