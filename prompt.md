@@ -63,3 +63,9 @@
 - Explamation of Generatiom: The Essentials page now uses a StatefulWidget with a _Product model storing title, price, imageUrl, and category. A DropdownButton lets users filter by “All,” “Jumpers,” “Tee,” or “Merchandise,” while a TextField captures the search query. The _filteredProducts getter combines both filters—only products whose titles contain the search text and whose category matches the dropdown selection appear in the GridView.
 
 - Private Notes: Understood how to filter products with the dropdown
+
+10. Update `ProductPage` so it accepts dynamic data via a `ProductDetails` model (title, price, imageUrl, description) and reads that model from `ModalRoute.of(context)!.settings.arguments`. Provide a default placeholder if no arguments are passed. Then, in `main.dart`, modify each `ProductCard`’s `onTap` to call `Navigator.pushNamed('/product', arguments: ProductDetails(...))`, supplying the correct data for the men’s and women’s Essential Grey Hoodies while leaving a fallback for other products. This lets the single product_page.dart render different content depending on which homepage card is tapped.
+
+- Explanation of Generation: Added a ProductDetails data model and updated ProductPage to read it from ModalRoute so the same screen can display dynamic content, then wired the men’s and women’s hoodie cards in main.dart to push that route with their specific details (title, price, image, description), keeping a default fallback for other products.
+
+- Private Notes: Learned how to pass custom data through Navigator.pushNamed using a ProductDetails model so a single ProductPage can render any product dynamically, avoiding duplicate files while keeping defaults for items without data.

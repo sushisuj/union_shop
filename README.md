@@ -54,6 +54,9 @@ Pressing `Shop` Button takes you to Collections Page
 ![alt text](image-3.png)
 Pressing `Essentials` Button Displays 2 products in the Essentials Collection
 
+![alt text](image-4.png)
+Clicking either the Mens or womens hoodie leads to a product page with its own description/details.
+
 ## Project Structure and Technologies Used
 ```
 union_shop/
