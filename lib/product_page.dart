@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  final List<String> _sizes = ['XS', 'S', 'M', 'L', 'XL'];
+  String _selectedSize = 'M';
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -208,6 +216,37 @@ class ProductPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
                     ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Size selector
+                  Row(
+                    children: [
+                      const Text(
+                        'Size:',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      DropdownButton<String>(
+                        value: _selectedSize,
+                        items: _sizes
+                            .map(
+                              (size) => DropdownMenuItem<String>(
+                                value: size,
+                                child: Text(size),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) return;
+                          setState(() => _selectedSize = value);
+                        },
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 24),
