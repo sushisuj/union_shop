@@ -7,129 +7,144 @@ class EssentialsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Main content (everything except footer)
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                // Purple header
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  color: const Color(0xFF4d2963),
-                  child: const Text(
-                    'Our Biggest Sale of the Year is Here! Up to 50% Off Selected Items. Shop Now!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-                // Navbar
-                Container(
-                  height: 10,
-                  color: Colors.white,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
                     children: [
-                      _NavTab(
-                          title: 'Home',
-                          onTap: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, '/', (route) => false);
-                          }),
-                      _NavTab(title: 'Shop', onTap: () {}),
-                      _NavTab(
-                          title: 'About Us',
-                          onTap: () {
-                            Navigator.pushNamed(context, '/about');
-                          }),
+                      // Purple header
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        color: const Color(0xFF4d2963),
+                        child: const Text(
+                          'Our Biggest Sale of the Year is Here! Up to 50% Off Selected Items. Shop Now!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                      // Navbar
+                      Container(
+                        height: 60,
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _NavTab(
+                              title: 'Home',
+                              onTap: () {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  '/',
+                                  (route) => false,
+                                );
+                              },
+                            ),
+                            _NavTab(title: 'Shop', onTap: () {}),
+                            _NavTab(
+                              title: 'About Us',
+                              onTap: () {
+                                Navigator.pushNamed(context, '/about');
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Products
+                      Padding(
+                        padding: const EdgeInsets.all(40.0),
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          crossAxisCount:
+                              MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                          crossAxisSpacing: 24,
+                          mainAxisSpacing: 48,
+                          childAspectRatio: 2.5,
+                          children: const [
+                            ProductCard(
+                              title: 'Essential Grey Hoodie Mens',
+                              price: '£29.99',
+                              imageUrl: 'assets/grey_hoodie.png',
+                            ),
+                            ProductCard(
+                              title: 'Essential Grey Hoodie Womens',
+                              price: '£29.99',
+                              imageUrl: 'assets/grey_hoodie_woman.png',
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ),
-                // Products Section
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 48,
-                      children: const [
-                        ProductCard(
-                          title: 'Essential Grey Hoodie Mens',
-                          price: '£29.99',
-                          imageUrl: 'assets/grey_hoodie.png',
+                  // Footer
+                  Container(
+                    width: double.infinity,
+                    color: Colors.grey[50],
+                    padding: const EdgeInsets.all(24),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Opening Times (Left)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Opening Times',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Mon-Fri: 9am - 5pm',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            Text(
+                              'Sat: 10am - 4pm',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            Text(
+                              'Sun: Closed',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
                         ),
-                        ProductCard(
-                          title: 'Essential Grey Hoodie Womens',
-                          price: '£29.99',
-                          imageUrl: 'assets/grey_hoodie_woman.png',
+                        Expanded(child: SizedBox()),
+                        // Help and Information (Right)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Text(
+                              'Help and Information',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            _FooterLink(text: 'Search'),
+                            _FooterLink(text: 'Terms and Conditions'),
+                            _FooterLink(text: 'Contact Us'),
+                            _FooterLink(text: 'FAQ'),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          // Footer
-          Container(
-            width: double.infinity,
-            color: Colors.grey[50],
-            padding: const EdgeInsets.all(24),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Opening Times (Left)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Opening Times',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text('Mon-Fri: 9am - 5pm',
-                        style: TextStyle(color: Colors.grey)),
-                    Text('Sat: 10am - 4pm',
-                        style: TextStyle(color: Colors.grey)),
-                    Text('Sun: Closed', style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-                Expanded(child: SizedBox()),
-                // Help and Information (Right)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text(
-                      'Help and Information',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    _FooterLink(text: 'Search'),
-                    _FooterLink(text: 'Terms and Conditions'),
-                    _FooterLink(text: 'Contact Us'),
-                    _FooterLink(text: 'FAQ'),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
