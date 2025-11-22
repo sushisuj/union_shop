@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 
-
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
@@ -97,7 +96,10 @@ class CollectionsPage extends StatelessWidget {
                     children: collections.map((item) {
                       return GestureDetector(
                         onTap: () {
-                          // TODO: Add navigation logic for each collection
+                          if (item.title == 'Essentials') {
+                            Navigator.pushNamed(context, '/essentials');
+                          }
+                          // Add more navigation logic for other collections if needed
                         },
                         child: Stack(
                           children: [
