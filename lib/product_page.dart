@@ -13,6 +13,16 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    final product = args is ProductDetails
+        ? args
+        : const ProductDetails(
+            title: 'Union Shop Product',
+            price: '£0.00',
+            imageUrl: 'assets/placeholder.png',
+            description: 'Product details coming soon.',
+          );
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -148,7 +158,7 @@ class ProductPage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        product.imageUrl,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -179,9 +189,9 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Product name
-                  const Text(
-                    'Placeholder Product Name',
-                    style: TextStyle(
+                  Text(
+                    product.title,
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -191,9 +201,9 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   // Product price
-                  const Text(
-                    '£15.00',
-                    style: TextStyle(
+                  Text(
+                    product.price,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
@@ -212,9 +222,9 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
-                    style: TextStyle(
+                  Text(
+                    product.description,
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
                       height: 1.5,
@@ -243,4 +253,18 @@ class ProductPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class ProductDetails {
+  final String title;
+  final String price;
+  final String imageUrl;
+  final String description;
+
+  const ProductDetails({
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.description,
+  });
 }

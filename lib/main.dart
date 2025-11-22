@@ -455,7 +455,33 @@ class ProductCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/product');
+        if (title == 'Essential Grey Hoodie Mens') {
+          Navigator.pushNamed(
+            context,
+            '/product',
+            arguments: const ProductDetails(
+              title: 'Essential Grey Hoodie Mens',
+              price: '£29.99',
+              imageUrl: 'assets/grey_hoodie.png',
+              description:
+                  'Premium brushed cotton hoodie with kangaroo pocket and embroidered Union crest.',
+            ),
+          );
+        } else if (title == 'Essential Grey Hoodie Womens') {
+          Navigator.pushNamed(
+            context,
+            '/product',
+            arguments: const ProductDetails(
+              title: 'Essential Grey Hoodie Womens',
+              price: '£29.99',
+              imageUrl: 'assets/grey_hoodie_woman.png',
+              description:
+                  'Tailored fit women’s hoodie with soft fleece lining and embroidered Union crest.',
+            ),
+          );
+        } else {
+          Navigator.pushNamed(context, '/product'); // default
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
