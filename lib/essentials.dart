@@ -4,29 +4,6 @@ import 'package:flutter/material.dart';
 class EssentialsPage extends StatelessWidget {
   const EssentialsPage({super.key});
 
-  final List<_CollectionItem> collections = const [
-    _CollectionItem(
-      title: 'Essentials',
-      image: 'assets/essentials.png',
-    ),
-    _CollectionItem(
-      title: 'Winter Collection',
-      image: 'assets/winter.png',
-    ),
-    _CollectionItem(
-      title: 'Merchandise',
-      image: 'assets/merchandise.png',
-    ),
-    _CollectionItem(
-      title: 'Personalisation',
-      image: 'assets/personalisation.png',
-    ),
-    _CollectionItem(
-      title: 'Sale',
-      image: 'assets/sale.png',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +28,7 @@ class EssentialsPage extends StatelessWidget {
                 ),
                 // Navbar
                 Container(
-                  height: 60,
+                  height: 10,
                   color: Colors.white,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -71,40 +48,33 @@ class EssentialsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 32),
-                const Center(
-                  child: Text(
-                    'Essentials Collection',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      letterSpacing: 1,
+                // Products Section
+                Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                      crossAxisSpacing: 24,
+                      mainAxisSpacing: 48,
+                      children: const [
+                        ProductCard(
+                          title: 'Essential Grey Hoodie Mens',
+                          price: '£29.99',
+                          imageUrl: 'assets/grey_hoodie.png',
+                        ),
+                        ProductCard(
+                          title: 'Essential Grey Hoodie Womens',
+                          price: '£29.99',
+                          imageUrl: 'assets/grey_hoodie_woman.png',
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount:
-                      MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                  crossAxisSpacing: 24,
-                  mainAxisSpacing: 48,
-                  children: const [
-                    ProductCard(
-                      title: 'Essential Grey Hoodie Mens',
-                      price: '£29.99',
-                      imageUrl: 'assets/grey_hoodie.png',
-                    ),
-                    ProductCard(
-                      title: 'Essential Grey Hoodie Womens',
-                      price: '£29.99',
-                      imageUrl: 'assets/grey_hoodie_woman.png',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
               ],
             ),
           ),
@@ -163,12 +133,6 @@ class EssentialsPage extends StatelessWidget {
       ),
     );
   }
-}
-
-class _CollectionItem {
-  final String title;
-  final String image;
-  const _CollectionItem({required this.title, required this.image});
 }
 
 class _NavTab extends StatelessWidget {
@@ -260,7 +224,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
