@@ -48,6 +48,12 @@
 
 7. Prompt: On my `EssentialsPage` (Flutter web), enhance the `ProductCard` so each card shows a taller product image and keeps the title/price locked to the bottom. Increase the image height (e.g., 220px), make it use `BoxFit.cover`, and wrap it in a `ClipRRect` with rounded top corners. Below the image, add a full-width text container with padding where the product name (bold) and price sit flush at the bottom with minimal spacing. Ensure the overall card layout stays identical to my main page styling.
 
-- Explanation of Generation: Updated the prompt describing how the ProductCard should be modified so the image occupies more vertical space with BoxFit.cover and the title/price sit in a padded bottom container, matching the styling from your main page. 
+- Explanation of Generation: Update container sizes to delete whitespace underneath product cards.
 
 - Private Notes: Tweaking card layout involves balancing image height and text placement—use BoxFit.cover for full-bleed visuals and a padded bottom container to keep name/price aligned consistently with the main page design.
+
+8. Build a Flutter login page that matches the UPSU style. Replace the “The UNION” text with the logo image (`https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854`) at the top, followed by “Sign in” text, an “Enter your details to continue” subtitle, then labeled email and password fields. The primary “Continue” button should have a purple background (`#5C1FEE`) with white text, and below it include a divider with the text “Need an account?” plus an outlined “Create an account” button.
+
+- Explanation of Generation: Create a login card utilising a rounded container with the appropriate sign in fields. Add given logo above the sign in text.
+
+- Private Notes: Learned how to recreate a branded login card in Flutter by stacking widgets inside a centered, rounded Container, loading an external logo with Image.network, styling form fields with OutlineInputBorder, and customizing ElevatedButton/OutlinedButton colors to match brand guidelines.
