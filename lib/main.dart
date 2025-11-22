@@ -479,8 +479,56 @@ class ProductCard extends StatelessWidget {
                   'Tailored fit women’s hoodie with soft fleece lining and embroidered Union crest.',
             ),
           );
+        } else if (title == 'Black Baseball Cap') {
+          Navigator.pushNamed(
+            context,
+            '/product',
+            arguments: const ProductDetails(
+              title: 'Black Baseball Cap',
+              price: '£7.99',
+              imageUrl: 'assets/black_cap.png',
+              description:
+                  'Adjustable cotton cap with embroidered Union logo and breathable eyelets.',
+            ),
+          );
+        } else if (title == 'Hydroflask with straw') {
+          Navigator.pushNamed(
+            context,
+            '/product',
+            arguments: const ProductDetails(
+              title: 'Hydroflask with straw',
+              price: '£11.99',
+              imageUrl: 'assets/jug.jpg',
+              description:
+                  'Insulated stainless bottle with flip straw lid—keeps drinks cold for 24h.',
+            ),
+          );
+        } else if (title == 'Lanyard Card Holder') {
+          Navigator.pushNamed(
+            context,
+            '/product',
+            arguments: const ProductDetails(
+              title: 'Lanyard Card Holder',
+              price: '£2.99',
+              imageUrl: 'assets/merchandise.png',
+              description:
+                  'Durable PVC holder and purple lanyard combo, perfect for student IDs.',
+            ),
+          );
+        } else if (title == 'Essential USB-C Charger') {
+          Navigator.pushNamed(
+            context,
+            '/product',
+            arguments: const ProductDetails(
+              title: 'Essential USB-C Charger',
+              price: '£6.99',
+              imageUrl: 'assets/charger.png',
+              description:
+                  'Fast-charge USB-C cable compatible with Android, iPad, and laptop power banks.',
+            ),
+          );
         } else {
-          Navigator.pushNamed(context, '/product'); // default
+          Navigator.pushNamed(context, '/product');
         }
       },
       child: Column(
