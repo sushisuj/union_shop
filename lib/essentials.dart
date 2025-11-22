@@ -87,6 +87,11 @@ class EssentialsPage extends StatelessWidget {
                               price: '£12.99',
                               imageUrl: 'assets/essentials2.png',
                             ),
+                          ProductCard(
+                              title: 'Lanyard Card Holder',
+                              price: '£2.99',
+                              imageUrl: 'assets/merchandise.png',
+                            ),
                           ],
                         ),
                       ),
