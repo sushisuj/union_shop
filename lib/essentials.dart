@@ -77,6 +77,16 @@ class EssentialsPage extends StatelessWidget {
                               price: '£29.99',
                               imageUrl: 'assets/grey_hoodie_woman.png',
                             ),
+                            ProductCard(
+                              title: 'Essential White T-Shirt Mens',
+                              price: '£12.99',
+                              imageUrl: 'assets/essentials.png',
+                            ),
+                            ProductCard(
+                              title: 'Essential White T-Shirt Womens',
+                              price: '£12.99',
+                              imageUrl: 'assets/essentials2.png',
+                            ),
                           ],
                         ),
                       ),
