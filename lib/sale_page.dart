@@ -29,10 +29,18 @@ class _SalePageState extends State<SalePage> {
     ),
 
     _Product(
-      title: 'Fleece Jacket',
+      title: 'Fleece Jacket Mens',
       price: '£79.99',
       salePrice: '£39.99', // new price
       imageUrl: 'assets/jumper1.png',
+      category: 'Jumpers',
+    ),
+
+     _Product(
+      title: 'Fleece Jacket Womens',
+      price: '£79.99',
+      salePrice: '£39.99', // new price
+      imageUrl: 'assets/jumper2.png',
       category: 'Jumpers',
     ),
   ];
