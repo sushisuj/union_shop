@@ -69,3 +69,9 @@
 - Explanation of Generation: Added a ProductDetails data model and updated ProductPage to read it from ModalRoute so the same screen can display dynamic content, then wired the men’s and women’s hoodie cards in main.dart to push that route with their specific details (title, price, image, description), keeping a default fallback for other products.
 
 - Private Notes: Learned how to pass custom data through Navigator.pushNamed using a ProductDetails model so a single ProductPage can render any product dynamically, avoiding duplicate files while keeping defaults for items without data.
+
+11. Enhance sale_page.dart so _Product and ProductCard support optional sale pricing. Card should show the original price (grey, line-through) and the discounted price (bold red) on the same row when salePrice is provided, otherwise keep the regular single-price display.
+
+- Explanation of Generation: Added an optional salePrice field to both _Product and ProductCard, passed the value from _products, and updated the card layout so discounted items render the original price in grey with a strikethrough alongside the bold red sale price, while non-discounted products keep their single standard price display.
+
+- Private Notes: Learned how to surface sales by adding an optional salePrice field to both the product model and card, then conditionally rendering a strike-through original price with a bold red discount when the field is present—handy pattern for any future promo listings.

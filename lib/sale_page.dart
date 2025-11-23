@@ -16,38 +16,24 @@ class _SalePageState extends State<SalePage> {
     _Product(
       title: 'Sunglasses',
       price: '£19.99',
+      salePrice: '£10.99', // new price
       imageUrl: 'assets/green.jpg',
       category: 'Merchandise',
     ),
     _Product(
       title: 'Scientific Calculator',
       price: '£15.99',
+      salePrice: '£9.99', // new price
       imageUrl: 'assets/blue.jpg',
       category: 'Merchandise',
     ),
+
     _Product(
-      title: 'Essential White T-Shirt Mens',
-      price: '£12.99',
-      imageUrl: 'assets/essentials.png',
-      category: 'Tee',
-    ),
-    _Product(
-      title: 'Essential White T-Shirt Womens',
-      price: '£12.99',
-      imageUrl: 'assets/essentials2.png',
-      category: 'Tee',
-    ),
-    _Product(
-      title: 'Lanyard Card Holder',
-      price: '£2.99',
-      imageUrl: 'assets/merchandise.png',
-      category: 'Merchandise',
-    ),
-    _Product(
-      title: 'Essential USB-C Charger',
-      price: '£6.99',
-      imageUrl: 'assets/charger.png',
-      category: 'Merchandise',
+      title: 'Fleece Jacket',
+      price: '£79.99',
+      salePrice: '£39.99', // new price
+      imageUrl: 'assets/jumper1.png',
+      category: 'Jumpers',
     ),
   ];
 
@@ -179,6 +165,7 @@ class _SalePageState extends State<SalePage> {
                             return ProductCard(
                               title: product.title,
                               price: product.price,
+                              salePrice: product.salePrice,
                               imageUrl: product.imageUrl,
                             );
                           },
@@ -313,6 +300,7 @@ class _FooterLinkState extends State<_FooterLink> {
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
+  final String? salePrice;
   final String imageUrl;
 
   const ProductCard({
@@ -320,6 +308,7 @@ class ProductCard extends StatelessWidget {
     required this.title,
     required this.price,
     required this.imageUrl,
+    this.salePrice,
   });
 
   @override
@@ -336,7 +325,7 @@ class ProductCard extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: SizedBox(
-              height: 220, // increased height so the image fills the card
+              height: 219, // increased height so the image fills the card
               width: double.infinity,
               child: Image.asset(
                 imageUrl,
@@ -350,7 +339,6 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 42),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   title,
@@ -361,14 +349,38 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 6),
-                Text(
-                  price,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                if (salePrice != null) ...[
+                  Row(
+                    children: [
+                      Text(
+                        price,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        salePrice!,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                ] else ...[
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -381,6 +393,7 @@ class ProductCard extends StatelessWidget {
 class _Product {
   final String title;
   final String price;
+  final String? salePrice; // new
   final String imageUrl;
   final String category;
 
@@ -389,5 +402,6 @@ class _Product {
     required this.price,
     required this.imageUrl,
     required this.category,
+    this.salePrice,
   });
 }
