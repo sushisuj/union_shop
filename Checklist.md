@@ -8,8 +8,8 @@
 - [x] Footer: Footer with dummy links and information
 - [x] Dummy Collections Page: Page displaying various collections of products
 - [x] Dummy Collection Page: Page displaying products within one collection with dropdowns and filters
-- [ ] Dummy Product Page: Product page showing details and images with widgets
-- [ ] Sale Collection: Page showing sale products with discounted prices and messaging
+- [x] Dummy Product Page: Product page showing details and images with widgets
+- [x] Sale Collection: Page showing sale products with discounted prices and messaging
 - [x] Authentication UI: Login/signup page with relevant forms
 - [x] Static Navbar: Top navigation bar on desktop view
 
