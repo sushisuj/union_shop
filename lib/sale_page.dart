@@ -14,16 +14,16 @@ class _SalePageState extends State<SalePage> {
 
   final List<_Product> _products = [
     _Product(
-      title: 'Essential Grey Hoodie Mens',
-      price: '£29.99',
-      imageUrl: 'assets/grey_hoodie.png',
-      category: 'Jumpers',
+      title: 'Sunglasses',
+      price: '£19.99',
+      imageUrl: 'assets/green.jpg',
+      category: 'Merchandise',
     ),
     _Product(
-      title: 'Essential Grey Hoodie Womens',
-      price: '£29.99',
-      imageUrl: 'assets/grey_hoodie_woman.png',
-      category: 'Jumpers',
+      title: 'Scientific Calculator',
+      price: '£15.99',
+      imageUrl: 'assets/blue.jpg',
+      category: 'Merchandise',
     ),
     _Product(
       title: 'Essential White T-Shirt Mens',
