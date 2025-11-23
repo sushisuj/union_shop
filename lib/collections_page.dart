@@ -98,6 +98,8 @@ class CollectionsPage extends StatelessWidget {
                         onTap: () {
                           if (item.title == 'Essentials') {
                             Navigator.pushNamed(context, '/essentials');
+                          } else if (item.title == 'Sale') {
+                            Navigator.pushNamed(context, '/sale');
                           }
                           // Add more navigation logic for other collections if needed
                         },

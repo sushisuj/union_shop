@@ -1,14 +1,14 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 
-class EssentialsPage extends StatefulWidget {
-  const EssentialsPage({super.key});
+class SalePage extends StatefulWidget {
+  const SalePage({super.key});
 
   @override
-  State<EssentialsPage> createState() => _EssentialsPageState();
+  State<SalePage> createState() => _SalePageState();
 }
 
-class _EssentialsPageState extends State<EssentialsPage> {
+class _SalePageState extends State<SalePage> {
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
 
@@ -80,7 +80,7 @@ class _EssentialsPageState extends State<EssentialsPage> {
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         color: const Color(0xFF4d2963),
                         child: const Text(
-                          'Our Biggest Sale of the Year is Here! Up to 50% Off Selected Items. Shop Now!',
+                          'Sale Picks—Up to 50% Off Selected Items!',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
@@ -120,18 +120,16 @@ class _EssentialsPageState extends State<EssentialsPage> {
                             Expanded(
                               child: TextField(
                                 controller: _searchController,
-                                onChanged: (value) {
-                                  setState(() {});
-                                },
+                                onChanged: (_) => setState(() {}),
                                 decoration: InputDecoration(
-                                  hintText: 'Search products...',
+                                  hintText: 'Search sale items...',
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide: BorderSide(
                                       color: Colors.grey.shade400,
                                     ),
                                   ),
-                                  prefixIcon: Icon(Icons.search),
+                                  prefixIcon: const Icon(Icons.search),
                                 ),
                               ),
                             ),
@@ -139,16 +137,15 @@ class _EssentialsPageState extends State<EssentialsPage> {
                             DropdownButton<String>(
                               value: _selectedCategory,
                               onChanged: (newValue) {
-                                setState(() {
-                                  _selectedCategory = newValue!;
-                                });
+                                if (newValue == null) return;
+                                setState(() => _selectedCategory = newValue);
                               },
-                              items: <String>[
+                              items: const [
                                 'All',
                                 'Jumpers',
                                 'Tee',
                                 'Merchandise'
-                              ].map<DropdownMenuItem<String>>((String value) {
+                              ].map((value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),

@@ -6,7 +6,7 @@ import 'package:union_shop/about_page.dart';
 import 'package:union_shop/collections_page.dart';
 import 'package:union_shop/essentials.dart';
 import 'package:union_shop/login_page.dart';
-
+import 'package:union_shop/sale_page.dart';
 void main() {
   runApp(const UnionShopApp());
 }
@@ -33,6 +33,7 @@ class UnionShopApp extends StatelessWidget {
         '/collections': (context) => const CollectionsPage(),
         '/essentials': (context) => const EssentialsPage(),
         '/login': (context) => const LoginPage(),
+        '/sale': (context) => const SalePage(),
       },
     );
   }
