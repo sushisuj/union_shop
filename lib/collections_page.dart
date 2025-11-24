@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/union_navbar.dart'; // new
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -33,44 +34,11 @@ class CollectionsPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Main content (everything except footer)
+          const UnionNavBar(), // replaces the old header + navbar
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                // Purple header
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  color: const Color(0xFF4d2963),
-                  child: const Text(
-                    'Our Biggest Sale of the Year is Here! Up to 50% Off Selected Items. Shop Now!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-                // Navbar
-                Container(
-                  height: 60,
-                  color: Colors.white,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _NavTab(
-                          title: 'Home',
-                          onTap: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, '/', (route) => false);
-                          }),
-                      _NavTab(title: 'Shop', onTap: () {}),
-                      _NavTab(
-                          title: 'About Us',
-                          onTap: () {
-                            Navigator.pushNamed(context, '/about');
-                          }),
-                    ],
-                  ),
-                ),
                 const SizedBox(height: 32),
                 const Center(
                   child: Text(
