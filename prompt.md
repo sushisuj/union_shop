@@ -93,3 +93,9 @@
 - Explanation of Generation: Added a MediaQuery width check inside ProductCard; narrow screens now use reduced image height and tighter spacing to avoid overflow, while wider screens keep the original dimensions, preserving the desktop layout.
 
 - Private Notes: Learned to fix mobile overflow by making ProductCard responsive—using MediaQuery to adjust image height and spacing preserves the desktop look while shrinking cards on small screens.
+
+15. Refactor main.dart so the hero section becomes a reusable _HeroCarousel widget that uses a PageController and PageView to show multiple slides. Include navigation arrows (left/right IconButtons) to switch slides without swiping; disable them at the edges. Slide 1 keeps the existing background image, copy, and button routing to /collections. Slide 2 uses AssetImage('assets/pizza.png'), placeholder title/subtitle text, and the same button style but with no navigation action (onPressed: null).
+
+- Explanation of Generation: Introduced a reusable _HeroCarousel stateful widget that wraps the existing hero slide plus the new pizza slide inside a PageView managed by a PageController. Added left/right arrow IconButtons that animate between pages and automatically disable at the ends, keeping slide 1’s original routing while slide 2 uses the same button style with onPressed: null.
+
+- Private Notes: Learned to wrap hero slides in a stateful _HeroCarousel with a PageController, adding arrow buttons for desktop navigation while keeping slide-specific content and routing logic reusable.
