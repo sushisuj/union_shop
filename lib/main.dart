@@ -267,69 +267,7 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Hero Section
-            SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  // Background image
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Content overlay
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Welcome to the Union Shop',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          "Check out all of our collections",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/collections');
-                          },
-                          child: const Text('Browse Products'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const _HeroCarousel(),
 
             // Products Section
             Container(
@@ -764,6 +702,167 @@ class _ShopDropdownState extends State<_ShopDropdown> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _HeroCarousel extends StatefulWidget {
+  const _HeroCarousel();
+
+  @override
+  State<_HeroCarousel> createState() => _HeroCarouselState();
+}
+
+class _HeroCarouselState extends State<_HeroCarousel> {
+  late final PageController _controller;
+  int _currentPage = 0;
+
+  final List<Widget> _slides = const [
+    _HeroSlide(
+      background: NetworkImage(
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+      ),
+      title: 'Welcome to the Union Shop',
+      subtitle: 'Check out all of our collections',
+      buttonLabel: 'Browse Products',
+      routeName: '/collections',
+    ),
+    _HeroSlide(
+      background: AssetImage('assets/pizza.png'),
+      title: 'Placeholder Title',
+      subtitle: 'Placeholder copy for the second slide.',
+      buttonLabel: 'Learn More',
+    ),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(initialPage: 0);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleArrowTap(bool forward) {
+    final nextPage = forward ? _currentPage + 1 : _currentPage - 1;
+    if (nextPage >= 0 && nextPage < _slides.length) {
+      _controller.animateToPage(
+        nextPage,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 400,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          PageView(
+            controller: _controller,
+            onPageChanged: (index) => setState(() => _currentPage = index),
+            children: _slides,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: IconButton(
+              splashRadius: 28,
+              iconSize: 32,
+              color: Colors.white70,
+              onPressed:
+                  _currentPage == 0 ? null : () => _handleArrowTap(false),
+              icon: const Icon(Icons.arrow_back_ios_new),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: IconButton(
+              splashRadius: 28,
+              iconSize: 32,
+              color: Colors.white70,
+              onPressed: _currentPage == _slides.length - 1
+                  ? null
+                  : () => _handleArrowTap(true),
+              icon: const Icon(Icons.arrow_forward_ios),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HeroSlide extends StatelessWidget {
+  final ImageProvider background;
+  final String title;
+  final String subtitle;
+  final String buttonLabel;
+  final String? routeName;
+
+  const _HeroSlide({
+    required this.background,
+    required this.title,
+    required this.subtitle,
+    required this.buttonLabel,
+    this.routeName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: background, fit: BoxFit.cover),
+            ),
+            child: Container(color: Colors.black.withValues(alpha: 0.65)),
+          ),
+        ),
+        Positioned(
+          left: 24,
+          right: 24,
+          top: 80,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  height: 1.2,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: routeName == null
+                    ? null
+                    : () => Navigator.pushNamed(context, routeName!),
+                child: Text(buttonLabel),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
