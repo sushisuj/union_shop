@@ -27,7 +27,6 @@ class _SalePageState extends State<SalePage> {
       imageUrl: 'assets/blue.jpg',
       category: 'Merchandise',
     ),
-
     _Product(
       title: 'Fleece Jacket Mens',
       price: '£79.99',
@@ -35,8 +34,7 @@ class _SalePageState extends State<SalePage> {
       imageUrl: 'assets/jumper1.png',
       category: 'Jumpers',
     ),
-
-     _Product(
+    _Product(
       title: 'Fleece Jacket Womens',
       price: '£79.99',
       salePrice: '£39.99', // new price
@@ -156,25 +154,38 @@ class _SalePageState extends State<SalePage> {
                       // Products
                       Padding(
                         padding: const EdgeInsets.all(40.0),
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount:
-                                MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                            crossAxisSpacing: 24,
-                            mainAxisSpacing: 48,
-                            childAspectRatio: 2.5,
-                          ),
-                          itemCount: _filteredProducts.length,
-                          itemBuilder: (context, index) {
-                            final product = _filteredProducts[index];
-                            return ProductCard(
-                              title: product.title,
-                              price: product.price,
-                              salePrice: product.salePrice,
-                              imageUrl: product.imageUrl,
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final width = constraints.maxWidth;
+                            final bool isDesktop = width >= 1024;
+                            final bool isTablet = width >= 600 && width < 1024;
+
+                            final crossAxisCount =
+                                isDesktop ? 2 : (isTablet ? 2 : 1);
+                            final childAspectRatio = isDesktop
+                                ? 2.2
+                                : (isTablet ? 1.8 : 0.95); // prevents overflow
+
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: crossAxisCount,
+                                crossAxisSpacing: 24,
+                                mainAxisSpacing: 32,
+                                childAspectRatio: childAspectRatio,
+                              ),
+                              itemCount: _filteredProducts.length,
+                              itemBuilder: (context, index) {
+                                final product = _filteredProducts[index];
+                                return ProductCard(
+                                  title: product.title,
+                                  price: product.price,
+                                  salePrice: product.salePrice,
+                                  imageUrl: product.imageUrl,
+                                );
+                              },
                             );
                           },
                         ),
