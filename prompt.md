@@ -99,3 +99,9 @@
 - Explanation of Generation: Introduced a reusable _HeroCarousel stateful widget that wraps the existing hero slide plus the new pizza slide inside a PageView managed by a PageController. Added left/right arrow IconButtons that animate between pages and automatically disable at the ends, keeping slide 1’s original routing while slide 2 uses the same button style with onPressed: null.
 
 - Private Notes: Learned to wrap hero slides in a stateful _HeroCarousel with a PageController, adding arrow buttons for desktop navigation while keeping slide-specific content and routing logic reusable.
+
+16. In sale_page.dart, refactor the products grid so it no longer overflows. Use LayoutBuilder (or MediaQuery) to detect desktop/tablet/mobile widths, adjust crossAxisCount and childAspectRatio accordingly (e.g., 2×2 layout with ratio ~2.2 on desktop, 2 columns with ~1.8 ratio on tablets, single column with ~0.95 ratio on mobile). Keep GridView.builder shrinkWrap: true and NeverScrollableScrollPhysics, ensuring no vertical overflow on any device size.
+
+- Explanation of Generation: Updated sale_page.dart to wrap the GridView.builder in a LayoutBuilder, dynamically adjusting crossAxisCount and childAspectRatio for desktop, tablet, and mobile widths so the cards resize appropriately. With shrinkWrap: true and NeverScrollableScrollPhysics retained, the product grid now fits without the 42px/223px overflow on any device size.
+
+- Private Notes: Learned to tailor grid sizing per breakpoint with LayoutBuilder, tweaking crossAxisCount and childAspectRatio so sale cards resize for desktop/tablet/mobile while keeping shrinkWrap and NeverScrollableScrollPhysics to prevent scroll conflicts.
