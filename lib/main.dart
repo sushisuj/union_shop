@@ -645,9 +645,10 @@ class _ShopDropdown extends StatefulWidget {
 
 class _ShopDropdownState extends State<_ShopDropdown> {
   final List<String> options = [
-    'Hoodies',
-    'Caps',
-    'Hydroflasks',
+    'Essentials',
+    'Sale',
+    'Merchandise',
+    'Winter',
     // Add more options as needed
   ];
 
