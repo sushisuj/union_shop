@@ -75,3 +75,9 @@
 - Explanation of Generation: Added an optional salePrice field to both _Product and ProductCard, passed the value from _products, and updated the card layout so discounted items render the original price in grey with a strikethrough alongside the bold red sale price, while non-discounted products keep their single standard price display.
 
 - Private Notes: Learned how to surface sales by adding an optional salePrice field to both the product model and card, then conditionally rendering a strike-through original price with a bold red discount when the field is present—handy pattern for any future promo listings.
+
+12. In main.dart, make the navbar responsive. When MediaQuery.of(context).size.width is under 700, replace the three separate “Home / Shop / About Us” tabs with a single PopupMenuButton labeled “Menu” whose items navigate to the existing routes (/, /collections, /about). When width is 700 or more, keep the current inline tab row with _ShopDropdown. Use the same spacing and styling so the desktop view is unchanged, and only the mobile breakpoint collapses into the dropdown.
+
+- Explanation of Generation: Added a width check around the navbar; on screens narrower than 700px it swaps the three inline tabs for a single “Menu” PopupMenuButton that routes to Home, Shop, or About Us, while wider screens keep the existing tab row with _ShopDropdown.
+
+- Private Notes: Learned to use MediaQuery width checks to build responsive navbars—swap inline tabs for a single PopupMenuButton on narrow screens while preserving the desktop layout when width exceeds the breakpoint.
