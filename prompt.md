@@ -87,3 +87,9 @@
 - Explanation of Generation: Extracted the homepage navbar into union_navbar.dart so it can be reused everywhere. Each page (home, sale, essentials, about, product, cart) now imports this widget and inserts const UnionNavBar() at the top, while LoginPage remains nav-free. The shared navbar keeps the responsive “Menu” dropdown, _ShopDropdown, and ensures the shopping bag button always routes to /cart.
 
 - Private Notes: Learned to centralize shared chrome by moving the navbar into union_navbar.dart and reusing it across screens, keeping login isolated and ensuring the cart icon consistently routes to /cart.
+
+14. In main.dart, update the ProductCard widget so mobile view (width < 600) uses shorter card heights to prevent overflow while keeping the desktop layout unchanged. Use MediaQuery inside ProductCard to determine screen width, set a smaller imageHeight/text spacing for narrow screens, and retain the original larger dimensions for wider screens.
+
+- Explanation of Generation: Added a MediaQuery width check inside ProductCard; narrow screens now use reduced image height and tighter spacing to avoid overflow, while wider screens keep the original dimensions, preserving the desktop layout.
+
+- Private Notes: Learned to fix mobile overflow by making ProductCard responsive—using MediaQuery to adjust image height and spacing preserves the desktop look while shrinking cards on small screens.
