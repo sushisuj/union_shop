@@ -165,24 +165,39 @@ class _EssentialsPageState extends State<EssentialsPage> {
                       // Products
                       Padding(
                         padding: const EdgeInsets.all(40.0),
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount:
-                                MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                            crossAxisSpacing: 24,
-                            mainAxisSpacing: 48,
-                            childAspectRatio: 2.5,
-                          ),
-                          itemCount: _filteredProducts.length,
-                          itemBuilder: (context, index) {
-                            final product = _filteredProducts[index];
-                            return ProductCard(
-                              title: product.title,
-                              price: product.price,
-                              imageUrl: product.imageUrl,
+                        child: Builder(
+                          builder: (context) {
+                            final width = MediaQuery.of(context).size.width;
+                            final bool isDesktop = width >= 1024;
+                            final bool isTablet = width >= 600 && width < 1024;
+
+                            final crossAxisCount =
+                                isDesktop ? 3 : (isTablet ? 2 : 1);
+                            final childAspectRatio = isDesktop
+                                ? 1.55 // prevents 27px overflow on desktop
+                                : (isTablet
+                                    ? 1.25
+                                    : 0.9); // prevents 43px overflow on mobile
+
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: crossAxisCount,
+                                crossAxisSpacing: 24,
+                                mainAxisSpacing: 32,
+                                childAspectRatio: childAspectRatio,
+                              ),
+                              itemCount: _filteredProducts.length,
+                              itemBuilder: (context, index) {
+                                final product = _filteredProducts[index];
+                                return ProductCard(
+                                  title: product.title,
+                                  price: product.price,
+                                  imageUrl: product.imageUrl,
+                                );
+                              },
                             );
                           },
                         ),
@@ -327,6 +342,18 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final bool isDesktop = width >= 1024;
+    final bool isTablet = width >= 600 && width < 1024;
+
+    final double imageHeight = isDesktop
+        ? 200 // down from 220 to remove the last 21px overflow
+        : (isTablet ? 190 : 160);
+    final EdgeInsets contentPadding = EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: isDesktop ? 28 : (isTablet ? 24 : 18),
+    );
+
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -335,39 +362,34 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Larger product image
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: SizedBox(
-              height: 220, // increased height so the image fills the card
+              height: imageHeight,
               width: double.infinity,
-              child: Image.asset(
-                imageUrl,
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset(imageUrl, fit: BoxFit.cover),
             ),
           ),
-          // Text block anchored at the bottom
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 42),
+          Padding(
+            padding: contentPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 8),
                 Text(
                   price,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
