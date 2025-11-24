@@ -465,40 +465,30 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isNarrow = MediaQuery.of(context).size.width < 600;
+    final double imageHeight = isNarrow ? 220 : 600;
+    final double textSpacing = isNarrow ? 8 : 4;
+
     Widget imageWidget;
     if (title == 'Essential Grey Hoodie Mens' ||
         title == 'Essential Grey Hoodie Womens') {
       imageWidget = SizedBox(
-        height: 600, // Set desired height
+        height: imageHeight,
         width: double.infinity,
         child: Image.asset(
           imageUrl,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              color: Colors.grey[300],
-              child: const Center(
-                child: Icon(Icons.image_not_supported, color: Colors.grey),
-              ),
-            );
-          },
+          errorBuilder: (context, error, stackTrace) => _placeholderImage(),
         ),
       );
     } else {
       imageWidget = SizedBox(
-        height: 600, // Same height for consistency
+        height: imageHeight,
         width: double.infinity,
         child: Image.network(
           imageUrl,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              color: Colors.grey[320],
-              child: const Center(
-                child: Icon(Icons.image_not_supported, color: Colors.grey),
-              ),
-            );
-          },
+          errorBuilder: (context, error, stackTrace) => _placeholderImage(),
         ),
       );
     }
@@ -588,13 +578,13 @@ class ProductCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 4),
+              SizedBox(height: textSpacing),
               Text(
                 title,
                 style: const TextStyle(fontSize: 14, color: Colors.black),
                 maxLines: 2,
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: textSpacing),
               Text(
                 price,
                 style: const TextStyle(fontSize: 13, color: Colors.grey),
@@ -602,6 +592,15 @@ class ProductCard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _placeholderImage() {
+    return Container(
+      color: Colors.grey[300],
+      child: const Center(
+        child: Icon(Icons.image_not_supported, color: Colors.grey),
       ),
     );
   }
