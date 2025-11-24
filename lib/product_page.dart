@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
 
@@ -333,3 +334,5 @@ class ProductDetails {
     this.sizes = const [], // default: no size choices
   });
 }
+
+
