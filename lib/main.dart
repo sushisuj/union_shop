@@ -59,6 +59,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -110,50 +112,92 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const Spacer(),
                           // Centered navigation tabs
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  navigateToHome(
-                                      context); // Navigates to homepage
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Text(
-                                    'Home',
+                          if (isMobile)
+                            PopupMenuButton<String>(
+                              tooltip: 'Menu',
+                              onSelected: (value) {
+                                switch (value) {
+                                  case 'home':
+                                    navigateToHome(context);
+                                    break;
+                                  case 'shop':
+                                    Navigator.pushNamed(
+                                        context, '/collections');
+                                    break;
+                                  case 'about':
+                                    Navigator.pushNamed(context, '/about');
+                                    break;
+                                }
+                              },
+                              child: Row(
+                                children: const [
+                                  Text(
+                                    'Menu',
                                     style: TextStyle(
                                       color: Colors.deepPurple,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Icon(Icons.arrow_drop_down,
+                                      color: Colors.deepPurple),
+                                ],
+                              ),
+                              itemBuilder: (context) => const [
+                                PopupMenuItem(
+                                  value: 'home',
+                                  child: Text('Home'),
+                                ),
+                                PopupMenuItem(
+                                  value: 'shop',
+                                  child: Text('Shop'),
+                                ),
+                                PopupMenuItem(
+                                  value: 'about',
+                                  child: Text('About Us'),
+                                ),
+                              ],
+                            )
+                          else
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => navigateToHome(context),
+                                  child: const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text(
+                                      'Home',
+                                      style: TextStyle(
+                                        color: Colors.deepPurple,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              // Shop dropdown
-                              _ShopDropdown(),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/about');
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Text(
-                                    'About Us',
-                                    style: TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      decoration: TextDecoration.underline,
+                                _ShopDropdown(),
+                                GestureDetector(
+                                  onTap: () =>
+                                      Navigator.pushNamed(context, '/about'),
+                                  child: const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text(
+                                      'About Us',
+                                      style: TextStyle(
+                                        color: Colors.deepPurple,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
                           const Spacer(),
                           // Icons (search, person, bag, menu)
                           ConstrainedBox(
