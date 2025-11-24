@@ -81,3 +81,9 @@
 - Explanation of Generation: Added a width check around the navbar; on screens narrower than 700px it swaps the three inline tabs for a single “Menu” PopupMenuButton that routes to Home, Shop, or About Us, while wider screens keep the existing tab row with _ShopDropdown.
 
 - Private Notes: Learned to use MediaQuery width checks to build responsive navbars—swap inline tabs for a single PopupMenuButton on narrow screens while preserving the desktop layout when width exceeds the breakpoint.
+
+13. Create a reusable UnionNavBar widget in union_navbar.dart that matches the homepage navbar (banner, logo, responsive menu with _ShopDropdown, search/person/cart icons). Export it and import the widget into every page—home, sale, essentials, about, product, cart—placing const UnionNavBar() at the top of each layout, but omit it from LoginPage. Ensure the shopping bag icon navigates to /cart and the menu behaves identically across all screens. 
+
+- Explanation of Generation: Extracted the homepage navbar into union_navbar.dart so it can be reused everywhere. Each page (home, sale, essentials, about, product, cart) now imports this widget and inserts const UnionNavBar() at the top, while LoginPage remains nav-free. The shared navbar keeps the responsive “Menu” dropdown, _ShopDropdown, and ensures the shopping bag button always routes to /cart.
+
+- Private Notes: Learned to centralize shared chrome by moving the navbar into union_navbar.dart and reusing it across screens, keeping login isolated and ensuring the cart icon consistently routes to /cart.
