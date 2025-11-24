@@ -20,7 +20,7 @@
 - [ ] Order Confirmation: Page confirming order details after checkout
 - [ ] Product Search: Search bar or page to find products by name or category
 - [ ] Product Filtering: Filter products by category, price, or other attributes
-- [ ] Responsive Design: Pages adapt for desktop and mobile screens
+- [x] Responsive Design: Pages adapt for desktop and mobile screens
 
 ## Advanced (25%)
 
