@@ -17,14 +17,14 @@ class _SalePageState extends State<SalePage> {
       title: 'Sunglasses',
       price: '£19.99',
       salePrice: '£10.99', // new price
-      imageUrl: 'assets/green.jpg',
+      imageUrl: 'assets/sunglasses.png',
       category: 'Merchandise',
     ),
     _Product(
       title: 'Scientific Calculator',
       price: '£15.99',
       salePrice: '£9.99', // new price
-      imageUrl: 'assets/blue.jpg',
+      imageUrl: 'assets/calc.png',
       category: 'Merchandise',
     ),
     _Product(
