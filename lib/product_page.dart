@@ -11,6 +11,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final List<String> _sizes = ['XS', 'S', 'M', 'L', 'XL'];
   String _selectedSize = 'M';
+  String _confirmationMessage = ''; // new: holds confirmation text
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -31,6 +32,11 @@ class _ProductPageState extends State<ProductPage> {
             imageUrl: 'assets/placeholder.png',
             description: 'Product details coming soon.',
           );
+
+    // ensure selected size is valid for this product (if product provides sizes)
+    if (product.sizes.isNotEmpty && !product.sizes.contains(_selectedSize)) {
+      _selectedSize = product.sizes.first;
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -162,6 +168,29 @@ class _ProductPageState extends State<ProductPage> {
 
                   const SizedBox(height: 28),
 
+                  // Confirmation message (appears above Add to cart button)
+                  if (_confirmationMessage.isNotEmpty) ...[
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 14,
+                      ),
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.green[50],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        _confirmationMessage,
+                        style: TextStyle(
+                          color: Colors.green[800],
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+
                   SizedBox(
                     width: double.infinity,
                     height: 52,
@@ -172,7 +201,14 @@ class _ProductPageState extends State<ProductPage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      onPressed: placeholderCallbackForButtons,
+                      onPressed: () {
+                        setState(() {
+                          _confirmationMessage =
+                              "'${product.title}' in size '$_selectedSize' has been added to cart!";
+                        });
+                        // keep placeholderCallbackForButtons if you need additional behaviour:
+                        // placeholderCallbackForButtons();
+                      },
                       child: const Text(
                         'Add to cart',
                         style: TextStyle(
