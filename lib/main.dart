@@ -855,7 +855,7 @@ class _HeroSlide extends StatelessWidget {
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: routeName == null
-                    ? null
+                    ? () {} // no-op so button appears enabled but does nothing
                     : () => Navigator.pushNamed(context, routeName!),
                 child: Text(buttonLabel),
               ),
