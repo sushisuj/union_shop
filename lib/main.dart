@@ -729,9 +729,9 @@ class _HeroCarouselState extends State<_HeroCarousel> {
     ),
     _HeroSlide(
       background: AssetImage('assets/pizza.png'),
-      title: 'Placeholder Title',
-      subtitle: 'Placeholder copy for the second slide.',
-      buttonLabel: 'Learn More',
+      title: 'Fancy some pizza?',
+      subtitle: 'Delicious cheese and tomato pizza.',
+      buttonLabel: 'Order Now',
     ),
   ];
 
