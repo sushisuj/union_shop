@@ -332,6 +332,12 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final bool isDesktop = width >= 1024;
+    // shave a pixel or two off desktop layout to avoid fractional overflow
+    final double imageHeight = isDesktop ? 218.0 : 219.0;
+    final double verticalPadding = isDesktop ? 41.0 : 42.0;
+
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -344,7 +350,7 @@ class ProductCard extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: SizedBox(
-              height: 219, // increased height so the image fills the card
+              height: imageHeight,
               width: double.infinity,
               child: Image.asset(
                 imageUrl,
@@ -355,7 +361,8 @@ class ProductCard extends StatelessWidget {
           // Text block anchored at the bottom
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 42),
+            padding:
+                EdgeInsets.symmetric(horizontal: 16, vertical: verticalPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
