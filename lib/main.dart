@@ -151,54 +151,52 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!_showGlobalSearch || _filtered.isEmpty) {
         _removeSearchOverlay();
-      } else {
-        _removeSearchOverlay();
-        final renderBox =
-            _searchFieldKey.currentContext?.findRenderObject() as RenderBox?;
-        final overlayWidth = renderBox?.size.width ?? 280;
+        return;
+      }
 
-        _searchOverlay = OverlayEntry(
-          builder: (_) => Positioned.fill(
-            child: IgnorePointer(
-              ignoring: false,
-              child: CompositedTransformFollower(
-                link: _searchFieldLink,
-                showWhenUnlinked: false,
-                offset: const Offset(0, 42),
-                child: SizedBox(
-                  width: overlayWidth,
-                  child: Material(
-                    elevation: 8,
-                    borderRadius: BorderRadius.circular(10),
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxHeight: 220),
-                      child: ListView.separated(
-                        padding: const EdgeInsets.symmetric(vertical: 6),
-                        shrinkWrap: true,
-                        itemCount: _filtered.length,
-                        separatorBuilder: (_, __) =>
-                            const Divider(height: 1, thickness: 0.4),
-                        itemBuilder: (context, index) {
-                          final product = _filtered[index];
-                          return ListTile(
-                            dense: true,
-                            horizontalTitleGap: 4,
-                            title: Text(product.title,
-                                style: const TextStyle(fontSize: 14)),
-                            subtitle: Text(product.price),
-                            onTap: () => _selectProduct(product),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ),
+      _removeSearchOverlay();
+
+      final renderBox =
+          _searchFieldKey.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox == null) return;
+
+      final size = renderBox.size;
+      final offset = renderBox.localToGlobal(Offset.zero);
+
+      _searchOverlay = OverlayEntry(
+        builder: (_) => Positioned(
+          left: offset.dx,
+          top: offset.dy + size.height + 6,
+          width: size.width,
+          child: Material(
+            color: Colors.white,
+            elevation: 8,
+            borderRadius: BorderRadius.circular(10),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 220),
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                shrinkWrap: true,
+                itemCount: _filtered.length,
+                separatorBuilder: (_, __) =>
+                    const Divider(height: 1, thickness: 0.4),
+                itemBuilder: (context, index) {
+                  final product = _filtered[index];
+                  return ListTile(
+                    dense: true,
+                    title: Text(product.title,
+                        style: const TextStyle(fontSize: 14)),
+                    subtitle: Text(product.price),
+                    onTap: () => _selectProduct(product),
+                  );
+                },
               ),
             ),
           ),
-        );
-        Overlay.of(context).insert(_searchOverlay!);
-      }
+        ),
+      );
+
+      Overlay.of(context).insert(_searchOverlay!);
     });
   }
 
