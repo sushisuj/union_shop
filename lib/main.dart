@@ -52,6 +52,65 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _globalSearchController = TextEditingController();
   bool _showGlobalSearch = false;
+  final List<ProductDetails> _allProducts = const [
+    ProductDetails(
+      title: 'Essential Grey Hoodie Mens',
+      price: '£29.99',
+      imageUrl: 'assets/grey_hoodie.png',
+      description: '',
+    ),
+    ProductDetails(
+      title: 'Essential Grey Hoodie Womens',
+      price: '£29.99',
+      imageUrl: 'assets/grey_hoodie_woman.png',
+      description: '',
+    ),
+    ProductDetails(
+      title: 'Black Baseball Cap',
+      price: '£7.99',
+      imageUrl: 'assets/black_cap.png',
+      description: '',
+    ),
+    ProductDetails(
+      title: 'Hydroflask with straw',
+      price: '£11.99',
+      imageUrl: 'assets/jug.jpg',
+      description: '',
+    ),
+    ProductDetails(
+      title: 'Lanyard Card Holder',
+      price: '£2.99',
+      imageUrl: 'assets/merchandise.png',
+      description: '',
+    ),
+    ProductDetails(
+      title: 'Essential USB-C Charger',
+      price: '£6.99',
+      imageUrl: 'assets/charger.png',
+      description: '',
+    ),
+  ];
+  List<ProductDetails> _filtered = const [];
+
+  void _onSearchChanged(String query) {
+    final q = query.toLowerCase();
+    setState(() {
+      _filtered = q.isEmpty
+          ? const []
+          : _allProducts
+              .where((p) => p.title.toLowerCase().contains(q))
+              .toList();
+    });
+  }
+
+  void _selectProduct(ProductDetails product) {
+    Navigator.pushNamed(context, '/product', arguments: product);
+    setState(() {
+      _globalSearchController.clear();
+      _filtered = const [];
+      _showGlobalSearch = false;
+    });
+  }
 
   @override
   void dispose() {
