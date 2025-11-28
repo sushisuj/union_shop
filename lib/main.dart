@@ -445,6 +445,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ? TextField(
                                                   controller:
                                                       _globalSearchController,
+                                                  focusNode:
+                                                      _globalSearchFocusNode,
                                                   decoration:
                                                       const InputDecoration(
                                                     hintText:
@@ -469,20 +471,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   padding: const EdgeInsets.all(8),
                                   constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
+                                      minWidth: 32, minHeight: 32),
                                   onPressed: () {
-                                    setState(() {
-                                      if (_showGlobalSearch) {
-                                        _globalSearchController.clear();
-                                        _filtered = const [];
-                                      }
-                                      _showGlobalSearch = !_showGlobalSearch;
-                                    });
-                                    if (!_showGlobalSearch) {
-                                      _removeSearchOverlay();
+                                    if (_showGlobalSearch) {
+                                      _closeSearch();
                                     } else {
+                                      setState(() => _showGlobalSearch = true);
+                                      _globalSearchFocusNode.requestFocus();
                                       _refreshSearchOverlay();
                                     }
                                   },
@@ -642,7 +637,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      _FooterLink(text: 'Search'),
+                      _FooterLink(
+                        text: 'Search',
+                        onTap: _openSearchAndScrollToTop,
+                      ),
                       _FooterLink(text: 'Terms and Conditions'),
                       _FooterLink(text: 'Contact Us'),
                       _FooterLink(text: 'FAQ'),
@@ -816,7 +814,8 @@ class ProductCard extends StatelessWidget {
 // Add this widget below your HomeScreen class (outside any other class)
 class _FooterLink extends StatefulWidget {
   final String text;
-  const _FooterLink({required this.text});
+  final VoidCallback? onTap;
+  const _FooterLink({required this.text, this.onTap});
 
   @override
   State<_FooterLink> createState() => _FooterLinkState();
@@ -832,7 +831,7 @@ class _FooterLinkState extends State<_FooterLink> {
       onExit: (_) => setState(() => _isHovering = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {}, // Dummy link, does nothing
+        onTap: widget.onTap ?? () {}, // Use the provided onTap or do nothing
         child: Text(
           widget.text,
           style: TextStyle(
