@@ -42,8 +42,22 @@ class UnionShopApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _globalSearchController = TextEditingController();
+  bool _showGlobalSearch = false;
+
+  @override
+  void dispose() {
+    _globalSearchController.dispose();
+    super.dispose();
+  }
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -203,11 +217,49 @@ class HomeScreen extends StatelessWidget {
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
                               children: [
+                                Expanded(
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    height: 36,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: _showGlobalSearch ? 12 : 0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: _showGlobalSearch
+                                          ? Colors.grey[100]
+                                          : Colors.transparent,
+                                      borderRadius: BorderRadius.circular(18),
+                                      boxShadow: _showGlobalSearch
+                                          ? const [
+                                              BoxShadow(
+                                                color: Colors.black12,
+                                                blurRadius: 6,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ]
+                                          : null,
+                                    ),
+                                    child: _showGlobalSearch
+                                        ? TextField(
+                                            controller: _globalSearchController,
+                                            decoration: const InputDecoration(
+                                              hintText:
+                                                  'Search the entire shop…',
+                                              border: InputBorder.none,
+                                            ),
+                                            onChanged: (value) {
+                                              // TODO: connect sitewide filtering
+                                            },
+                                          )
+                                        : const SizedBox.shrink(),
+                                  ),
+                                ),
                                 IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
+                                  icon: Icon(
+                                    _showGlobalSearch
+                                        ? Icons.close
+                                        : Icons.search,
                                     size: 18,
                                     color: Colors.grey,
                                   ),
@@ -216,7 +268,14 @@ class HomeScreen extends StatelessWidget {
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
-                                  onPressed: placeholderCallbackForButtons,
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_showGlobalSearch) {
+                                        _globalSearchController.clear();
+                                      }
+                                      _showGlobalSearch = !_showGlobalSearch;
+                                    });
+                                  },
                                 ),
                                 IconButton(
                                   icon: const Icon(
