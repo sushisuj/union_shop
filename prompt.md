@@ -129,3 +129,9 @@
 - Explanation of Generation: Added a master _allProducts list and _filtered results inside HomeScreen, wired _onSearchChanged to lowercase-filter titles, and rendered a dropdown ListView beneath the expanded search bar showing matches. Selecting a result navigates to ProductPage with the tapped product’s data, clears the query, and collapses the bar.
 
 - Private Notes: Store all searchable product metadata in one list, filter it in onChanged, and render suggestions with ListView under the search field; remember to clear results and hide the bar after navigation so the UI resets.
+
+21. Can the new home-page search bar pull every product from Featured, Sale, and Essentials so typing “fleece” shows those sale jackets right under the bar, and tapping one navigates to that product page?
+
+- Explanation of Generation: Added a sitewide _allProducts list (covering Featured, Sale, and Essentials items) plus _filtered results inside HomeScreen, wired the search TextField’s onChanged to filter titles/descriptions, and rendered the dropdown suggestion list below the bar with tap-to-navigate behavior that clears and collapses the search.
+
+- Private Notes: Keep every searchable product in _allProducts; update it when new cards are added elsewhere. Filtering uses lowercase contains, so expand to tags/categories later if needed.
