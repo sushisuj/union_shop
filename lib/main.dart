@@ -51,7 +51,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _globalSearchController = TextEditingController();
+  final LayerLink _searchFieldLink = LayerLink();
+  OverlayEntry? _searchOverlay;
+
   bool _showGlobalSearch = false;
+  List<ProductDetails> _filtered = const [];
 
   static const List<ProductDetails> _allProducts = [
     ProductDetails(
@@ -128,8 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
 
-  List<ProductDetails> _filtered = const [];
-
   void _onSearchChanged(String query) {
     final q = query.toLowerCase();
     setState(() {
@@ -141,6 +143,57 @@ class _HomeScreenState extends State<HomeScreen> {
                   p.description.toLowerCase().contains(q))
               .toList();
     });
+    _refreshSearchOverlay();
+  }
+
+  void _refreshSearchOverlay() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_showGlobalSearch || _filtered.isEmpty) {
+        _removeSearchOverlay();
+      } else {
+        _removeSearchOverlay();
+        _searchOverlay = OverlayEntry(
+          builder: (_) => Positioned.fill(
+            child: IgnorePointer(
+              ignoring: false,
+              child: CompositedTransformFollower(
+                link: _searchFieldLink,
+                showWhenUnlinked: false,
+                offset: const Offset(0, 42),
+                child: Material(
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(12),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 260),
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      shrinkWrap: true,
+                      itemCount: _filtered.length,
+                      separatorBuilder: (_, __) => const Divider(height: 1),
+                      itemBuilder: (context, index) {
+                        final product = _filtered[index];
+                        return ListTile(
+                          dense: true,
+                          title: Text(product.title),
+                          subtitle: Text(product.price),
+                          onTap: () => _selectProduct(product),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        Overlay.of(context).insert(_searchOverlay!);
+      }
+    });
+  }
+
+  void _removeSearchOverlay() {
+    _searchOverlay?.remove();
+    _searchOverlay = null;
   }
 
   void _selectProduct(ProductDetails product) {
@@ -150,10 +203,12 @@ class _HomeScreenState extends State<HomeScreen> {
       _filtered = const [];
       _showGlobalSearch = false;
     });
+    _removeSearchOverlay();
   }
 
   @override
   void dispose() {
+    _removeSearchOverlay();
     _globalSearchController.dispose();
     super.dispose();
   }
@@ -360,44 +415,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                               )
                                             : const SizedBox.shrink(),
                                       ),
-                                      if (_showGlobalSearch &&
-                                          _filtered.isNotEmpty)
-                                        Container(
-                                          width: double.infinity,
-                                          margin: const EdgeInsets.only(top: 6),
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 4),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Colors.black12,
-                                                blurRadius: 8,
-                                                offset: Offset(0, 4),
-                                              ),
-                                            ],
-                                          ),
-                                          child: ListView.separated(
-                                            shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: _filtered.length,
-                                            separatorBuilder: (_, __) =>
-                                                const Divider(height: 1),
-                                            itemBuilder: (context, index) {
-                                              final product = _filtered[index];
-                                              return ListTile(
-                                                dense: true,
-                                                title: Text(product.title),
-                                                subtitle: Text(product.price),
-                                                onTap: () =>
-                                                    _selectProduct(product),
-                                              );
-                                            },
-                                          ),
-                                        ),
                                     ],
                                   ),
                                 ),
