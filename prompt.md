@@ -1,4 +1,3 @@
-
 ## Prompt Bank
 - This document will act as a library of prompts used throughout the development of this coursework for documentation and future reference.
 
@@ -105,3 +104,9 @@
 - Explanation of Generation: Updated sale_page.dart to wrap the GridView.builder in a LayoutBuilder, dynamically adjusting crossAxisCount and childAspectRatio for desktop, tablet, and mobile widths so the cards resize appropriately. With shrinkWrap: true and NeverScrollableScrollPhysics retained, the product grid now fits without the 42px/223px overflow on any device size.
 
 - Private Notes: Learned to tailor grid sizing per breakpoint with LayoutBuilder, tweaking crossAxisCount and childAspectRatio so sale cards resize for desktop/tablet/mobile while keeping shrinkWrap and NeverScrollableScrollPhysics to prevent scroll conflicts.
+
+17. In product_page.dart, when the user taps the ‘Add to cart’ button for a product, show a confirmation message such as ‘{title} in size {size} has been added to cart!’ above the button.
+
+- Explanation of Generation: Added state handling so pressing “Add to cart” sets `_confirmationMessage`, then conditionally renders that string above the button to confirm which product/size was added.
+
+- Private Notes: Remember to call `setState` when updating `_confirmationMessage`; the `if (_confirmationMessage.isNotEmpty)` block displays user feedback without navigating away.
