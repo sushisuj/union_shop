@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
+import 'package:union_shop/cart_state.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -206,8 +207,13 @@ class _ProductPageState extends State<ProductPage> {
                           _confirmationMessage =
                               "'${product.title}' in size '$_selectedSize' has been added to cart!";
                         });
-                        // keep placeholderCallbackForButtons if you need additional behaviour:
-                        // placeholderCallbackForButtons();
+                        cartState.addItem(
+                          CartItem(
+                            title: product.title,
+                            size: _selectedSize,
+                            price: product.price,
+                          ),
+                        );
                       },
                       child: const Text(
                         'Add to cart',
