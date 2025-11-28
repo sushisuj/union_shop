@@ -110,3 +110,9 @@
 - Explanation of Generation: Added state handling so pressing “Add to cart” sets `_confirmationMessage`, then conditionally renders that string above the button to confirm which product/size was added.
 
 - Private Notes: Remember to call `setState` when updating `_confirmationMessage`; the `if (_confirmationMessage.isNotEmpty)` block displays user feedback without navigating away.
+
+18. Ensure cart functionality is fully connected so pressing “Add to cart” on ProductPage immediately reflects the new item in CartPage using a shared CartState singleton.
+
+- Explanation of Generation: Introduced a shared cart_state.dart with a CartItem model and ValueNotifier list, updated ProductPage to add items via the global cartState, and rewired CartPage to listen to cartState.items with ValueListenableBuilder, replacing the hardcoded “empty” message with a live list of cart entries.
+
+- Private Notes: Use one global cartState instance (imported from cart_state.dart) across all pages; avoid creating new CartState() objects or the cart will reset. Call cartState.addItem(...) when adding items and rely on ValueListenableBuilder to rebuild CartPage whenever the cart changes—hot restart after wiring everything so both pages share the same state.
