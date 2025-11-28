@@ -63,6 +63,12 @@ Clicking add to cart pops up with a confirmation message
 ![alt text](image-6.png)
 Cart now displays basic information (to be improved)
 
+![alt text](image-7.png)
+Clicking the Search Button on the navbar now opens a searchbar
+
+![alt text](image-8.png)
+Searching for elements now creates a dropdown menu stemming from the searchbar
+
 ## Project Structure and Technologies Used
 ```
 union_shop/
