@@ -52,44 +52,82 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _globalSearchController = TextEditingController();
   bool _showGlobalSearch = false;
-  final List<ProductDetails> _allProducts = const [
+
+  static const List<ProductDetails> _allProducts = [
     ProductDetails(
       title: 'Essential Grey Hoodie Mens',
       price: '£29.99',
       imageUrl: 'assets/grey_hoodie.png',
-      description: '',
+      description: 'Premium brushed cotton hoodie with kangaroo pocket.',
     ),
     ProductDetails(
       title: 'Essential Grey Hoodie Womens',
       price: '£29.99',
       imageUrl: 'assets/grey_hoodie_woman.png',
-      description: '',
+      description: 'Tailored women’s fit with soft fleece lining.',
     ),
     ProductDetails(
       title: 'Black Baseball Cap',
       price: '£7.99',
       imageUrl: 'assets/black_cap.png',
-      description: '',
+      description: 'Adjustable cotton cap with embroidered Union logo.',
     ),
     ProductDetails(
       title: 'Hydroflask with straw',
       price: '£11.99',
       imageUrl: 'assets/jug.jpg',
-      description: '',
+      description: 'Insulated stainless bottle with flip straw lid.',
     ),
     ProductDetails(
       title: 'Lanyard Card Holder',
       price: '£2.99',
       imageUrl: 'assets/merchandise.png',
-      description: '',
+      description: 'Durable PVC holder plus purple lanyard.',
     ),
     ProductDetails(
       title: 'Essential USB-C Charger',
       price: '£6.99',
       imageUrl: 'assets/charger.png',
-      description: '',
+      description: 'Fast-charge USB-C cable for phones and tablets.',
+    ),
+    ProductDetails(
+      title: 'Essential White T-Shirt Mens',
+      price: '£12.99',
+      imageUrl: 'assets/essentials.png',
+      description: 'Classic crew neck tee in breathable cotton.',
+    ),
+    ProductDetails(
+      title: 'Essential White T-Shirt Womens',
+      price: '£12.99',
+      imageUrl: 'assets/essentials2.png',
+      description: 'Slim-fit cotton tee with embroidered crest.',
+    ),
+    ProductDetails(
+      title: 'Sunglasses',
+      price: '£10.99',
+      imageUrl: 'assets/sunglasses.png',
+      description: 'Sale sunglasses with UV400 protection.',
+    ),
+    ProductDetails(
+      title: 'Scientific Calculator',
+      price: '£9.99',
+      imageUrl: 'assets/calc.png',
+      description: 'Scientific calculator now at sale price.',
+    ),
+    ProductDetails(
+      title: 'Fleece Jacket Mens',
+      price: '£39.99',
+      imageUrl: 'assets/jumper1.png',
+      description: 'Sale fleece jacket with thermal lining.',
+    ),
+    ProductDetails(
+      title: 'Fleece Jacket Womens',
+      price: '£39.99',
+      imageUrl: 'assets/jumper2.png',
+      description: 'Women’s sale fleece with tapered fit.',
     ),
   ];
+
   List<ProductDetails> _filtered = const [];
 
   void _onSearchChanged(String query) {
@@ -98,7 +136,9 @@ class _HomeScreenState extends State<HomeScreen> {
       _filtered = q.isEmpty
           ? const []
           : _allProducts
-              .where((p) => p.title.toLowerCase().contains(q))
+              .where((p) =>
+                  p.title.toLowerCase().contains(q) ||
+                  p.description.toLowerCase().contains(q))
               .toList();
     });
   }
@@ -307,9 +347,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'Search the entire shop…',
                                               border: InputBorder.none,
                                             ),
-                                            onChanged: (value) {
-                                              // TODO: connect sitewide filtering
-                                            },
+                                            onChanged: _onSearchChanged,
                                           )
                                         : const SizedBox.shrink(),
                                   ),
