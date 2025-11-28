@@ -147,3 +147,9 @@
 - Explanation of Generation: Updated the overlay logic to measure the search field’s render box, position the dropdown directly below it with matching width, and wrap the ListView in a short ConstrainedBox so it only grows with its results. Also cleared _filtered and removed the OverlayEntry whenever the query empties or the search toggle closes, preventing lingering panels.
 
 - Private Notes: When using overlay-based dropdowns, compute position/size via the field’s RenderBox and always remove the OverlayEntry whenever state hides the trigger (clear query, close search) to avoid stuck overlays or leftover whitespace.
+
+24. Make the footer’s “Search” link act like the magnifying-glass icon but also scroll the page back to the top: when tapped, scroll to the hero, open the global search bar, focus the TextField, and close everything (including the overlay) when the user clears or collapses the search.
+
+- Explanation of Generation: Added a ScrollController and FocusNode to HomeScreen, wired _openSearchAndScrollToTop() to animate to offset 0, toggle _showGlobalSearch, request focus, and refresh the overlay; _closeSearch() now clears the query, hides the bar, unfocuses, and removes the overlay. Hooked these helpers into both the navbar search icon and the footer “Search” _FooterLink, which now accepts an onTap callback.
+
+- Private Notes: Coordinating scroll-to-top with inline UI toggles needs a shared ScrollController plus helper methods; always dispose controllers/focus nodes and ensure overlay teardown happens whenever search closes so the dropdown never lingers off-screen.
