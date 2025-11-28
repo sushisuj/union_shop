@@ -51,6 +51,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _globalSearchController = TextEditingController();
+  final FocusNode _globalSearchFocusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
   final LayerLink _searchFieldLink = LayerLink();
   final GlobalKey _searchFieldKey = GlobalKey();
   OverlayEntry? _searchOverlay;
@@ -215,10 +217,35 @@ class _HomeScreenState extends State<HomeScreen> {
     _removeSearchOverlay();
   }
 
+  Future<void> _openSearchAndScrollToTop() async {
+    await _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeOut,
+    );
+    if (!_showGlobalSearch) {
+      setState(() => _showGlobalSearch = true);
+    }
+    _globalSearchFocusNode.requestFocus();
+    _refreshSearchOverlay();
+  }
+
+  void _closeSearch() {
+    setState(() {
+      _globalSearchController.clear();
+      _filtered = const [];
+      _showGlobalSearch = false;
+    });
+    _globalSearchFocusNode.unfocus();
+    _removeSearchOverlay();
+  }
+
   @override
   void dispose() {
     _removeSearchOverlay();
     _globalSearchController.dispose();
+    _globalSearchFocusNode.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -240,6 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             // Header
