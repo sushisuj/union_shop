@@ -13,7 +13,7 @@ class CartItem {
 }
 
 class CartState {
-  final ValueNotifier<List<CartItem>> items = ValueNotifier(const []);
+  final ValueNotifier<List<CartItem>> items = ValueNotifier<List<CartItem>>([]);
 
   void addItem(CartItem item) {
     items.value = [...items.value, item];
