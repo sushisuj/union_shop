@@ -74,9 +74,15 @@ Searching for elements now creates a dropdown menu stemming from the searchbar
 union_shop/
 ├── lib/
 │   ├── main.dart             # Home, navbar, hero, footer
+│   ├── cart_state.dart       # Shared cart ValueNotifier + model
+│   ├── cart_page.dart        # Cart screen with ValueListenableBuilder
+│   ├── product_page.dart     # Product detail template + add-to-cart
+│   ├── sale_page.dart        # Sale listings
 │   ├── collections_page.dart # Collections landing page
 │   ├── essentials.dart       # Essentials collection view
-│   └── product_page.dart     # Product detail template
+│   ├── login_page.dart       # Login placeholder
+│   └── widgets/
+│       └── union_navbar.dart # Reusable navbar widget
 ├── assets/                   # Product and hero imagery
 └── test/                     # Widget tests
 ```
