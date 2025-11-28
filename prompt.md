@@ -116,3 +116,9 @@
 - Explanation of Generation: Introduced a shared cart_state.dart with a CartItem model and ValueNotifier list, updated ProductPage to add items via the global cartState, and rewired CartPage to listen to cartState.items with ValueListenableBuilder, replacing the hardcoded “empty” message with a live list of cart entries.
 
 - Private Notes: Use one global cartState instance (imported from cart_state.dart) across all pages; avoid creating new CartState() objects or the cart will reset. Call cartState.addItem(...) when adding items and rely on ValueListenableBuilder to rebuild CartPage whenever the cart changes—hot restart after wiring everything so both pages share the same state.
+
+19. Add a collapsible sitewide search bar on HomeScreen: when the navbar magnifying-glass is tapped, slide open a TextField across the white space (replacing the blank area), and hide it again when the icon is tapped once more—no filtering logic yet, just the UI.
+
+- Explanation of Generation: Converted HomeScreen into a stateful widget with _showGlobalSearch, inserted an AnimatedContainer in the navbar so tapping the magnifying glass expands a TextField inline across the white space, and collapses/clears it when the icon is tapped again—purely UI with filtering left for later.
+
+- Private Notes: Inline search bars can be toggled with a boolean flag and AnimatedContainer; remember to dispose the TextEditingController and clear it when hiding the bar so future filtering logic starts fresh.
