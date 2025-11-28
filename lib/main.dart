@@ -52,6 +52,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _globalSearchController = TextEditingController();
   final LayerLink _searchFieldLink = LayerLink();
+  final GlobalKey _searchFieldKey = GlobalKey();
   OverlayEntry? _searchOverlay;
 
   bool _showGlobalSearch = false;
@@ -152,6 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
         _removeSearchOverlay();
       } else {
         _removeSearchOverlay();
+        final renderBox =
+            _searchFieldKey.currentContext?.findRenderObject() as RenderBox?;
+        final overlayWidth = renderBox?.size.width ?? 280;
+
         _searchOverlay = OverlayEntry(
           builder: (_) => Positioned.fill(
             child: IgnorePointer(
@@ -160,25 +165,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 link: _searchFieldLink,
                 showWhenUnlinked: false,
                 offset: const Offset(0, 42),
-                child: Material(
-                  elevation: 8,
-                  borderRadius: BorderRadius.circular(12),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxHeight: 260),
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      shrinkWrap: true,
-                      itemCount: _filtered.length,
-                      separatorBuilder: (_, __) => const Divider(height: 1),
-                      itemBuilder: (context, index) {
-                        final product = _filtered[index];
-                        return ListTile(
-                          dense: true,
-                          title: Text(product.title),
-                          subtitle: Text(product.price),
-                          onTap: () => _selectProduct(product),
-                        );
-                      },
+                child: SizedBox(
+                  width: overlayWidth,
+                  child: Material(
+                    elevation: 8,
+                    borderRadius: BorderRadius.circular(10),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 220),
+                      child: ListView.separated(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        shrinkWrap: true,
+                        itemCount: _filtered.length,
+                        separatorBuilder: (_, __) =>
+                            const Divider(height: 1, thickness: 0.4),
+                        itemBuilder: (context, index) {
+                          final product = _filtered[index];
+                          return ListTile(
+                            dense: true,
+                            horizontalTitleGap: 4,
+                            title: Text(product.title,
+                                style: const TextStyle(fontSize: 14)),
+                            subtitle: Text(product.price),
+                            onTap: () => _selectProduct(product),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -380,6 +391,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       CompositedTransformTarget(
                                         link: _searchFieldLink,
                                         child: AnimatedContainer(
+                                          key: _searchFieldKey,
                                           duration:
                                               const Duration(milliseconds: 200),
                                           height: 36,
@@ -442,6 +454,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       }
                                       _showGlobalSearch = !_showGlobalSearch;
                                     });
+                                    if (!_showGlobalSearch) {
+                                      _removeSearchOverlay();
+                                    } else {
+                                      _refreshSearchOverlay();
+                                    }
                                   },
                                 ),
                                 IconButton(
