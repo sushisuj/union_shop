@@ -135,3 +135,9 @@
 - Explanation of Generation: Added a sitewide _allProducts list (covering Featured, Sale, and Essentials items) plus _filtered results inside HomeScreen, wired the search TextField’s onChanged to filter titles/descriptions, and rendered the dropdown suggestion list below the bar with tap-to-navigate behavior that clears and collapses the search.
 
 - Private Notes: Keep every searchable product in _allProducts; update it when new cards are added elsewhere. Filtering uses lowercase contains, so expand to tags/categories later if needed.
+
+22. When the home-page search field shows matches, render the dropdown as an overlay that floats above the hero (like the Shop dropdown) so results no longer push the content down; tapping a suggestion should still navigate and close the search.
+
+- Explanation of Generation: Wrapped the search field in a CompositedTransformTarget, created an OverlayEntry follower linked to it, and moved the suggestion list into that overlay so it appears above the hero. Selecting an item still calls _selectProduct, which clears the query, collapses the bar, and removes the overlay.
+
+- Private Notes: Overlay-based dropdowns need a LayerLink, CompositedTransformTarget, and CompositedTransformFollower. Remember to manage the OverlayEntry lifecycle (insert/remove) when toggling search or clearing results to avoid lingering widgets.
