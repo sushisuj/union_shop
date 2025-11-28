@@ -377,43 +377,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 200),
-                                        height: 36,
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal:
-                                              _showGlobalSearch ? 12 : 0,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: _showGlobalSearch
-                                              ? Colors.grey[100]
-                                              : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          boxShadow: _showGlobalSearch
-                                              ? const [
-                                                  BoxShadow(
-                                                    color: Colors.black12,
-                                                    blurRadius: 6,
-                                                    offset: Offset(0, 2),
+                                      CompositedTransformTarget(
+                                        link: _searchFieldLink,
+                                        child: AnimatedContainer(
+                                          duration:
+                                              const Duration(milliseconds: 200),
+                                          height: 36,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal:
+                                                _showGlobalSearch ? 12 : 0,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: _showGlobalSearch
+                                                ? Colors.grey[100]
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            boxShadow: _showGlobalSearch
+                                                ? const [
+                                                    BoxShadow(
+                                                      color: Colors.black12,
+                                                      blurRadius: 6,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ]
+                                                : null,
+                                          ),
+                                          child: _showGlobalSearch
+                                              ? TextField(
+                                                  controller:
+                                                      _globalSearchController,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    hintText:
+                                                        'Search the entire shop…',
+                                                    border: InputBorder.none,
                                                   ),
-                                                ]
-                                              : null,
+                                                  onChanged: _onSearchChanged,
+                                                )
+                                              : const SizedBox.shrink(),
                                         ),
-                                        child: _showGlobalSearch
-                                            ? TextField(
-                                                controller:
-                                                    _globalSearchController,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  hintText:
-                                                      'Search the entire shop…',
-                                                  border: InputBorder.none,
-                                                ),
-                                                onChanged: _onSearchChanged,
-                                              )
-                                            : const SizedBox.shrink(),
                                       ),
                                     ],
                                   ),
