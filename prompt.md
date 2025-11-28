@@ -122,3 +122,10 @@
 - Explanation of Generation: Converted HomeScreen into a stateful widget with _showGlobalSearch, inserted an AnimatedContainer in the navbar so tapping the magnifying glass expands a TextField inline across the white space, and collapses/clears it when the icon is tapped again—purely UI with filtering left for later.
 
 - Private Notes: Inline search bars can be toggled with a boolean flag and AnimatedContainer; remember to dispose the TextEditingController and clear it when hiding the bar so future filtering logic starts fresh.
+
+
+20. I want the new collapsible search bar on the home page to actually search across every product. As I type (e.g., “fleece”), show matching products in a dropdown panel directly under the search bar, and let me tap a result to navigate to that product page. Keep the filtering logic scoped to HomeScreen for now.
+
+- Explanation of Generation: Added a master _allProducts list and _filtered results inside HomeScreen, wired _onSearchChanged to lowercase-filter titles, and rendered a dropdown ListView beneath the expanded search bar showing matches. Selecting a result navigates to ProductPage with the tapped product’s data, clears the query, and collapses the bar.
+
+- Private Notes: Store all searchable product metadata in one list, filter it in onChanged, and render suggestions with ListView under the search field; remember to clear results and hide the bar after navigation so the UI resets.
