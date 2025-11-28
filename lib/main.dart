@@ -316,40 +316,89 @@ class _HomeScreenState extends State<HomeScreen> {
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    height: 36,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: _showGlobalSearch ? 12 : 0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: _showGlobalSearch
-                                          ? Colors.grey[100]
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(18),
-                                      boxShadow: _showGlobalSearch
-                                          ? const [
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      AnimatedContainer(
+                                        duration:
+                                            const Duration(milliseconds: 200),
+                                        height: 36,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                              _showGlobalSearch ? 12 : 0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: _showGlobalSearch
+                                              ? Colors.grey[100]
+                                              : Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          boxShadow: _showGlobalSearch
+                                              ? const [
+                                                  BoxShadow(
+                                                    color: Colors.black12,
+                                                    blurRadius: 6,
+                                                    offset: Offset(0, 2),
+                                                  ),
+                                                ]
+                                              : null,
+                                        ),
+                                        child: _showGlobalSearch
+                                            ? TextField(
+                                                controller:
+                                                    _globalSearchController,
+                                                decoration:
+                                                    const InputDecoration(
+                                                  hintText:
+                                                      'Search the entire shop…',
+                                                  border: InputBorder.none,
+                                                ),
+                                                onChanged: _onSearchChanged,
+                                              )
+                                            : const SizedBox.shrink(),
+                                      ),
+                                      if (_showGlobalSearch &&
+                                          _filtered.isNotEmpty)
+                                        Container(
+                                          width: double.infinity,
+                                          margin: const EdgeInsets.only(top: 6),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: const [
                                               BoxShadow(
                                                 color: Colors.black12,
-                                                blurRadius: 6,
-                                                offset: Offset(0, 2),
+                                                blurRadius: 8,
+                                                offset: Offset(0, 4),
                                               ),
-                                            ]
-                                          : null,
-                                    ),
-                                    child: _showGlobalSearch
-                                        ? TextField(
-                                            controller: _globalSearchController,
-                                            decoration: const InputDecoration(
-                                              hintText:
-                                                  'Search the entire shop…',
-                                              border: InputBorder.none,
-                                            ),
-                                            onChanged: _onSearchChanged,
-                                          )
-                                        : const SizedBox.shrink(),
+                                            ],
+                                          ),
+                                          child: ListView.separated(
+                                            shrinkWrap: true,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount: _filtered.length,
+                                            separatorBuilder: (_, __) =>
+                                                const Divider(height: 1),
+                                            itemBuilder: (context, index) {
+                                              final product = _filtered[index];
+                                              return ListTile(
+                                                dense: true,
+                                                title: Text(product.title),
+                                                subtitle: Text(product.price),
+                                                onTap: () =>
+                                                    _selectProduct(product),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                 ),
                                 IconButton(
@@ -369,6 +418,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     setState(() {
                                       if (_showGlobalSearch) {
                                         _globalSearchController.clear();
+                                        _filtered = const [];
                                       }
                                       _showGlobalSearch = !_showGlobalSearch;
                                     });
