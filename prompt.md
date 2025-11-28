@@ -141,3 +141,9 @@
 - Explanation of Generation: Wrapped the search field in a CompositedTransformTarget, created an OverlayEntry follower linked to it, and moved the suggestion list into that overlay so it appears above the hero. Selecting an item still calls _selectProduct, which clears the query, collapses the bar, and removes the overlay.
 
 - Private Notes: Overlay-based dropdowns need a LayerLink, CompositedTransformTarget, and CompositedTransformFollower. Remember to manage the OverlayEntry lifecycle (insert/remove) when toggling search or clearing results to avoid lingering widgets.
+
+23. The search overlay is oversized and stays open after I close the search bar. Make it the same width as the search field, stop after the last result (no extra whitespace), and ensure the overlay fully disappears whenever I clear the query or collapse the search.
+
+- Explanation of Generation: Updated the overlay logic to measure the search field’s render box, position the dropdown directly below it with matching width, and wrap the ListView in a short ConstrainedBox so it only grows with its results. Also cleared _filtered and removed the OverlayEntry whenever the query empties or the search toggle closes, preventing lingering panels.
+
+- Private Notes: When using overlay-based dropdowns, compute position/size via the field’s RenderBox and always remove the OverlayEntry whenever state hides the trigger (clear query, close search) to avoid stuck overlays or leftover whitespace.
