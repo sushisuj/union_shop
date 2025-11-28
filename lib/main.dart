@@ -815,6 +815,7 @@ class ProductCard extends StatelessWidget {
 class _FooterLink extends StatefulWidget {
   final String text;
   final VoidCallback? onTap;
+
   const _FooterLink({required this.text, this.onTap});
 
   @override
@@ -831,7 +832,7 @@ class _FooterLinkState extends State<_FooterLink> {
       onExit: (_) => setState(() => _isHovering = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: widget.onTap ?? () {}, // Use the provided onTap or do nothing
+        onTap: widget.onTap ?? () {},
         child: Text(
           widget.text,
           style: TextStyle(
