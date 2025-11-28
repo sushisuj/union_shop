@@ -57,6 +57,12 @@ Pressing `Essentials` Button Displays 2 products in the Essentials Collection
 ![alt text](image-4.png)
 Clicking either the Mens or womens hoodie leads to a product page with its own description/details.
 
+![alt text](image-5.png)
+Clicking add to cart pops up with a confirmation message
+
+![alt text](image-6.png)
+Cart now displays basic information (to be improved)
+
 ## Project Structure and Technologies Used
 ```
 union_shop/
