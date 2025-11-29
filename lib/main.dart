@@ -516,19 +516,40 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.pushNamed(context, '/cart');
                                   },
                                 ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
+                                if (!isMobile)
+                                  const SizedBox.shrink()
+                                else
+                                  PopupMenuButton<String>(
+                                    icon: const Icon(Icons.menu,
+                                        size: 20, color: Colors.grey),
+                                    onSelected: (value) {
+                                      switch (value) {
+                                        case 'search':
+                                          setState(
+                                              () => _showGlobalSearch = true);
+                                          _globalSearchFocusNode.requestFocus();
+                                          _refreshSearchOverlay();
+                                          break;
+                                        case 'login':
+                                          Navigator.pushNamed(
+                                              context, '/login');
+                                          break;
+                                        case 'cart':
+                                          Navigator.pushNamed(context, '/cart');
+                                          break;
+                                      }
+                                    },
+                                    itemBuilder: (_) => const [
+                                      PopupMenuItem(
+                                          value: 'search',
+                                          child: Text('Search')),
+                                      PopupMenuItem(
+                                          value: 'login',
+                                          child: Text('Account')),
+                                      PopupMenuItem(
+                                          value: 'cart', child: Text('Cart')),
+                                    ],
                                   ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
                               ],
                             ),
                           ),
