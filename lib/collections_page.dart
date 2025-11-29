@@ -68,6 +68,8 @@ class CollectionsPage extends StatelessWidget {
                             Navigator.pushNamed(context, '/essentials');
                           } else if (item.title == 'Sale') {
                             Navigator.pushNamed(context, '/sale');
+                          } else if (item.title == 'Personalisation') {
+                            Navigator.pushNamed(context, '/print-shack');
                           }
                           // Add more navigation logic for other collections if needed
                         },
