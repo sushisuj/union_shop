@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/about_page.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 
 class LoginPage extends StatelessWidget {
