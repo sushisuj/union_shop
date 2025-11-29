@@ -3,7 +3,9 @@ import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/cart_state.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final ProductDetails? initialProduct;
+
+  const ProductPage({super.key, this.initialProduct});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -25,14 +27,15 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
-    final product = args is ProductDetails
-        ? args
-        : const ProductDetails(
-            title: 'Union Shop Product',
-            price: '£0.00',
-            imageUrl: 'assets/placeholder.png',
-            description: 'Product details coming soon.',
-          );
+    final product = widget.initialProduct ??
+        (args is ProductDetails
+            ? args
+            : const ProductDetails(
+                title: 'Union Shop Product',
+                price: '£0.00',
+                imageUrl: 'assets/placeholder.png',
+                description: 'Product details coming soon.',
+              ));
 
     // ensure selected size is valid for this product (if product provides sizes)
     if (product.sizes.isNotEmpty && !product.sizes.contains(_selectedSize)) {
