@@ -385,6 +385,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 _ShopDropdown(),
                                 GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, '/print-shack'),
+                                  child: const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Text(
+                                      'Print Shack',
+                                      style: TextStyle(
+                                        color: Colors.deepPurple,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
                                   onTap: () =>
                                       Navigator.pushNamed(context, '/about'),
                                   child: const Padding(
