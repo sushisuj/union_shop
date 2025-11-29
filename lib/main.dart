@@ -741,6 +741,7 @@ class ProductCard extends StatelessWidget {
               imageUrl: 'assets/grey_hoodie.png',
               description:
                   'Premium brushed cotton hoodie with kangaroo pocket and embroidered Union crest.',
+              sizes: ['XS', 'S', 'M', 'L', 'XL'],
             ),
           );
         } else if (title == 'Essential Grey Hoodie Womens') {
@@ -753,6 +754,7 @@ class ProductCard extends StatelessWidget {
               imageUrl: 'assets/grey_hoodie_woman.png',
               description:
                   'Tailored fit women’s hoodie with soft fleece lining and embroidered Union crest.',
+              sizes: ['XS', 'S', 'M', 'L', 'XL'],
             ),
           );
         } else if (title == 'Black Baseball Cap') {

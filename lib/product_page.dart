@@ -37,7 +37,9 @@ class _ProductPageState extends State<ProductPage> {
           : const ['One Size'],
     ).toList();
 
-    _selectedSize ??= sizeOptions.first;
+    if (!sizeOptions.contains(_selectedSize)) {
+      _selectedSize = sizeOptions.first;
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
