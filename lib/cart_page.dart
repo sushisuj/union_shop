@@ -39,7 +39,24 @@ class CartPage extends StatelessWidget {
                     final item = items[index];
                     return ListTile(
                       title: Text(item.title),
-                      subtitle: Text('Size: ${item.size}\n${item.price} each'),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Size: ${item.size}\n${item.price} each'),
+                          if (item.message != null &&
+                              item.message!.trim().isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: Text(
+                                'Message: ${item.message}',
+                                style: const TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                       isThreeLine: true,
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
