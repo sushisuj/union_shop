@@ -15,7 +15,7 @@
 
 ## Intermediate (35%)
 
-- [ ] Cart: Shopping cart page showing selected products and totals
+- [x] Cart: Shopping cart page showing selected products and totals
 - [ ] Checkout: Checkout page with form for delivery and payment details
 - [ ] Order Confirmation: Page confirming order details after checkout
 - [x] Product Search: Search bar or page to find products by name or category
