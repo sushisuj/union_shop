@@ -31,7 +31,13 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
             title: 'Personalisation',
             price: '£3.00',
             imageUrl: 'assets/personalisation.png',
-            description: 'Add your own text or design to make it uniquely yours!',
+            description: '''
+Add your own text or design to make it uniquely yours!
+
+One line of text is 10 characters.
+
+Please ensure all spellings are correct before submitting your purchase as we will print your item with the exact wording you provide. We will not be responsible for any incorrect spellings printed onto your garment. Personalised items do not qualify for refunds.
+''',
           );
 
     // ensure selected size is valid for this product (if product provides sizes)
