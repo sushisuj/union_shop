@@ -153,3 +153,9 @@
 - Explanation of Generation: Added a ScrollController and FocusNode to HomeScreen, wired _openSearchAndScrollToTop() to animate to offset 0, toggle _showGlobalSearch, request focus, and refresh the overlay; _closeSearch() now clears the query, hides the bar, unfocuses, and removes the overlay. Hooked these helpers into both the navbar search icon and the footer “Search” _FooterLink, which now accepts an onTap callback.
 
 - Private Notes: Coordinating scroll-to-top with inline UI toggles needs a shared ScrollController plus helper methods; always dispose controllers/focus nodes and ensure overlay teardown happens whenever search closes so the dropdown never lingers off-screen.
+
+25. Add a “Print Shack” tab to the navbar (desktop + popup menu) that routes to my PersonalisationPage so users can reach the new print/personalisation flow from both desktop and mobile navigation.
+
+- Explanation of Generation: Imported printshack_page.dart, registered /print-shack in MaterialApp, inserted a Print Shack _NavLink beside Shop/About for desktop, and added a matching PopupMenuItem that calls Navigator.pushNamed(context, '/print-shack') on mobile.
+
+- Private Notes: Whenever you add a navbar tab, register its route in MaterialApp, wire the desktop row and mobile menu, and ensure the destination page (PersonalisationPage) is imported so Navigator.pushNamed can build it. 
