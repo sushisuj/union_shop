@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/cart_icon_button.dart';
 
 class UnionNavBar extends StatelessWidget {
   const UnionNavBar({super.key});
@@ -99,9 +100,7 @@ class UnionNavBar extends StatelessWidget {
                 icon: const Icon(Icons.person_outline, color: Colors.grey),
                 onPressed: () => Navigator.pushNamed(context, '/login'),
               ),
-              IconButton(
-                icon:
-                    const Icon(Icons.shopping_bag_outlined, color: Colors.grey),
+              CartIconButton(
                 onPressed: () => Navigator.pushNamed(context, '/cart'),
               ),
             ],

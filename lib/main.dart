@@ -9,6 +9,7 @@ import 'package:union_shop/login_page.dart';
 import 'package:union_shop/sale_page.dart';
 import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/printshack_page.dart';
+import 'package:union_shop/widgets/cart_icon_button.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -510,17 +511,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.pushNamed(context, '/login');
                                   },
                                 ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
+                                CartIconButton(
                                   onPressed: () {
                                     Navigator.pushNamed(context, '/cart');
                                   },
