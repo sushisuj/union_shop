@@ -51,6 +51,9 @@ Updated Navbar
  ![alt text](image-2.png)
 Pressing `Shop` Button takes you to Collections Page
 
+![alt text](image-13.png)
+Hero slide updated with a second slide.
+
 ![alt text](image-3.png)
 Pressing `Essentials` Button Displays 2 products in the Essentials Collection
 
@@ -63,11 +66,23 @@ Clicking add to cart pops up with a confirmation message
 ![alt text](image-6.png)
 Cart now displays basic information (to be improved)
 
+![alt text](image-10.png)
+Clicking person icon shows login page
+
 ![alt text](image-7.png)
 Clicking the Search Button on the navbar now opens a searchbar
 
 ![alt text](image-8.png)
 Searching for elements now creates a dropdown menu stemming from the searchbar
+
+![alt text](image-9.png)
+Cart page implemented showing a grand total and includes a checkout button
+
+![alt text](image-11.png)
+Personalisation Page supports text input
+
+![alt text](image-12.png)
+Filters in sale and essentials page
 
 ## Project Structure and Technologies Used
 ```
