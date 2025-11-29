@@ -86,12 +86,31 @@ class CartPage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
-                    Text(
-                      '£${total.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        '£${total.toStringAsFixed(2)}',
+                        textAlign: TextAlign.right,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                      ),
+                      onPressed: () {
+                        // TODO: implement checkout flow
+                      },
+                      child: const Text('Checkout'),
                     ),
                   ],
                 ),
