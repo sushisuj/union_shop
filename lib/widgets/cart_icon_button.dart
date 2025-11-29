@@ -16,7 +16,8 @@ class CartIconButton extends StatelessWidget {
     return ValueListenableBuilder<List<CartItem>>(
       valueListenable: cartState.items,
       builder: (_, items, __) {
-        final count = items.length;
+        final count =
+            items.fold<int>(0, (total, item) => total + item.quantity);
         return Stack(
           clipBehavior: Clip.none,
           children: [
