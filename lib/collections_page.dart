@@ -170,31 +170,6 @@ class _CollectionItem {
   const _CollectionItem({required this.title, required this.image});
 }
 
-class _NavTab extends StatelessWidget {
-  final String title;
-  final VoidCallback onTap;
-  const _NavTab({required this.title, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Color(0xFF4d2963),
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            decoration: TextDecoration.underline,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _FooterLink extends StatefulWidget {
   final String text;
   const _FooterLink({required this.text});
