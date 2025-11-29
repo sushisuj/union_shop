@@ -35,3 +35,8 @@
 - [x] README: A comprehensive, well-formatted and accurate README file
 - [ ] Testing: Tests covering all or almost all of the application; passing tests
 - [ ] External Services: Integration and utilization of cloud services
+
+
+
+
+- [ ] Test Functions for all files
