@@ -10,8 +10,8 @@ class PersonalisationPage extends StatefulWidget {
 }
 
 class _PersonalisationPageState extends State<PersonalisationPage> {
-  final List<String> _sizes = ['XS', 'S', 'M', 'L', 'XL'];
-  String _selectedSize = 'M';
+  final List<String> _sizes = ['One Line of Text', 'Two Lines of Text'];
+  String _selectedSize = 'One Line of Text'; // default size
   String _confirmationMessage = ''; // new: holds confirmation text
 
   void navigateToHome(BuildContext context) {
@@ -127,7 +127,7 @@ Please ensure all spellings are correct before submitting your purchase as we wi
                   Row(
                     children: [
                       const Text(
-                        'Size:',
+                        'Lines:',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
