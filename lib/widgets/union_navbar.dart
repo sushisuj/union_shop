@@ -72,8 +72,7 @@ class UnionNavBar extends StatelessWidget {
                   itemBuilder: (_) => const [
                     PopupMenuItem(value: 'home', child: Text('Home')),
                     PopupMenuItem(value: 'shop', child: Text('Shop')),
-                    PopupMenuItem(
-                        value: 'print', child: Text('Print Shack')),
+                    PopupMenuItem(value: 'print', child: Text('Print Shack')),
                     PopupMenuItem(value: 'about', child: Text('About Us')),
                   ],
                 )
@@ -84,6 +83,9 @@ class UnionNavBar extends StatelessWidget {
                     _NavLink(label: 'Home', route: '/'),
                     SizedBox(width: 20),
                     _ShopDropdown(),
+                    SizedBox(width: 20),
+                    _NavLink(
+                        label: 'Print Shack', route: '/print-shack'), // new
                     SizedBox(width: 20),
                     _NavLink(label: 'About Us', route: '/about'),
                   ],
