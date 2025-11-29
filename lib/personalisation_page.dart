@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/cart_state.dart';
 
-class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+class PersonalisationPage extends StatefulWidget {
+  const PersonalisationPage({super.key});
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  State<PersonalisationPage> createState() => _PersonalisationPageState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _PersonalisationPageState extends State<PersonalisationPage> {
   final List<String> _sizes = ['XS', 'S', 'M', 'L', 'XL'];
   String _selectedSize = 'M';
   String _confirmationMessage = ''; // new: holds confirmation text
