@@ -155,6 +155,26 @@ Please ensure all spellings are correct before submitting your purchase as we wi
                     ],
                   ),
 
+                  const SizedBox(height: 16),
+
+                  // Custom message input
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Your custom message',
+                      hintText: _selectedSize == 'Two Lines of Text'
+                          ? 'Enter up to 2 lines (max 10 chars per line)'
+                          : 'Enter up to 10 characters',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    maxLength: _selectedSize == 'Two Lines of Text' ? 21 : 10,
+                    maxLines: _selectedSize == 'Two Lines of Text' ? 2 : 1,
+                    onChanged: (value) {
+                      // You can store this value in a variable if needed
+                    },
+                  ),
+
                   const SizedBox(height: 24),
 
                   // Product description
