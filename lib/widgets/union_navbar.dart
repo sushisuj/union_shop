@@ -49,6 +49,9 @@ class UnionNavBar extends StatelessWidget {
                       case 'shop':
                         Navigator.pushNamed(context, '/collections');
                         break;
+                      case 'print':
+                        Navigator.pushNamed(context, '/print-shack'); // new
+                        break;
                       case 'about':
                         Navigator.pushNamed(context, '/about');
                         break;
@@ -69,6 +72,8 @@ class UnionNavBar extends StatelessWidget {
                   itemBuilder: (_) => const [
                     PopupMenuItem(value: 'home', child: Text('Home')),
                     PopupMenuItem(value: 'shop', child: Text('Shop')),
+                    PopupMenuItem(
+                        value: 'print', child: Text('Print Shack')),
                     PopupMenuItem(value: 'about', child: Text('About Us')),
                   ],
                 )
