@@ -28,10 +28,10 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     final product = args is PrintShackProduct
         ? args
         : const PrintShackProduct(
-            title: 'Union Shop Product',
-            price: '£0.00',
-            imageUrl: 'assets/placeholder.png',
-            description: 'Product details coming soon.',
+            title: 'Personalisation',
+            price: '£3.00',
+            imageUrl: 'assets/personalisation.png',
+            description: 'Add your own text or design to make it uniquely yours!',
           );
 
     // ensure selected size is valid for this product (if product provides sizes)
