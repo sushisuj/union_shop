@@ -329,6 +329,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.pushNamed(
                                         context, '/collections');
                                     break;
+                                  case 'print':
+                                    Navigator.pushNamed(
+                                        context, '/print-shack');
+                                    break;
                                   case 'about':
                                     Navigator.pushNamed(context, '/about');
                                     break;
@@ -350,17 +354,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               itemBuilder: (context) => const [
                                 PopupMenuItem(
-                                  value: 'home',
-                                  child: Text('Home'),
-                                ),
+                                    value: 'home', child: Text('Home')),
                                 PopupMenuItem(
-                                  value: 'shop',
-                                  child: Text('Shop'),
-                                ),
+                                    value: 'shop', child: Text('Shop')),
                                 PopupMenuItem(
-                                  value: 'about',
-                                  child: Text('About Us'),
-                                ),
+                                    value: 'print', child: Text('Print Shack')),
+                                PopupMenuItem(
+                                    value: 'about', child: Text('About Us')),
                               ],
                             )
                           else
