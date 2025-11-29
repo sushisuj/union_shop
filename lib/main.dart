@@ -275,8 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Header
             Container(
-              width: double.infinity,
-              padding: const EdgeInsets.only(bottom: 12),
+              height: 100,
               color: Colors.white,
               child: Column(
                 children: [
@@ -428,52 +427,58 @@ class _HomeScreenState extends State<HomeScreen> {
                           // Icons (search, person, bag, menu)
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
-                            child: Wrap(
-                              spacing: 4,
-                              runSpacing: 4,
-                              crossAxisAlignment: WrapCrossAlignment.center,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  width: isMobile ? 180 : 260,
-                                  child: CompositedTransformTarget(
-                                    link: _searchFieldLink,
-                                    child: AnimatedContainer(
-                                      key: _searchFieldKey,
-                                      duration:
-                                          const Duration(milliseconds: 200),
-                                      height: 36,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: _showGlobalSearch ? 12 : 0,
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CompositedTransformTarget(
+                                        link: _searchFieldLink,
+                                        child: AnimatedContainer(
+                                          key: _searchFieldKey,
+                                          duration:
+                                              const Duration(milliseconds: 200),
+                                          height: 36,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal:
+                                                _showGlobalSearch ? 12 : 0,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: _showGlobalSearch
+                                                ? Colors.grey[100]
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            boxShadow: _showGlobalSearch
+                                                ? const [
+                                                    BoxShadow(
+                                                      color: Colors.black12,
+                                                      blurRadius: 6,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ]
+                                                : null,
+                                          ),
+                                          child: _showGlobalSearch
+                                              ? TextField(
+                                                  controller:
+                                                      _globalSearchController,
+                                                  focusNode:
+                                                      _globalSearchFocusNode,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    hintText:
+                                                        'Search the entire shop…',
+                                                    border: InputBorder.none,
+                                                  ),
+                                                  onChanged: _onSearchChanged,
+                                                )
+                                              : const SizedBox.shrink(),
+                                        ),
                                       ),
-                                      decoration: BoxDecoration(
-                                        color: _showGlobalSearch
-                                            ? Colors.grey[100]
-                                            : Colors.transparent,
-                                        borderRadius: BorderRadius.circular(18),
-                                        boxShadow: _showGlobalSearch
-                                            ? const [
-                                                BoxShadow(
-                                                  color: Colors.black12,
-                                                  blurRadius: 6,
-                                                  offset: Offset(0, 2),
-                                                ),
-                                              ]
-                                            : null,
-                                      ),
-                                      child: _showGlobalSearch
-                                          ? TextField(
-                                              controller:
-                                                  _globalSearchController,
-                                              focusNode: _globalSearchFocusNode,
-                                              decoration: const InputDecoration(
-                                                hintText:
-                                                    'Search the entire shop…',
-                                                border: InputBorder.none,
-                                              ),
-                                              onChanged: _onSearchChanged,
-                                            )
-                                          : const SizedBox.shrink(),
-                                    ),
+                                    ],
                                   ),
                                 ),
                                 IconButton(
@@ -511,7 +516,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.pushNamed(context, '/cart');
                                   },
                                 ),
-                                if (isMobile)
+                                if (!isMobile)
+                                  const SizedBox.shrink()
+                                else
                                   PopupMenuButton<String>(
                                     icon: const Icon(Icons.menu,
                                         size: 20, color: Colors.grey),
