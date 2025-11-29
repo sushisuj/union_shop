@@ -3,6 +3,16 @@ import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/cart_state.dart';
 
 class CartPage extends StatelessWidget {
+  const CartPage({super.key});
+
+  double _calculateTotal(List<CartItem> items) {
+    return items.fold(0, (sum, item) {
+      final numericPrice =
+          double.tryParse(item.price.replaceAll(RegExp(r'[^\d.]'), '')) ?? 0;
+      return sum + numericPrice * item.quantity;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +63,40 @@ class CartPage extends StatelessWidget {
                 );
               },
             ),
+          ),
+          ValueListenableBuilder<List<CartItem>>(
+            valueListenable: cartState.items,
+            builder: (context, items, _) {
+              final total = _calculateTotal(items);
+              return Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border(
+                    top: BorderSide(color: Colors.grey.shade300),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Cart total',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      '£${total.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ],
       ),
