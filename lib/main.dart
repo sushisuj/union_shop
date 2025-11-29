@@ -275,7 +275,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Header
             Container(
-              height: 100,
+              width: double.infinity,
+              padding: const EdgeInsets.only(bottom: 12),
               color: Colors.white,
               child: Column(
                 children: [
