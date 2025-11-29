@@ -1,9 +1,12 @@
+import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/cart_state.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final ProductDetails? initialProduct;
+
+  const ProductPage({super.key, this.initialProduct});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -25,18 +28,17 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
-    final product = args is ProductDetails
-        ? args
-        : const ProductDetails(
-            title: 'Union Shop Product',
-            price: '£0.00',
-            imageUrl: 'assets/placeholder.png',
-            description: 'Product details coming soon.',
-          );
+    final product = widget.initialProduct ??
+        (args is ProductDetails ? args : _placeholderProduct);
 
-    // ensure selected size is valid for this product (if product provides sizes)
-    if (product.sizes.isNotEmpty && !product.sizes.contains(_selectedSize)) {
-      _selectedSize = product.sizes.first;
+    final sizeOptions = LinkedHashSet<String>.from(
+      (product.sizes?.isNotEmpty ?? false)
+          ? product.sizes!
+          : const ['One Size'],
+    ).toList();
+
+    if (!sizeOptions.contains(_selectedSize)) {
+      _selectedSize = sizeOptions.first;
     }
 
     return Scaffold(
@@ -130,7 +132,7 @@ class _ProductPageState extends State<ProductPage> {
                       const SizedBox(width: 12),
                       DropdownButton<String>(
                         value: _selectedSize,
-                        items: _sizes
+                        items: sizeOptions
                             .map(
                               (size) => DropdownMenuItem<String>(
                                 value: size,
@@ -139,8 +141,9 @@ class _ProductPageState extends State<ProductPage> {
                             )
                             .toList(),
                         onChanged: (value) {
-                          if (value == null) return;
-                          setState(() => _selectedSize = value);
+                          if (value != null) {
+                            setState(() => _selectedSize = value);
+                          }
                         },
                       ),
                     ],
@@ -265,3 +268,10 @@ class ProductDetails {
     this.sizes = const [], // default: no size choices
   });
 }
+
+final ProductDetails _placeholderProduct = ProductDetails(
+  title: 'Placeholder Product',
+  price: '\$0.00',
+  imageUrl: 'https://via.placeholder.com/300',
+  description: 'This is a placeholder product description.',
+);

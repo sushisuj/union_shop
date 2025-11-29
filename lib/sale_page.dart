@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:union_shop/product_page.dart';
 
 class SalePage extends StatefulWidget {
   const SalePage({super.key});
@@ -11,37 +12,6 @@ class SalePage extends StatefulWidget {
 class _SalePageState extends State<SalePage> {
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
-
-  final List<_Product> _products = [
-    _Product(
-      title: 'Sunglasses',
-      price: '£19.99',
-      salePrice: '£10.99', // new price
-      imageUrl: 'assets/sunglasses.png',
-      category: 'Merchandise',
-    ),
-    _Product(
-      title: 'Scientific Calculator',
-      price: '£15.99',
-      salePrice: '£9.99', // new price
-      imageUrl: 'assets/calc.png',
-      category: 'Merchandise',
-    ),
-    _Product(
-      title: 'Fleece Jacket Mens',
-      price: '£79.99',
-      salePrice: '£39.99', // new price
-      imageUrl: 'assets/jumper1.png',
-      category: 'Jumpers',
-    ),
-    _Product(
-      title: 'Fleece Jacket Womens',
-      price: '£79.99',
-      salePrice: '£39.99', // new price
-      imageUrl: 'assets/jumper2.png',
-      category: 'Jumpers',
-    ),
-  ];
 
   List<_Product> get _filteredProducts {
     final query = _searchController.text.toLowerCase();
@@ -184,6 +154,19 @@ class _SalePageState extends State<SalePage> {
                                   price: product.price,
                                   salePrice: product.salePrice,
                                   imageUrl: product.imageUrl,
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/product',
+                                      arguments: ProductDetails(
+                                        title: product.title,
+                                        price: product.salePrice ?? product.price,
+                                        imageUrl: product.imageUrl,
+                                        description: product.description,
+                                        sizes: product.sizes,
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             );
@@ -321,12 +304,14 @@ class ProductCard extends StatelessWidget {
   final String price;
   final String? salePrice;
   final String imageUrl;
+  final VoidCallback onTap;
 
   const ProductCard({
     super.key,
     required this.title,
     required this.price,
     required this.imageUrl,
+    required this.onTap,
     this.salePrice,
   });
 
@@ -338,79 +323,84 @@ class ProductCard extends StatelessWidget {
     final double imageHeight = isDesktop ? 218.0 : 219.0;
     final double verticalPadding = isDesktop ? 41.0 : 42.0;
 
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Larger product image
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: SizedBox(
-              height: imageHeight,
-              width: double.infinity,
-              child: Image.asset(
-                imageUrl,
-                fit: BoxFit.cover,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Larger product image
+            ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12)),
+              child: SizedBox(
+                height: imageHeight,
+                width: double.infinity,
+                child: Image.asset(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          // Text block anchored at the bottom
-          Container(
-            width: double.infinity,
-            padding:
-                EdgeInsets.symmetric(horizontal: 16, vertical: verticalPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                if (salePrice != null) ...[
-                  Row(
-                    children: [
-                      Text(
-                        price,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        salePrice!,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                  ),
-                ] else ...[
+            // Text block anchored at the bottom
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(
+                  horizontal: 16, vertical: verticalPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Text(
-                    price,
+                    title,
                     style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
+                  const SizedBox(height: 6),
+                  if (salePrice != null) ...[
+                    Row(
+                      children: [
+                        Text(
+                          price,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          salePrice!,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ] else ...[
+                    Text(
+                      price,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -419,15 +409,60 @@ class ProductCard extends StatelessWidget {
 class _Product {
   final String title;
   final String price;
-  final String? salePrice; // new
+  final String? salePrice;
   final String imageUrl;
   final String category;
+  final String description;
+  final List<String> sizes;
 
-  _Product({
+  const _Product({
     required this.title,
     required this.price,
     required this.imageUrl,
     required this.category,
+    required this.description,
+    this.sizes = const ['One Size'],
     this.salePrice,
   });
 }
+
+final List<_Product> _products = [
+  _Product(
+    title: 'Sunglasses',
+    price: '£19.99',
+    salePrice: '£10.99',
+    imageUrl: 'assets/sunglasses.png',
+    category: 'Merchandise',
+    description:
+        'Protect your eyes in style with UV400 lenses and a lightweight frame.',
+  ),
+  _Product(
+    title: 'Scientific Calculator',
+    price: '£15.99',
+    salePrice: '£9.99',
+    imageUrl: 'assets/calc.png',
+    category: 'Merchandise',
+    description:
+        'Exam-approved scientific calculator packed with trig and stats modes.',
+  ),
+  _Product(
+    title: 'Fleece Jacket Mens',
+    price: '£79.99',
+    salePrice: '£39.99',
+    imageUrl: 'assets/jumper1.png',
+    category: 'Jumpers',
+    description:
+        'Warm men’s fleece with Union crest embroidery and roomy zip pockets.',
+    sizes: ['S', 'M', 'L', 'XL'],
+  ),
+  _Product(
+    title: 'Fleece Jacket Womens',
+    price: '£79.99',
+    salePrice: '£39.99',
+    imageUrl: 'assets/jumper2.png',
+    category: 'Jumpers',
+    description:
+        'Tailored women’s fleece featuring soft lining and Union branding.',
+    sizes: ['XS', 'S', 'M', 'L'],
+  ),
+];

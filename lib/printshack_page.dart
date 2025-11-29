@@ -14,6 +14,8 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
   String _selectedSize = 'One Line of Text';
   String _confirmationMessage = '';
 
+  final TextEditingController _messageController = TextEditingController();
+
   String get _currentPrice =>
       _selectedSize == 'Two Lines of Text' ? '£5.00' : '£3.00';
 
@@ -23,6 +25,12 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
 
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
+  }
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -155,6 +163,24 @@ Please ensure all spellings are correct before submitting your purchase as we wi
                     ],
                   ),
 
+                  const SizedBox(height: 16),
+
+                  // Custom message input
+                  TextField(
+                    controller: _messageController,
+                    decoration: InputDecoration(
+                      labelText: 'Your custom message',
+                      hintText: _selectedSize == 'Two Lines of Text'
+                          ? 'Enter up to 2 lines (max 10 chars per line)'
+                          : 'Enter up to 10 characters',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    maxLength: _selectedSize == 'Two Lines of Text' ? 21 : 10,
+                    maxLines: _selectedSize == 'Two Lines of Text' ? 2 : 1,
+                  ),
+
                   const SizedBox(height: 24),
 
                   // Product description
@@ -221,6 +247,7 @@ Please ensure all spellings are correct before submitting your purchase as we wi
                             title: product.title,
                             size: _selectedSize,
                             price: _currentPrice,
+                            message: _messageController.text,
                           ),
                         );
                       },

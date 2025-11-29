@@ -5,12 +5,14 @@ class CartItem {
   final String size;
   final String price;
   final int quantity;
+  final String? message; // <-- Add this line
 
   const CartItem({
     required this.title,
     required this.size,
     required this.price,
     this.quantity = 1,
+    this.message, // <-- Add this line
   });
 
   CartItem copyWith({int? quantity}) {
@@ -19,6 +21,7 @@ class CartItem {
       size: size,
       price: price,
       quantity: quantity ?? this.quantity,
+      message: message, // <-- Add this line
     );
   }
 }

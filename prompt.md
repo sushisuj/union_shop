@@ -165,3 +165,9 @@
 - Explanation of Generation: Created a reusable CartIconButton that wraps the bag icon in a ValueListenableBuilder, draws a badge with the current cartState.items.length, and navigates to /cart on press. Replaced the old IconButton in both main.dart’s header and union_navbar.dart with this new widget so every page shows the dynamic count.
 
 - Private Notes: To reflect shared cart data globally, expose the cart items via a ValueNotifier (cart_state.dart) and use ValueListenableBuilder in the navbar icon. The badge only appears when count > 0, so remember to hot restart after wiring it in to ensure all navbars rebuild with the new widget.
+
+27. Add a dynamic cart total to CartPage. The page already uses cartState.items (a ValueNotifier<List<CartItem>>) and CartItem has title, size, price, and quantity. Show a bottom bar that computes the sum of each item’s numeric price times quantity, updates automatically when users increment/decrement quantities, and displays the total in pounds (two decimals). Keep existing cart layout and show the total even when the list is empty.
+
+- Explanation of Generation: Added a persistent bottom bar that listens to cartState.items, recalculates the sum of each line item’s numeric price times its quantity, and renders “Cart total £xx.xx” with two decimals so the value updates instantly as quantities change—even when the list is empty.
+
+- Private Notes: Wrap totals in a ValueListenableBuilder so the UI rebuilds whenever cartState.items updates; parse price strings into numbers before multiplying by quantity, and keep the bottom bar outside the scrollable list so it stays visible at all times.
