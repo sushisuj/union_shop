@@ -11,8 +11,11 @@ class PersonalisationPage extends StatefulWidget {
 
 class _PersonalisationPageState extends State<PersonalisationPage> {
   final List<String> _sizes = ['One Line of Text', 'Two Lines of Text'];
-  String _selectedSize = 'One Line of Text'; // default size
-  String _confirmationMessage = ''; // new: holds confirmation text
+  String _selectedSize = 'One Line of Text';
+  String _confirmationMessage = '';
+
+  String get _currentPrice =>
+      _selectedSize == 'Two Lines of Text' ? '£5.00' : '£3.00';
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -113,7 +116,7 @@ Please ensure all spellings are correct before submitting your purchase as we wi
 
                   // Product price
                   Text(
-                    product.price,
+                    _currentPrice,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -217,7 +220,7 @@ Please ensure all spellings are correct before submitting your purchase as we wi
                           CartItem(
                             title: product.title,
                             size: _selectedSize,
-                            price: product.price,
+                            price: _currentPrice,
                           ),
                         );
                       },
