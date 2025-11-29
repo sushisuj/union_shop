@@ -159,3 +159,9 @@
 - Explanation of Generation: Imported printshack_page.dart, registered /print-shack in MaterialApp, inserted a Print Shack _NavLink beside Shop/About for desktop, and added a matching PopupMenuItem that calls Navigator.pushNamed(context, '/print-shack') on mobile.
 
 - Private Notes: Whenever you add a navbar tab, register its route in MaterialApp, wire the desktop row and mobile menu, and ensure the destination page (PersonalisationPage) is imported so Navigator.pushNamed can build it. 
+
+26. Update the shopping bag icon across the navbar so it shows a badge with the total number of items in the cart, updating live whenever products are added, and navigates to /cart when tapped.
+
+- Explanation of Generation: Created a reusable CartIconButton that wraps the bag icon in a ValueListenableBuilder, draws a badge with the current cartState.items.length, and navigates to /cart on press. Replaced the old IconButton in both main.dart’s header and union_navbar.dart with this new widget so every page shows the dynamic count.
+
+- Private Notes: To reflect shared cart data globally, expose the cart items via a ValueNotifier (cart_state.dart) and use ValueListenableBuilder in the navbar icon. The badge only appears when count > 0, so remember to hot restart after wiring it in to ensure all navbars rebuild with the new widget.
