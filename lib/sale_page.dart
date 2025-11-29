@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:union_shop/product_page.dart';
 
 class SalePage extends StatefulWidget {
   const SalePage({super.key});
@@ -11,37 +12,6 @@ class SalePage extends StatefulWidget {
 class _SalePageState extends State<SalePage> {
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
-
-  final List<_Product> _products = [
-    _Product(
-      title: 'Sunglasses',
-      price: '£19.99',
-      salePrice: '£10.99', // new price
-      imageUrl: 'assets/sunglasses.png',
-      category: 'Merchandise',
-    ),
-    _Product(
-      title: 'Scientific Calculator',
-      price: '£15.99',
-      salePrice: '£9.99', // new price
-      imageUrl: 'assets/calc.png',
-      category: 'Merchandise',
-    ),
-    _Product(
-      title: 'Fleece Jacket Mens',
-      price: '£79.99',
-      salePrice: '£39.99', // new price
-      imageUrl: 'assets/jumper1.png',
-      category: 'Jumpers',
-    ),
-    _Product(
-      title: 'Fleece Jacket Womens',
-      price: '£79.99',
-      salePrice: '£39.99', // new price
-      imageUrl: 'assets/jumper2.png',
-      category: 'Jumpers',
-    ),
-  ];
 
   List<_Product> get _filteredProducts {
     final query = _searchController.text.toLowerCase();
@@ -419,15 +389,60 @@ class ProductCard extends StatelessWidget {
 class _Product {
   final String title;
   final String price;
-  final String? salePrice; // new
+  final String? salePrice;
   final String imageUrl;
   final String category;
+  final String description;
+  final List<String> sizes;
 
-  _Product({
+  const _Product({
     required this.title,
     required this.price,
     required this.imageUrl,
     required this.category,
+    required this.description,
+    this.sizes = const ['One Size'],
     this.salePrice,
   });
 }
+
+final List<_Product> _products = [
+  _Product(
+    title: 'Sunglasses',
+    price: '£19.99',
+    salePrice: '£10.99',
+    imageUrl: 'assets/sunglasses.png',
+    category: 'Merchandise',
+    description:
+        'Protect your eyes in style with UV400 lenses and a lightweight frame.',
+  ),
+  _Product(
+    title: 'Scientific Calculator',
+    price: '£15.99',
+    salePrice: '£9.99',
+    imageUrl: 'assets/calc.png',
+    category: 'Merchandise',
+    description:
+        'Exam-approved scientific calculator packed with trig and stats modes.',
+  ),
+  _Product(
+    title: 'Fleece Jacket Mens',
+    price: '£79.99',
+    salePrice: '£39.99',
+    imageUrl: 'assets/jumper1.png',
+    category: 'Jumpers',
+    description:
+        'Warm men’s fleece with Union crest embroidery and roomy zip pockets.',
+    sizes: ['S', 'M', 'L', 'XL'],
+  ),
+  _Product(
+    title: 'Fleece Jacket Womens',
+    price: '£79.99',
+    salePrice: '£39.99',
+    imageUrl: 'assets/jumper2.png',
+    category: 'Jumpers',
+    description:
+        'Tailored women’s fleece featuring soft lining and Union branding.',
+    sizes: ['XS', 'S', 'M', 'L'],
+  ),
+];
