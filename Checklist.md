@@ -18,15 +18,15 @@
 - [ ] Cart: Shopping cart page showing selected products and totals
 - [ ] Checkout: Checkout page with form for delivery and payment details
 - [ ] Order Confirmation: Page confirming order details after checkout
-- [ ] Product Search: Search bar or page to find products by name or category
-- [ ] Product Filtering: Filter products by category, price, or other attributes
+- [x] Product Search: Search bar or page to find products by name or category
+- [x] Product Filtering: Filter products by category, price, or other attributes
 - [x] Responsive Design: Pages adapt for desktop and mobile screens
 
 ## Advanced (25%)
 
 - [ ] Authentication System: Full user authentication and account management
 - [ ] Cart Management: Full cart functionality with quantity editing, price calculations, and persistence
-- [ ] Search System: Complete search functionality on navbar and footer
+- [x] Search System: Complete search functionality on navbar and footer
 
 
 ## Software Practices
