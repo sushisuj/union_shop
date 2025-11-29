@@ -25,9 +25,9 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
-    final product = args is ProductDetails
+    final product = args is PrintShackProduct
         ? args
-        : const ProductDetails(
+        : const PrintShackProduct(
             title: 'Union Shop Product',
             price: '£0.00',
             imageUrl: 'assets/placeholder.png',
@@ -250,14 +250,14 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
   }
 }
 
-class ProductDetails {
+class PrintShackProduct {
   final String title;
   final String price;
   final String imageUrl;
   final String description;
   final List<String> sizes;
 
-  const ProductDetails({
+  const PrintShackProduct({
     required this.title,
     required this.price,
     required this.imageUrl,
