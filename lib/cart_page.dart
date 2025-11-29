@@ -29,8 +29,25 @@ class CartPage extends StatelessWidget {
                     final item = items[index];
                     return ListTile(
                       title: Text(item.title),
-                      subtitle: Text('Size: ${item.size}'),
-                      trailing: Text(item.price),
+                      subtitle: Text('Size: ${item.size}\n${item.price} each'),
+                      isThreeLine: true,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.remove),
+                            onPressed: () => cartState.decrementQuantity(index),
+                          ),
+                          Text(
+                            '${item.quantity}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.add),
+                            onPressed: () => cartState.incrementQuantity(index),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 );
