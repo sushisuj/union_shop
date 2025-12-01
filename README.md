@@ -84,6 +84,9 @@ Personalisation Page supports text input
 ![alt text](image-12.png)
 Filters in sale and essentials page
 
+![alt text](image-14.png)
+Basic creation of a Checkout page.
+
 ## Project Structure and Technologies Used
 ```
 union_shop/
