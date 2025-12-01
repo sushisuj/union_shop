@@ -17,6 +17,7 @@ class _ProductPageState extends State<ProductPage> {
   final List<String> _sizes = ['XS', 'S', 'M', 'L', 'XL'];
   String _selectedSize = 'M';
   String _confirmationMessage = ''; // new: holds confirmation text
+  final ScrollController _scrollController = ScrollController();
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -24,6 +25,19 @@ class _ProductPageState extends State<ProductPage> {
 
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
+  }
+
+  void _openSearchBar() {
+    // Your logic to open the search bar (e.g., setState to show it)
+  }
+
+  void _scrollToTopAndOpenSearch() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+    _openSearchBar();
   }
 
   @override
@@ -44,6 +58,7 @@ class _ProductPageState extends State<ProductPage> {
 
     return Scaffold(
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             const UnionNavBar(), // navbar on every product page

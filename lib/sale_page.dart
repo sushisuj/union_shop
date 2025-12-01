@@ -13,6 +13,7 @@ class SalePage extends StatefulWidget {
 class _SalePageState extends State<SalePage> {
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
+  final ScrollController _scrollController = ScrollController();
 
   List<_Product> get _filteredProducts {
     final query = _searchController.text.toLowerCase();
@@ -24,12 +25,26 @@ class _SalePageState extends State<SalePage> {
     }).toList();
   }
 
+  void _openSearchBar() {
+    // Your logic to open the search bar (e.g., setState to show it)
+  }
+
+  void _scrollToTopAndOpenSearch() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+    _openSearchBar();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
+            controller: _scrollController,
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(
@@ -184,9 +199,9 @@ class _SalePageState extends State<SalePage> {
             ),
           );
         },
-      ),
-    );
-  }
+        ),
+      );
+    }
 }
 
 class _NavTab extends StatelessWidget {
