@@ -47,10 +47,90 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       // Checkout side (left)
                       Expanded(
                         flex: 2,
-                        child: Container(
-                          color: Colors.transparent,
-                          height: 700,
-                          // TODO: Add checkout form content here
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 32, horizontal: 24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Express checkout',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 48,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              Color(0xFF6C3DFF), // Purple
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        onPressed: () {},
+                                        child: const Text('Button 1'),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 48,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors
+                                              .black, // Black for GPay style
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        onPressed: () {},
+                                        child: const Text('Button 2'),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 24),
+                              Row(
+                                children: const [
+                                  Expanded(child: Divider(thickness: 1)),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 12),
+                                    child: Text(
+                                      'OR',
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  Expanded(child: Divider(thickness: 1)),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       // Summary side (right)
