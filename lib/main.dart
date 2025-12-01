@@ -648,17 +648,47 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 12),
                       SizedBox(
-                        width: 300,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Email address',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(4)),
+                        width: 400,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Email address',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.horizontal(
+                                        left: Radius.circular(4)),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 14),
+                                ),
+                              ),
                             ),
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 14),
-                          ),
+                            SizedBox(
+                              height: 48,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFF4d2963),
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.horizontal(
+                                        right: Radius.circular(4)),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 24),
+                                ),
+                                onPressed: () {
+                                  // TODO: handle subscribe action
+                                },
+                                child: const Text(
+                                  'SUBSCRIBE',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
