@@ -31,16 +31,21 @@ class CartState {
 
   void addItem(CartItem item) {
     final existingIndex = items.value.indexWhere(
-      (existing) => existing.title == item.title && existing.size == item.size,
+      (i) =>
+          i.title == item.title &&
+          i.size == item.size &&
+          i.price == item.price &&
+          (i.message ?? '') == (item.message ?? ''),
     );
 
     if (existingIndex != -1) {
+      // If all fields (including message) match, increment quantity
       final updated = [...items.value];
-      final existing = updated[existingIndex];
-      updated[existingIndex] =
-          existing.copyWith(quantity: existing.quantity + 1);
+      updated[existingIndex] = updated[existingIndex]
+          .copyWith(quantity: updated[existingIndex].quantity + 1);
       items.value = updated;
     } else {
+      // Otherwise, add as a new cart item
       items.value = [...items.value, item];
     }
   }
