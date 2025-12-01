@@ -10,6 +10,7 @@ import 'package:union_shop/sale_page.dart';
 import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/printshack_page.dart';
 import 'package:union_shop/widgets/cart_icon_button.dart';
+import 'package:union_shop/checkout.dart'; // Add this import
 
 // test commit
 void main() {
@@ -41,6 +42,7 @@ class UnionShopApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/sale': (context) => const SalePage(),
         '/cart': (context) => CartPage(),
+        '/checkout': (context) => const CheckoutPage(), // Add this route
       },
     );
   }
