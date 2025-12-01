@@ -26,7 +26,7 @@ class _SalePageState extends State<SalePage> {
   }
 
   void _openSearchBar() {
-    // Your logic to open the search bar (e.g., setState to show it)
+    // Your logic to open the search bar
   }
 
   void _scrollToTopAndOpenSearch() {
@@ -192,16 +192,15 @@ class _SalePageState extends State<SalePage> {
                       ),
                     ],
                   ),
-                  // Footer
-                  const FooterWidget(),
+                  FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
                 ],
               ),
             ),
           );
         },
-        ),
-      );
-    }
+      ),
+    );
+  }
 }
 
 class _NavTab extends StatelessWidget {

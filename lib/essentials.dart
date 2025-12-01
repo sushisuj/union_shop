@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class EssentialsPage extends StatefulWidget {
   const EssentialsPage({super.key});
@@ -11,6 +12,7 @@ class EssentialsPage extends StatefulWidget {
 class _EssentialsPageState extends State<EssentialsPage> {
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
+  final ScrollController _scrollController = ScrollController();
 
   final List<_Product> _products = [
     _Product(
@@ -61,12 +63,26 @@ class _EssentialsPageState extends State<EssentialsPage> {
     }).toList();
   }
 
+  void _openSearchBar() {
+    // Your logic to open the search bar
+  }
+
+  void _scrollToTopAndOpenSearch() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+    _openSearchBar();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
+            controller: _scrollController,
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(
@@ -204,64 +220,7 @@ class _EssentialsPageState extends State<EssentialsPage> {
                       ),
                     ],
                   ),
-                  // Footer
-                  Container(
-                    width: double.infinity,
-                    color: Colors.grey[50],
-                    padding: const EdgeInsets.all(24),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Opening Times (Left)
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Opening Times',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              'Mon-Fri: 9am - 5pm',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'Sat: 10am - 4pm',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'Sun: Closed',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: SizedBox()),
-                        // Help and Information (Right)
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Text(
-                              'Help and Information',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            _FooterLink(text: 'Search'),
-                            _FooterLink(text: 'Terms and Conditions'),
-                            _FooterLink(text: 'Contact Us'),
-                            _FooterLink(text: 'FAQ'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
                 ],
               ),
             ),
@@ -289,37 +248,6 @@ class _NavTab extends StatelessWidget {
             color: Color(0xFF4d2963),
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            decoration: TextDecoration.underline,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _FooterLink extends StatefulWidget {
-  final String text;
-  const _FooterLink({required this.text});
-
-  @override
-  State<_FooterLink> createState() => _FooterLinkState();
-}
-
-class _FooterLinkState extends State<_FooterLink> {
-  bool _isHovering = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovering = true),
-      onExit: (_) => setState(() => _isHovering = false),
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {}, // Dummy link, does nothing
-        child: Text(
-          widget.text,
-          style: TextStyle(
-            color: _isHovering ? Colors.deepPurple : Colors.blue,
             decoration: TextDecoration.underline,
           ),
         ),

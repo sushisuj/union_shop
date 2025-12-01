@@ -249,7 +249,7 @@ class _ProductPageState extends State<ProductPage> {
             ),
 
             // Footer
-            const FooterWidget(),
+            FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
           ],
         ),
       ),

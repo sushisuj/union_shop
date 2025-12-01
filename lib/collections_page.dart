@@ -2,8 +2,28 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
 
-class CollectionsPage extends StatelessWidget {
+class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});
+
+  @override
+  State<CollectionsPage> createState() => _CollectionsPageState();
+}
+
+class _CollectionsPageState extends State<CollectionsPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  void _openSearchBar() {
+    // Your logic to open the search bar
+  }
+
+  void _scrollToTopAndOpenSearch() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+    _openSearchBar();
+  }
 
   final List<_CollectionItem> collections = const [
     _CollectionItem(
@@ -32,6 +52,7 @@ class CollectionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             const SizedBox(height: 32),
@@ -100,7 +121,7 @@ class CollectionsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            const FooterWidget(), // <-- Add this as the last child
+            FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
           ],
         ),
       ),
