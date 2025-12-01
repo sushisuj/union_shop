@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
-
+import 'package:union_shop/widgets/union_navbar.dart'; // Add this import
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});
@@ -56,6 +56,10 @@ class _CollectionsPageState extends State<CollectionsPage> {
         controller: _scrollController,
         child: Column(
           children: [
+            // Add the navbar at the top
+            UnionNavBar(
+              onSearchIconTap: _openSearchBar,
+            ),
             const SizedBox(height: 32),
             const Center(
               child: Text(
