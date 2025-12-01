@@ -26,9 +26,29 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'We’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive personalisation service!',
-                    textAlign: TextAlign.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Flexible(
+                        child: Text(
+                          'We’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive ',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/print-shack'),
+                        child: const Text(
+                          'personalisation service!',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 16),
                   const Text(
