@@ -94,7 +94,7 @@ class UnionNavBar extends StatelessWidget {
                 ),
               const SizedBox(width: 24),
               IconButton(
-                icon: const Icon(Icons.search, color: Colors.grey),
+                icon: Icon(Icons.search),
                 onPressed: onSearchIconTap,
               ),
               IconButton(

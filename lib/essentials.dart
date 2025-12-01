@@ -101,7 +101,7 @@ class _EssentialsPageState extends State<EssentialsPage> {
                   Column(
                     children: [
                       // Navbar
-                      const UnionNavBar(),
+                      UnionNavBar(onSearchIconTap: _openSearchBar),
                       if (_showSearchBar)
                         Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -223,8 +223,8 @@ class _EssentialsPageState extends State<EssentialsPage> {
           );
         },
       ),
-      );
-    }
+    );
+  }
 }
 
 class _NavTab extends StatelessWidget {
