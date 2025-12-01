@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FooterWidget extends StatelessWidget {
-  const FooterWidget({super.key});
+  final VoidCallback? onSearchTap;
+  const FooterWidget({Key? key, this.onSearchTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,16 @@ class FooterWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              _FooterLink(text: 'Search'),
+              GestureDetector(
+                onTap: onSearchTap,
+                child: const Text(
+                  'Search',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
               _FooterLink(text: 'Terms and Conditions'),
               _FooterLink(text: 'Contact Us'),
               _FooterLink(text: 'FAQ'),
