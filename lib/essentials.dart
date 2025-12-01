@@ -14,6 +14,7 @@ class _EssentialsPageState extends State<EssentialsPage> {
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
   final ScrollController _scrollController = ScrollController();
+  bool _showSearchBar = false;
 
   final List<_Product> _products = [
     _Product(
@@ -65,7 +66,15 @@ class _EssentialsPageState extends State<EssentialsPage> {
   }
 
   void _openSearchBar() {
-    // Your logic to open the search bar
+    setState(() {
+      _showSearchBar = true;
+    });
+  }
+
+  void _closeSearchBar() {
+    setState(() {
+      _showSearchBar = false;
+    });
   }
 
   void _scrollToTopAndOpenSearch() {
@@ -93,6 +102,28 @@ class _EssentialsPageState extends State<EssentialsPage> {
                     children: [
                       // Navbar
                       const UnionNavBar(),
+                      if (_showSearchBar)
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Search the entire shop...',
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(24),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.close),
+                                onPressed: _closeSearchBar,
+                              ),
+                            ],
+                          ),
+                        ),
                       // Search and Filter
                       Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -192,8 +223,8 @@ class _EssentialsPageState extends State<EssentialsPage> {
           );
         },
       ),
-    );
-  }
+      );
+    }
 }
 
 class _NavTab extends StatelessWidget {

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/cart_icon_button.dart';
 
 class UnionNavBar extends StatelessWidget {
-  const UnionNavBar({super.key});
+  final VoidCallback? onSearchIconTap;
+  const UnionNavBar({Key? key, this.onSearchIconTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class UnionNavBar extends StatelessWidget {
               const SizedBox(width: 24),
               IconButton(
                 icon: const Icon(Icons.search, color: Colors.grey),
-                onPressed: () {},
+                onPressed: onSearchIconTap,
               ),
               IconButton(
                 icon: const Icon(Icons.person_outline, color: Colors.grey),
