@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
+import 'package:union_shop/widgets/shop_search_bar.dart';
 
 class EssentialsPage extends StatefulWidget {
   const EssentialsPage({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/cart_state.dart';
+import 'package:union_shop/widgets/shop_search_bar.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
