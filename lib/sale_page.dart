@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class SalePage extends StatefulWidget {
   const SalePage({super.key});
@@ -160,7 +161,8 @@ class _SalePageState extends State<SalePage> {
                                       '/product',
                                       arguments: ProductDetails(
                                         title: product.title,
-                                        price: product.salePrice ?? product.price,
+                                        price:
+                                            product.salePrice ?? product.price,
                                         imageUrl: product.imageUrl,
                                         description: product.description,
                                         sizes: product.sizes,
@@ -176,63 +178,7 @@ class _SalePageState extends State<SalePage> {
                     ],
                   ),
                   // Footer
-                  Container(
-                    width: double.infinity,
-                    color: Colors.grey[50],
-                    padding: const EdgeInsets.all(24),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Opening Times (Left)
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Opening Times',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              'Mon-Fri: 9am - 5pm',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'Sat: 10am - 4pm',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'Sun: Closed',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: SizedBox()),
-                        // Help and Information (Right)
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Text(
-                              'Help and Information',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            _FooterLink(text: 'Search'),
-                            _FooterLink(text: 'Terms and Conditions'),
-                            _FooterLink(text: 'Contact Us'),
-                            _FooterLink(text: 'FAQ'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  const FooterWidget(),
                 ],
               ),
             ),
