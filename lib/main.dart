@@ -256,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+    Navigator.pushNamed(context, '/');
   }
 
   void navigateToProduct(BuildContext context) {
