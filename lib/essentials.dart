@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/union_navbar.dart';
 
 class EssentialsPage extends StatefulWidget {
   const EssentialsPage({super.key});
@@ -102,32 +103,7 @@ class _EssentialsPageState extends State<EssentialsPage> {
                         ),
                       ),
                       // Navbar
-                      Container(
-                        height: 60,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _NavTab(
-                              title: 'Home',
-                              onTap: () {
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  '/',
-                                  (route) => false,
-                                );
-                              },
-                            ),
-                            _NavTab(title: 'Shop', onTap: () {}),
-                            _NavTab(
-                              title: 'About Us',
-                              onTap: () {
-                                Navigator.pushNamed(context, '/about');
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                      const UnionNavBar(),
                       // Search and Filter
                       Padding(
                         padding: const EdgeInsets.all(16.0),
