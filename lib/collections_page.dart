@@ -1,6 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/union_navbar.dart'; // new
 import 'package:union_shop/widgets/footer.dart';
 
 class CollectionsPage extends StatelessWidget {
@@ -34,85 +33,74 @@ class CollectionsPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const UnionNavBar(), // replaces the old header + navbar
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  const SizedBox(height: 32),
-                  const Center(
-                    child: Text(
-                      'Collections',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: GridView.count(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 32,
-                      children: collections.map((item) {
-                        return GestureDetector(
-                          onTap: () {
-                            if (item.title == 'Essentials') {
-                              Navigator.pushNamed(context, '/essentials');
-                            } else if (item.title == 'Sale') {
-                              Navigator.pushNamed(context, '/sale');
-                            } else if (item.title == 'Personalisation') {
-                              Navigator.pushNamed(context, '/print-shack');
-                            }
-                            // Add more navigation logic for other collections if needed
-                          },
-                          child: Stack(
-                            children: [
-                              // Background image with opacity
-                              Positioned.fill(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.asset(
-                                    item.image,
-                                    fit: BoxFit.cover,
-                                    color: Colors.black.withOpacity(0.7),
-                                    colorBlendMode: BlendMode.darken,
-                                  ),
-                                ),
-                              ),
-                              // Overlay text
-                              Center(
-                                child: Text(
-                                  item.title,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                ],
+            const SizedBox(height: 32),
+            const Center(
+              child: Text(
+                'Collections',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  letterSpacing: 1,
+                ),
               ),
             ),
-            // Footer
-            const FooterWidget(),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                crossAxisCount: MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                crossAxisSpacing: 24,
+                mainAxisSpacing: 32,
+                children: collections.map((item) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (item.title == 'Essentials') {
+                        Navigator.pushNamed(context, '/essentials');
+                      } else if (item.title == 'Sale') {
+                        Navigator.pushNamed(context, '/sale');
+                      } else if (item.title == 'Personalisation') {
+                        Navigator.pushNamed(context, '/print-shack');
+                      }
+                      // Add more navigation logic for other collections if needed
+                    },
+                    child: Stack(
+                      children: [
+                        // Background image with opacity
+                        Positioned.fill(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              item.image,
+                              fit: BoxFit.cover,
+                              color: Colors.black.withOpacity(0.7),
+                              colorBlendMode: BlendMode.darken,
+                            ),
+                          ),
+                        ),
+                        // Overlay text
+                        Center(
+                          child: Text(
+                            item.title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            const SizedBox(height: 32),
+            const FooterWidget(), // <-- Add this as the last child
           ],
         ),
       ),
