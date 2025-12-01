@@ -28,15 +28,44 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            UnionNavBar(onSearchIconTap: _openSearchBar),
-            // ...checkout page content will go here...
-            FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
-          ],
-        ),
+      body: Column(
+        children: [
+          UnionNavBar(onSearchIconTap: _openSearchBar),
+          Expanded(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1200),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Checkout side (left)
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          color: Colors.transparent,
+                          height: 700, // Placeholder height for layout
+                          // TODO: Add checkout form content here
+                        ),
+                      ),
+                      // Summary side (right)
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          color: Colors.transparent,
+                          height: 700, // Placeholder height for layout
+                          // TODO: Add summary content here
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
+        ],
       ),
     );
   }
