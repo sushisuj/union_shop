@@ -150,7 +150,58 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       ],
                                     ),
                                   )),
-                              // More summary fields will be added here later
+                              const SizedBox(height: 24),
+                              // Discount codes field
+                              const Text(
+                                'Discount codes',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        hintText: 'Enter discount code',
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.horizontal(
+                                              left: Radius.circular(4)),
+                                        ),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 14),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 48,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xFF4d2963),
+                                        foregroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.horizontal(
+                                              right: Radius.circular(4)),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                      ),
+                                      onPressed: () {
+                                        // TODO: handle apply discount action
+                                      },
+                                      child: const Text(
+                                        'Apply',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1.2,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
