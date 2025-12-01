@@ -149,3 +149,34 @@ class _FooterLink extends StatelessWidget {
     );
   }
 }
+
+class MyHomePage extends StatelessWidget {
+  final ScrollController _scrollController = ScrollController();
+
+  MyHomePage({Key? key}) : super(key: key);
+
+  void _scrollToTopAndOpenSearch() {
+    // Scroll to top
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+    // TODO: Open search
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          children: [
+            // ...content...
+            FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
+          ],
+        ),
+      ),
+    );
+  }
+}
