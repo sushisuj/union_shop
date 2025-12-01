@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/shop_search_bar.dart';
+// ...existing imports...
 
-class AboutPage extends StatelessWidget {
+class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
 
+  @override
+  State<AboutPage> createState() => _AboutPageState();
+}
+
+class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          const _UnionNavBar(),
+          // Example: If you have a navbar widget, pass the callback
+          _UnionNavBar(onSearchIconTap: () {}),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
@@ -82,7 +88,10 @@ class AboutPage extends StatelessWidget {
 }
 
 class _UnionNavBar extends StatelessWidget {
-  const _UnionNavBar();
+  const _UnionNavBar({Key? key, required this.onSearchIconTap})
+      : super(key: key);
+
+  final VoidCallback onSearchIconTap;
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +186,7 @@ class _UnionNavBar extends StatelessWidget {
               const SizedBox(width: 24),
               IconButton(
                 icon: const Icon(Icons.search, color: Colors.grey),
-                onPressed: () {},
+                onPressed: onSearchIconTap,
               ),
               IconButton(
                 icon: const Icon(Icons.person_outline, color: Colors.grey),

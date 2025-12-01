@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
-import 'package:union_shop/widgets/shop_search_bar.dart';
+
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
-import 'package:union_shop/widgets/shop_search_bar.dart';
+
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
