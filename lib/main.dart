@@ -633,10 +633,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text('Sun: Closed', style: TextStyle(color: Colors.grey)),
                     ],
                   ),
-
-                  // Add here, before Expanded(child: Container())
+                  // Spacer to push the subscribe box to the center
+                  Expanded(child: Container()),
+                  // Email subscribe box (center)
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
                         'Latest Offers',
@@ -693,10 +694,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
+                  // Spacer to push the help/info column to the right
                   Expanded(child: Container()),
                   // Help and Information (Right)
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'Help and Information',
@@ -707,10 +709,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      _FooterLink(
-                        text: 'Search',
-                        onTap: _openSearchAndScrollToTop,
-                      ),
+                      _FooterLink(text: 'Search'),
                       _FooterLink(text: 'Terms and Conditions'),
                       _FooterLink(text: 'Contact Us'),
                       _FooterLink(text: 'FAQ'),
