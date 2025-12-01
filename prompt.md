@@ -171,3 +171,9 @@
 - Explanation of Generation: Added a persistent bottom bar that listens to cartState.items, recalculates the sum of each line item’s numeric price times its quantity, and renders “Cart total £xx.xx” with two decimals so the value updates instantly as quantities change—even when the list is empty.
 
 - Private Notes: Wrap totals in a ValueListenableBuilder so the UI rebuilds whenever cartState.items updates; parse price strings into numbers before multiplying by quantity, and keep the bottom bar outside the scrollable list so it stays visible at all times.
+
+28. My Flutter web app displays a blank page and throws layout errors about “Expanded” and “SingleChildScrollView.” I want to fix this so the page renders correctly. Please explain what’s wrong and how to restructure my layout to resolve the error.
+
+- Explanation of Generation: Identified that using an Expanded widget inside a SingleChildScrollView causes layout errors because Expanded requires a finite height, but scroll views provide infinite height. The AI removed the Expanded from around the scrollable content and replaced it with a regular Container or left the SingleChildScrollView unwrapped, ensuring the layout works without assertion failures and the page displays as expected.
+
+- Private Notes: Never use Expanded or Flexible inside a SingleChildScrollView or any widget that gives infinite height. Instead, use Container, SizedBox, or just the scroll view itself for layout. This change prevents “RenderFlex children have non-zero flex but incoming height constraints are unbounded” errors and ensures the UI renders on both web and mobile.
