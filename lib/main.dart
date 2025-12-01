@@ -634,6 +634,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
 
+                  // Add here, before Expanded(child: Container())
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Latest Offers',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        width: 300,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Email address',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.horizontal(
+                                  left: Radius.circular(4)),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 14),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Expanded(child: Container()),
                   // Help and Information (Right)
                   Column(
