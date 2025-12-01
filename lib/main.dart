@@ -293,262 +293,248 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          // Logo
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: [
+                        // Logo
+                        GestureDetector(
+                          onTap: () {
+                            navigateToHome(context);
+                          },
+                          child: Image.network(
+                            'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                            height: 18,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey[300],
+                                width: 18,
+                                height: 18,
+                                child: const Center(
+                                  child: Icon(Icons.image_not_supported,
+                                      color: Colors.grey),
+                                ),
+                              );
                             },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
                           ),
-                          const Spacer(),
-                          // Centered navigation tabs
-                          if (isMobile)
-                            PopupMenuButton<String>(
-                              tooltip: 'Menu',
-                              onSelected: (value) {
-                                switch (value) {
-                                  case 'home':
-                                    navigateToHome(context);
-                                    break;
-                                  case 'shop':
-                                    Navigator.pushNamed(
-                                        context, '/collections');
-                                    break;
-                                  case 'print':
-                                    Navigator.pushNamed(
-                                        context, '/print-shack');
-                                    break;
-                                  case 'about':
-                                    Navigator.pushNamed(context, '/about');
-                                    break;
-                                }
-                              },
-                              child: Row(
-                                children: const [
-                                  Text(
-                                    'Menu',
+                        ),
+                        const Spacer(),
+                        // Centered navigation tabs
+                        if (isMobile)
+                          PopupMenuButton<String>(
+                            tooltip: 'Menu',
+                            onSelected: (value) {
+                              switch (value) {
+                                case 'home':
+                                  navigateToHome(context);
+                                  break;
+                                case 'shop':
+                                  Navigator.pushNamed(context, '/collections');
+                                  break;
+                                case 'print':
+                                  Navigator.pushNamed(context, '/print-shack');
+                                  break;
+                                case 'about':
+                                  Navigator.pushNamed(context, '/about');
+                                  break;
+                              }
+                            },
+                            child: Row(
+                              children: const [
+                                Text(
+                                  'Menu',
+                                  style: TextStyle(
+                                    color: Colors.deepPurple,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_drop_down,
+                                    color: Colors.deepPurple),
+                              ],
+                            ),
+                            itemBuilder: (context) => const [
+                              PopupMenuItem(value: 'home', child: Text('Home')),
+                              PopupMenuItem(value: 'shop', child: Text('Shop')),
+                              PopupMenuItem(
+                                  value: 'print', child: Text('Print Shack')),
+                              PopupMenuItem(
+                                  value: 'about', child: Text('About Us')),
+                            ],
+                          )
+                        else
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              GestureDetector(
+                                onTap: () => navigateToHome(context),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    'Home',
                                     style: TextStyle(
                                       color: Colors.deepPurple,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.underline,
                                     ),
                                   ),
-                                  Icon(Icons.arrow_drop_down,
-                                      color: Colors.deepPurple),
-                                ],
+                                ),
                               ),
-                              itemBuilder: (context) => const [
-                                PopupMenuItem(
-                                    value: 'home', child: Text('Home')),
-                                PopupMenuItem(
-                                    value: 'shop', child: Text('Shop')),
-                                PopupMenuItem(
-                                    value: 'print', child: Text('Print Shack')),
-                                PopupMenuItem(
-                                    value: 'about', child: Text('About Us')),
-                              ],
-                            )
-                          else
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                GestureDetector(
-                                  onTap: () => navigateToHome(context),
-                                  child: const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Text(
-                                      'Home',
-                                      style: TextStyle(
-                                        color: Colors.deepPurple,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                              _ShopDropdown(),
+                              GestureDetector(
+                                onTap: () => Navigator.pushNamed(
+                                    context, '/print-shack'),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    'Print Shack',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.underline,
                                     ),
                                   ),
                                 ),
-                                _ShopDropdown(),
-                                GestureDetector(
-                                  onTap: () => Navigator.pushNamed(
-                                      context, '/print-shack'),
-                                  child: const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Text(
-                                      'Print Shack',
-                                      style: TextStyle(
-                                        color: Colors.deepPurple,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                              ),
+                              GestureDetector(
+                                onTap: () =>
+                                    Navigator.pushNamed(context, '/about'),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    'About Us',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.underline,
                                     ),
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () =>
-                                      Navigator.pushNamed(context, '/about'),
-                                  child: const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Text(
-                                      'About Us',
-                                      style: TextStyle(
-                                        color: Colors.deepPurple,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                              ),
+                            ],
+                          ),
+                        const Spacer(),
+                        // Icons (search, person, bag, menu)
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 600),
+                          child: Wrap(
+                            spacing: 4,
+                            runSpacing: 4,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: isMobile ? 180 : 260,
+                                child: CompositedTransformTarget(
+                                  link: _searchFieldLink,
+                                  child: AnimatedContainer(
+                                    key: _searchFieldKey,
+                                    duration: const Duration(milliseconds: 200),
+                                    height: 36,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: _showGlobalSearch ? 12 : 0,
                                     ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          const Spacer(),
-                          // Icons (search, person, bag, menu)
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Wrap(
-                              spacing: 4,
-                              runSpacing: 4,
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: isMobile ? 180 : 260,
-                                  child: CompositedTransformTarget(
-                                    link: _searchFieldLink,
-                                    child: AnimatedContainer(
-                                      key: _searchFieldKey,
-                                      duration:
-                                          const Duration(milliseconds: 200),
-                                      height: 36,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: _showGlobalSearch ? 12 : 0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: _showGlobalSearch
-                                            ? Colors.grey[100]
-                                            : Colors.transparent,
-                                        borderRadius: BorderRadius.circular(18),
-                                        boxShadow: _showGlobalSearch
-                                            ? const [
-                                                BoxShadow(
-                                                  color: Colors.black12,
-                                                  blurRadius: 6,
-                                                  offset: Offset(0, 2),
-                                                ),
-                                              ]
-                                            : null,
-                                      ),
-                                      child: _showGlobalSearch
-                                          ? TextField(
-                                              controller:
-                                                  _globalSearchController,
-                                              focusNode: _globalSearchFocusNode,
-                                              decoration: const InputDecoration(
-                                                hintText:
-                                                    'Search the entire shop…',
-                                                border: InputBorder.none,
+                                    decoration: BoxDecoration(
+                                      color: _showGlobalSearch
+                                          ? Colors.grey[100]
+                                          : Colors.transparent,
+                                      borderRadius: BorderRadius.circular(18),
+                                      boxShadow: _showGlobalSearch
+                                          ? const [
+                                              BoxShadow(
+                                                color: Colors.black12,
+                                                blurRadius: 6,
+                                                offset: Offset(0, 2),
                                               ),
-                                              onChanged: _onSearchChanged,
-                                            )
-                                          : const SizedBox.shrink(),
+                                            ]
+                                          : null,
                                     ),
+                                    child: _showGlobalSearch
+                                        ? TextField(
+                                            controller: _globalSearchController,
+                                            focusNode: _globalSearchFocusNode,
+                                            decoration: const InputDecoration(
+                                              hintText:
+                                                  'Search the entire shop…',
+                                              border: InputBorder.none,
+                                            ),
+                                            onChanged: _onSearchChanged,
+                                          )
+                                        : const SizedBox.shrink(),
                                   ),
                                 ),
-                                IconButton(
-                                  icon: Icon(
-                                    _showGlobalSearch
-                                        ? Icons.close
-                                        : Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                      minWidth: 32, minHeight: 32),
-                                  onPressed: () {
-                                    if (_showGlobalSearch) {
-                                      _closeSearch();
-                                    } else {
-                                      setState(() => _showGlobalSearch = true);
-                                      _globalSearchFocusNode.requestFocus();
-                                      _refreshSearchOverlay();
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  _showGlobalSearch
+                                      ? Icons.close
+                                      : Icons.search,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(
+                                    minWidth: 32, minHeight: 32),
+                                onPressed: () {
+                                  if (_showGlobalSearch) {
+                                    _closeSearch();
+                                  } else {
+                                    setState(() => _showGlobalSearch = true);
+                                    _globalSearchFocusNode.requestFocus();
+                                    _refreshSearchOverlay();
+                                  }
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.person_outline,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/login');
+                                },
+                              ),
+                              CartIconButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/cart');
+                                },
+                              ),
+                              if (isMobile)
+                                PopupMenuButton<String>(
+                                  icon: const Icon(Icons.menu,
+                                      size: 20, color: Colors.grey),
+                                  onSelected: (value) {
+                                    switch (value) {
+                                      case 'search':
+                                        setState(
+                                            () => _showGlobalSearch = true);
+                                        _globalSearchFocusNode.requestFocus();
+                                        _refreshSearchOverlay();
+                                        break;
+                                      case 'login':
+                                        Navigator.pushNamed(context, '/login');
+                                        break;
+                                      case 'cart':
+                                        Navigator.pushNamed(context, '/cart');
+                                        break;
                                     }
                                   },
+                                  itemBuilder: (_) => const [
+                                    PopupMenuItem(
+                                        value: 'search', child: Text('Search')),
+                                    PopupMenuItem(
+                                        value: 'login', child: Text('Account')),
+                                    PopupMenuItem(
+                                        value: 'cart', child: Text('Cart')),
+                                  ],
                                 ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/login');
-                                  },
-                                ),
-                                CartIconButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/cart');
-                                  },
-                                ),
-                                if (isMobile)
-                                  PopupMenuButton<String>(
-                                    icon: const Icon(Icons.menu,
-                                        size: 20, color: Colors.grey),
-                                    onSelected: (value) {
-                                      switch (value) {
-                                        case 'search':
-                                          setState(
-                                              () => _showGlobalSearch = true);
-                                          _globalSearchFocusNode.requestFocus();
-                                          _refreshSearchOverlay();
-                                          break;
-                                        case 'login':
-                                          Navigator.pushNamed(
-                                              context, '/login');
-                                          break;
-                                        case 'cart':
-                                          Navigator.pushNamed(context, '/cart');
-                                          break;
-                                      }
-                                    },
-                                    itemBuilder: (_) => const [
-                                      PopupMenuItem(
-                                          value: 'search',
-                                          child: Text('Search')),
-                                      PopupMenuItem(
-                                          value: 'login',
-                                          child: Text('Account')),
-                                      PopupMenuItem(
-                                          value: 'cart', child: Text('Cart')),
-                                    ],
-                                  ),
-                              ],
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
