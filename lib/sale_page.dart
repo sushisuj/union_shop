@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/union_navbar.dart'; // Add this import
 
 class SalePage extends StatefulWidget {
   const SalePage({super.key});
@@ -63,33 +64,8 @@ class _SalePageState extends State<SalePage> {
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
-                      // Navbar
-                      Container(
-                        height: 60,
-                        color: Colors.white,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _NavTab(
-                              title: 'Home',
-                              onTap: () {
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  '/',
-                                  (route) => false,
-                                );
-                              },
-                            ),
-                            _NavTab(title: 'Shop', onTap: () {}),
-                            _NavTab(
-                              title: 'About Us',
-                              onTap: () {
-                                Navigator.pushNamed(context, '/about');
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Use the shared navbar here
+                      UnionNavBar(onSearchIconTap: _openSearchBar),
                       // Search and Filter
                       Padding(
                         padding: const EdgeInsets.all(16.0),
