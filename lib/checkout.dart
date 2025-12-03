@@ -415,14 +415,34 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                         fontSize: 18,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      // Example: Extract last 4 digits from card number field
-                                      // For demo, use '1234'. Replace with actual logic.
-                                      Navigator.pushNamed(
-                                        context,
-                                        '/order-summary',
-                                        arguments: {'cardEnding': '1234'},
+                                    onPressed: () async {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (context) => AlertDialog(
+                                          content: Row(
+                                            children: const [
+                                              CircularProgressIndicator(),
+                                              SizedBox(width: 16),
+                                              Expanded(
+                                                child: Text(
+                                                    'Processing Order, Hold on for a moment'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       );
+                                      await Future.delayed(
+                                          const Duration(seconds: 3));
+                                      if (mounted) {
+                                        Navigator.of(context)
+                                            .pop(); // Close dialog
+                                        Navigator.pushNamed(
+                                          context,
+                                          '/order-summary',
+                                          arguments: {'cardEnding': '1234'},
+                                        );
+                                      }
                                     },
                                     child: const Text('Place Order'),
                                   ),
