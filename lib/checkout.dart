@@ -460,7 +460,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
             ),
           ),
-          FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
+          // Footer removed from checkout page
         ],
       ),
     );
