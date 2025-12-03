@@ -255,9 +255,15 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final bool isDesktop = width >= 1024;
-    // shave a pixel or two off desktop layout to avoid fractional overflow
-    final double imageHeight = isDesktop ? 218.0 : 219.0;
-    final double verticalPadding = isDesktop ? 41.0 : 42.0;
+    final bool isTablet = width >= 600 && width < 1024;
+
+    // Responsive heights and paddings
+    final double imageHeight = isDesktop
+        ? 218.0
+        : (isTablet ? 180.0 : 140.0);
+    final double verticalPadding = isDesktop
+        ? 41.0
+        : (isTablet ? 24.0 : 12.0);
 
     return InkWell(
       onTap: onTap,
@@ -270,10 +276,9 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Larger product image
+            // Responsive product image
             ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
               child: SizedBox(
                 height: imageHeight,
                 width: double.infinity,
