@@ -213,3 +213,9 @@
 - Explanation of Generation: Added cart persistence using the shared_preferences package. The AI updated pubspec.yaml to include shared_preferences, then modified CartState to save cart items as JSON to local storage whenever the cart changes, and to load them on app start. Cart items are serialized and deserialized automatically, so the cart is restored after closing and reopening the app.
 
 - Private Notes: shared_preferences is a simple way to store key-value data locally in Flutter. Cart items are converted to JSON and saved as a string. On app start, the cart is loaded from storage and updates the ValueNotifier. This approach works for small data and is easy to implement. For more complex needs, consider Hive or SQLite.
+
+7. I want to create an order summary page that shows the products ordered, the card ending in xxxx, a grand total, and a 'Continue Shopping' button that routes back to the homepage.
+
+- Explanation of Generation: Created a new OrderSummaryPage widget with a navbar, a title, and a list of ordered products. Added a field to display 'card ending in xxxx' using the value passed from checkout. Below the card info, a grand total is calculated from the cart items and displayed. At the bottom, a 'Continue Shopping' button was added, which routes the user back to the homepage when pressed. Navigation and argument passing were set up in main.dart and checkout.dart to ensure smooth flow.
+
+- Private Notes: The summary page uses the cart state to list products and calculate totals. The card ending is passed via route arguments. The button uses Navigator.pushNamed(context, '/') to return to the homepage. This pattern can be reused for other post-checkout flows or confirmation pages.
