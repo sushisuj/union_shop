@@ -10,7 +10,7 @@ import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/printshack_page.dart';
 import 'package:union_shop/widgets/cart_icon_button.dart';
 import 'package:union_shop/checkout.dart';
-
+import 'package:union_shop/order_summary_page.dart';
 
 // test commit
 void main() {
@@ -42,7 +42,15 @@ class UnionShopApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/sale': (context) => const SalePage(),
         '/cart': (context) => CartPage(),
-        '/checkout': (context) => const CheckoutPage(), // Add this route
+        '/checkout': (context) => const CheckoutPage(),
+        '/order-summary': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          String cardEnding = 'xxxx';
+          if (args is Map && args.containsKey('cardEnding')) {
+            cardEnding = args['cardEnding'] ?? 'xxxx';
+          }
+          return OrderSummaryPage(cardEnding: cardEnding);
+        },
       },
     );
   }
