@@ -398,6 +398,30 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   ),
                                 ],
                               ),
+                              const SizedBox(height: 24),
+                              Center(
+                                child: SizedBox(
+                                  width: 220,
+                                  height: 48,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Color(0xFF4d2963),
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      // TODO: Implement place order logic
+                                    },
+                                    child: const Text('Place Order'),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
