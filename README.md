@@ -4,11 +4,17 @@
 - Union Shop App is a Flutter web experience that recreates key areas of the UPSU shop. It includes a promotional hero, dropdown-enabled navbar, collections landing page, and dedicated Essentials page featuring reusable product cards with overlay-entry dropdowns.
 
 ## Key Features
-- Sticky navbar with “Shop” dropdown rendered via OverlayEntry
-- Collections page with hero-style tiles (Essentials, Winter, Merchandise, Personalisation)
-- Essentials collection page showing product cards for men’s and women’s hoodies
-- Consistent purple promo banner and shared footer across pages
+- Sticky navbar with dropdown using OverlayEntry
+- Collections landing page with hero-style tiles for Essentials, Winter, Merchandise, Personalisation
+- Essentials page with reusable product cards and overlay dropdowns
+- Consistent purple promo banner and shared footer
 - Responsive grid layouts using GridView.count and adaptive aspect ratios
+- Product detail pages with add-to-cart functionality and confirmation popups
+- Cart page showing items, grand total, checkout button and order summary page
+- Search bar with dropdown results
+- Personalisation page supporting text input
+- Sale and essentials pages with filters
+
 
 ## Installation and Setup
 
@@ -87,22 +93,53 @@ Filters in sale and essentials page
 ![alt text](image-14.png)
 Basic creation of a Checkout page.
 
+![alt text](image-15.png)
+Checkout page completed
+
+![alt text](image-16.png)
+Presssing Place order creates a dialog
+
+![alt text](image-17.png)
+Order Summary Screen, pressing `continue shopping` clears cart and redirects to homepage
+
 ## Project Structure and Technologies Used
 ```
 union_shop/
 ├── lib/
-│   ├── main.dart             # Home, navbar, hero, footer
-│   ├── cart_state.dart       # Shared cart ValueNotifier + model
-│   ├── cart_page.dart        # Cart screen with ValueListenableBuilder
-│   ├── product_page.dart     # Product detail template + add-to-cart
-│   ├── sale_page.dart        # Sale listings
-│   ├── collections_page.dart # Collections landing page
-│   ├── essentials.dart       # Essentials collection view
-│   ├── login_page.dart       # Login placeholder
+│   ├── main.dart                 # Home, navbar, hero, footer
+│   ├── cart_state.dart           # Shared cart ValueNotifier + model
+│   ├── cart_page.dart            # Cart screen with ValueListenableBuilder
+│   ├── product_page.dart         # Product detail template + add-to-cart
+│   ├── sale_page.dart            # Sale listings
+│   ├── collections_page.dart     # Collections landing page
+│   ├── essentials.dart           # Essentials collection view
+│   ├── login_page.dart           # Login placeholder
+│   ├── about_page.dart           # About page
+│   ├── checkout.dart             # Checkout page
+│   ├── order_summary_page.dart   # Order summary page
+│   ├── printshack_page.dart      # Printshack page
 │   └── widgets/
-│       └── union_navbar.dart # Reusable navbar widget
-├── assets/                   # Product and hero imagery
-└── test/                     # Widget tests
+│       ├── union_navbar.dart         # Reusable navbar widget
+│       ├── cart_icon_button.dart     # Cart icon button widget
+│       ├── footer.dart               # Shared footer widget
+│       ├── shop_search_bar.dart      # Search bar widget
+│       └── ...                       # Other reusable widgets
+├── assets/                       # Product and hero imagery
+└── test/                         # Widget tests
+	├── about_page_test.dart
+	├── cart_iconbutton_test.dart
+	├── cartstate_test.dart
+	├── checkout_test.dart
+	├── collections_page_test.dart
+	├── essentials_test.dart
+	├── footer_test.dart
+	├── login_page_test.dart
+	├── mainpage_test.dart
+	├── order_summary_test.dart
+	├── printshack_test.dart
+	├── product_page_test.dart
+	├── sale_test.dart
+	└── union_navbar_test.dart
 ```
 ### Technologies
 - Technologies: Flutter, Dart
@@ -111,14 +148,12 @@ union_shop/
 - Development Tools: VS Code, Chrome DevTools, Flutter DevTools
 
 ## Known Issues or Limitations
-- Assets use placeholder imagery (no backend integration).
-- Additional collections (Winter, Merchandise, Personalisation) not yet routed.
-- Cart, authentication, and search flows are not implemented.
+- Searchbar Does not work in all pages
+- No authentication
 
 ## Future Improvements
-- Add full routing for every collection tile.
-- Implement product detail variations and cart management.
-- Hook up data models/services for dynamic content and sorting.
+- Authentication
+- Ensure Searching is possible from all sub pages
 
 ## Contribution Guidelines
 - Fork the repo, create feature branches, and submit pull requests.
