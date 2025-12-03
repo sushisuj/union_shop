@@ -140,6 +140,7 @@ class OrderSummaryPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
+                        cartState.items.value = [];
                         Navigator.pushNamed(context, '/');
                       },
                       child: const Text('Continue Shopping'),
