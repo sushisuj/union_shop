@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
-
+import 'package:union_shop/product_page.dart';
 
 class EssentialsPage extends StatefulWidget {
   const EssentialsPage({super.key});
@@ -12,6 +12,37 @@ class EssentialsPage extends StatefulWidget {
 }
 
 class _EssentialsPageState extends State<EssentialsPage> {
+  // Map of product titles to ProductDetails for navigation
+  final Map<String, ProductDetails> _productDetailsMap = {
+    'Essential Grey Hoodie Mens': ProductDetails(
+      title: 'Essential Grey Hoodie Mens',
+      price: '£29.99',
+      imageUrl: 'assets/grey_hoodie.png',
+      description: 'A classic grey hoodie for men.',
+      sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    ),
+    'Essential Grey Hoodie Womens': ProductDetails(
+      title: 'Essential Grey Hoodie Womens',
+      price: '£29.99',
+      imageUrl: 'assets/grey_hoodie_woman.png',
+      description: 'A classic grey hoodie for women.',
+      sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    ),
+    'Lanyard Card Holder': ProductDetails(
+      title: 'Lanyard Card Holder',
+      price: '£2.99',
+      imageUrl: 'assets/merchandise.png',
+      description: 'Keep your cards safe and handy.',
+      sizes: ['One Size'],
+    ),
+    'Essential USB-C Charger': ProductDetails(
+      title: 'Essential USB-C Charger',
+      price: '£6.99',
+      imageUrl: 'assets/charger.png',
+      description: 'Fast charging USB-C charger.',
+      sizes: ['One Size'],
+    ),
+  };
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
   final ScrollController _scrollController = ScrollController();
@@ -209,6 +240,18 @@ class _EssentialsPageState extends State<EssentialsPage> {
                                   title: product.title,
                                   price: product.price,
                                   imageUrl: product.imageUrl,
+                                  onTap: () {
+                                    if (_productDetailsMap.containsKey(product.title)) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ProductPage(
+                                            initialProduct: _productDetailsMap[product.title]!,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
                                 );
                               },
                             );
@@ -257,12 +300,14 @@ class ProductCard extends StatelessWidget {
   final String title;
   final String price;
   final String imageUrl;
+  final VoidCallback? onTap;
 
   const ProductCard({
     super.key,
     required this.title,
     required this.price,
     required this.imageUrl,
+    this.onTap,
   });
 
   @override
@@ -279,50 +324,53 @@ class ProductCard extends StatelessWidget {
       vertical: isDesktop ? 28 : (isTablet ? 24 : 18),
     );
 
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: SizedBox(
-              height: imageHeight,
-              width: double.infinity,
-              child: Image.asset(imageUrl, fit: BoxFit.cover),
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: SizedBox(
+                height: imageHeight,
+                width: double.infinity,
+                child: Image.asset(imageUrl, fit: BoxFit.cover),
+              ),
             ),
-          ),
-          Padding(
-            padding: contentPadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+            Padding(
+              padding: contentPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  price,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                  const SizedBox(height: 8),
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
