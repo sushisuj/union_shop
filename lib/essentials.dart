@@ -217,10 +217,10 @@ class _EssentialsPageState extends State<EssentialsPage> {
                         final crossAxisCount =
                             isDesktop ? 3 : (isTablet ? 2 : 1);
                         final childAspectRatio = isDesktop
-              ? 1.55 // prevents 27px overflow on desktop
-              : (isTablet
-                ? 0.95
-                : 0.55); // even further reduced to prevent overflow on mobile
+                            ? 1.55 // prevents 27px overflow on desktop
+                            : (isTablet
+                                ? 0.7
+                                : 0.35); // minimum aspect ratio for mobile
 
                         return GridView.builder(
                           shrinkWrap: true,
@@ -291,62 +291,70 @@ class ProductCard extends StatelessWidget {
     final bool isTablet = width >= 600 && width < 1024;
 
     final double imageHeight = isDesktop
-  ? 190 // slightly reduced for desktop
-  : (isTablet ? 160 : 130); // reduced for tablet/mobile
+        ? 190 // slightly reduced for desktop
+        : (isTablet ? 160 : 130); // reduced for tablet/mobile
     final EdgeInsets contentPadding = EdgeInsets.symmetric(
-  horizontal: 16,
-  vertical: isDesktop ? 20 : (isTablet ? 16 : 10),
+      horizontal: 16,
+      vertical: isDesktop ? 20 : (isTablet ? 16 : 10),
     );
 
     return InkWell(
       onTap: onTap,
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: isDesktop ? 220 : (isTablet ? 160 : 120),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ClipRRect(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(12)),
-              child: SizedBox(
-                height: imageHeight,
-                width: double.infinity,
-                child: Image.asset(imageUrl, fit: BoxFit.cover),
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(12)),
+                child: SizedBox(
+                  height: isDesktop ? 90 : (isTablet ? 60 : 40),
+                  width: double.infinity,
+                  child: Image.asset(imageUrl, fit: BoxFit.cover),
+                ),
               ),
-            ),
-            Padding(
-              padding: contentPadding,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: isDesktop ? 10 : (isTablet ? 6 : 4),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: isDesktop ? 13 : (isTablet ? 11 : 9),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    price,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
+                    const SizedBox(height: 2),
+                    Text(
+                      price,
+                      style: TextStyle(
+                        fontSize: isDesktop ? 12 : (isTablet ? 10 : 8),
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
