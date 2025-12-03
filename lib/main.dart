@@ -422,81 +422,53 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         const Spacer(),
-                        // Icons (search, person, bag, menu)
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 600),
-                          child: Wrap(
-                            spacing: 4,
-                            runSpacing: 4,
-                            crossAxisAlignment: WrapCrossAlignment.center,
+                        // Search icon (always visible, even on mobile)
+                        IconButton(
+                          icon: Icon(
+                            _showGlobalSearch ? Icons.close : Icons.search,
+                            size: 18,
+                            color: Colors.grey,
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: () {
+                            if (_showGlobalSearch) {
+                              _closeSearch();
+                            } else {
+                              setState(() => _showGlobalSearch = true);
+                              _globalSearchFocusNode.requestFocus();
+                              _refreshSearchOverlay();
+                            }
+                          },
+                        ),
+                        // Person and Cart icons (inside burger on mobile, visible on desktop/tablet)
+                        if (isMobile)
+                          PopupMenuButton<String>(
+                            icon: const Icon(Icons.menu,
+                                size: 24, color: Colors.deepPurple),
+                            onSelected: (value) {
+                              switch (value) {
+                                case 'login':
+                                  Navigator.pushNamed(context, '/login');
+                                  break;
+                                case 'cart':
+                                  Navigator.pushNamed(context, '/cart');
+                                  break;
+                              }
+                            },
+                            itemBuilder: (context) => const [
+                              PopupMenuItem(
+                                  value: 'login', child: Text('Account')),
+                              PopupMenuItem(value: 'cart', child: Text('Cart')),
+                            ],
+                          )
+                        else
+                          Row(
                             children: [
-                              SizedBox(
-                                width: isMobile ? 180 : 260,
-                                child: CompositedTransformTarget(
-                                  link: _searchFieldLink,
-                                  child: AnimatedContainer(
-                                    key: _searchFieldKey,
-                                    duration: const Duration(milliseconds: 200),
-                                    height: 36,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: _showGlobalSearch ? 12 : 0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: _showGlobalSearch
-                                          ? Colors.grey[100]
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(18),
-                                      boxShadow: _showGlobalSearch
-                                          ? const [
-                                              BoxShadow(
-                                                color: Colors.black12,
-                                                blurRadius: 6,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ]
-                                          : null,
-                                    ),
-                                    child: _showGlobalSearch
-                                        ? TextField(
-                                            controller: _globalSearchController,
-                                            focusNode: _globalSearchFocusNode,
-                                            decoration: const InputDecoration(
-                                              hintText:
-                                                  'Search the entire shop…',
-                                              border: InputBorder.none,
-                                            ),
-                                            onChanged: _onSearchChanged,
-                                          )
-                                        : const SizedBox.shrink(),
-                                  ),
-                                ),
-                              ),
                               IconButton(
-                                icon: Icon(
-                                  _showGlobalSearch
-                                      ? Icons.close
-                                      : Icons.search,
-                                  size: 18,
-                                  color: Colors.grey,
-                                ),
-                                padding: const EdgeInsets.all(8),
-                                constraints: const BoxConstraints(
-                                    minWidth: 32, minHeight: 32),
-                                onPressed: () {
-                                  if (_showGlobalSearch) {
-                                    _closeSearch();
-                                  } else {
-                                    setState(() => _showGlobalSearch = true);
-                                    _globalSearchFocusNode.requestFocus();
-                                    _refreshSearchOverlay();
-                                  }
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.person_outline,
-                                  color: Colors.grey,
-                                ),
+                                icon: const Icon(Icons.person_outline,
+                                    color: Colors.grey),
                                 onPressed: () {
                                   Navigator.pushNamed(context, '/login');
                                 },
@@ -506,38 +478,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Navigator.pushNamed(context, '/cart');
                                 },
                               ),
-                              if (isMobile)
-                                PopupMenuButton<String>(
-                                  icon: const Icon(Icons.menu,
-                                      size: 20, color: Colors.grey),
-                                  onSelected: (value) {
-                                    switch (value) {
-                                      case 'search':
-                                        setState(
-                                            () => _showGlobalSearch = true);
-                                        _globalSearchFocusNode.requestFocus();
-                                        _refreshSearchOverlay();
-                                        break;
-                                      case 'login':
-                                        Navigator.pushNamed(context, '/login');
-                                        break;
-                                      case 'cart':
-                                        Navigator.pushNamed(context, '/cart');
-                                        break;
-                                    }
-                                  },
-                                  itemBuilder: (_) => const [
-                                    PopupMenuItem(
-                                        value: 'search', child: Text('Search')),
-                                    PopupMenuItem(
-                                        value: 'login', child: Text('Account')),
-                                    PopupMenuItem(
-                                        value: 'cart', child: Text('Cart')),
-                                  ],
-                                ),
                             ],
                           ),
-                        ),
                       ],
                     ),
                   ),
