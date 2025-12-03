@@ -10,7 +10,7 @@ import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/printshack_page.dart';
 import 'package:union_shop/widgets/cart_icon_button.dart';
 import 'package:union_shop/checkout.dart';
-import 'package:union_shop/widgets/footer.dart';
+
 
 // test commit
 void main() {
