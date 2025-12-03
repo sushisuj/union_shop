@@ -16,8 +16,8 @@
 ## Intermediate (35%)
 
 - [x] Cart: Shopping cart page showing selected products and totals
-- [ ] Checkout: Checkout page with form for delivery and payment details
-- [ ] Order Confirmation: Page confirming order details after checkout
+- [x] Checkout: Checkout page with form for delivery and payment details
+- [x] Order Confirmation: Page confirming order details after checkout
 - [x] Product Search: Search bar or page to find products by name or category
 - [x] Product Filtering: Filter products by category, price, or other attributes
 - [x] Responsive Design: Pages adapt for desktop and mobile screens
@@ -33,10 +33,8 @@
 
 - [x] Git: Regular, small, meaningful commits with clear commit messages
 - [x] README: A comprehensive, well-formatted and accurate README file
-- [ ] Testing: Tests covering all or almost all of the application; passing tests
+- [x] Testing: Tests covering all or almost all of the application; passing tests
 - [ ] External Services: Integration and utilization of cloud services
 
 
 
-
-- [ ] Test Functions for all files
