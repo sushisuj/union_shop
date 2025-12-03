@@ -28,8 +28,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Get cart items (update this if you use a different cart state management)
     final cartItems = cartState.items.value;
+    final isMobile = MediaQuery.of(context).size.width < 700;
 
     return Scaffold(
       body: Column(
@@ -48,38 +48,38 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Expanded(
                         flex: 2,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 32, horizontal: 24),
+                          padding: EdgeInsets.symmetric(
+                              vertical: isMobile ? 16 : 32,
+                              horizontal: isMobile ? 8 : 24),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text(
+                              Text(
                                 'Express checkout',
                                 style: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: 16,
+                                  fontSize: isMobile ? 14 : 16,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: isMobile ? 8 : 16),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Expanded(
                                     child: SizedBox(
-                                      height: 48,
+                                      height: isMobile ? 38 : 48,
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Color(0xFF6C3DFF), // Purple
+                                          backgroundColor: Color(0xFF6C3DFF),
                                           foregroundColor: Colors.white,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
+                                            borderRadius: BorderRadius.circular(
+                                                isMobile ? 8 : 12),
                                           ),
-                                          textStyle: const TextStyle(
+                                          textStyle: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18,
+                                            fontSize: isMobile ? 15 : 18,
                                           ),
                                         ),
                                         onPressed: () {},
@@ -87,22 +87,21 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 16),
+                                  SizedBox(width: isMobile ? 8 : 16),
                                   Expanded(
                                     child: SizedBox(
-                                      height: 48,
+                                      height: isMobile ? 38 : 48,
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors
-                                              .black, // Black for GPay style
+                                          backgroundColor: Colors.black,
                                           foregroundColor: Colors.white,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
+                                            borderRadius: BorderRadius.circular(
+                                                isMobile ? 8 : 12),
                                           ),
-                                          textStyle: const TextStyle(
+                                          textStyle: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18,
+                                            fontSize: isMobile ? 15 : 18,
                                           ),
                                         ),
                                         onPressed: () {},
@@ -112,51 +111,58 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: isMobile ? 16 : 24),
                               Row(
-                                children: const [
+                                children: [
                                   Expanded(child: Divider(thickness: 1)),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: isMobile ? 6 : 12),
                                     child: Text(
                                       'OR',
                                       style: TextStyle(
                                           color: Colors.grey,
-                                          fontWeight: FontWeight.w500),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: isMobile ? 13 : 16),
                                     ),
                                   ),
                                   Expanded(child: Divider(thickness: 1)),
                                 ],
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: isMobile ? 16 : 24),
                               // Credit Card Input Fields
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     'Input Card Details',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18,
+                                      fontSize: isMobile ? 15 : 18,
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: isMobile ? 8 : 12),
                                   TextField(
                                     decoration: InputDecoration(
                                       labelText: 'Cardholder Name',
                                       border: OutlineInputBorder(),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: isMobile ? 10 : 14),
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: isMobile ? 8 : 12),
                                   TextField(
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                       labelText: 'Card Number',
                                       border: OutlineInputBorder(),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: isMobile ? 10 : 14),
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: isMobile ? 8 : 12),
                                   Row(
                                     children: [
                                       Expanded(
@@ -165,26 +171,39 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           decoration: InputDecoration(
                                             labelText: 'Expiry Date (MM/YY)',
                                             border: OutlineInputBorder(),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical:
+                                                        isMobile ? 10 : 14),
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 12),
+                                      SizedBox(width: isMobile ? 8 : 12),
                                       Expanded(
                                         child: TextField(
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
                                             labelText: 'CVV',
                                             border: OutlineInputBorder(),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical:
+                                                        isMobile ? 10 : 14),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: isMobile ? 8 : 12),
                                   TextField(
                                     decoration: InputDecoration(
                                       labelText: 'Billing Address',
                                       border: OutlineInputBorder(),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: isMobile ? 10 : 14),
                                     ),
                                   ),
                                 ],
@@ -197,29 +216,27 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Expanded(
                         flex: 2,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 32, horizontal: 24),
+                          padding: EdgeInsets.symmetric(
+                              vertical: isMobile ? 16 : 32,
+                              horizontal: isMobile ? 8 : 24),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Logo
                               Center(
                                 child: Image.network(
                                   'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                                  height: 60,
+                                  height: isMobile ? 40 : 60,
                                   fit: BoxFit.contain,
                                 ),
                               ),
-                              const SizedBox(height: 24),
-                              // Cart items list
+                              SizedBox(height: isMobile ? 16 : 24),
                               ...cartItems.map((item) => Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 16.0),
+                                    padding: EdgeInsets.only(
+                                        bottom: isMobile ? 10 : 16),
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        // Product details
                                         Expanded(
                                           child: Column(
                                             crossAxisAlignment:
@@ -227,51 +244,50 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                             children: [
                                               Text(
                                                 item.title,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
+                                                  fontSize: isMobile ? 14 : 16,
                                                 ),
                                               ),
                                               if (item.size != null)
                                                 Text(
                                                   item.size!,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14,
+                                                    fontSize:
+                                                        isMobile ? 12 : 14,
                                                   ),
                                                 ),
                                               if (item.message != null &&
                                                   item.message!.isNotEmpty)
                                                 Text(
                                                   item.message!,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14,
+                                                    fontSize:
+                                                        isMobile ? 12 : 14,
                                                   ),
                                                 ),
                                             ],
                                           ),
                                         ),
-                                        // Price and quantity
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
                                             Text(
                                               item.price,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 fontWeight: FontWeight.w500,
-                                                fontSize: 15,
+                                                fontSize: isMobile ? 13 : 15,
                                               ),
                                             ),
                                             if (item.quantity > 1)
                                               Container(
-                                                margin: const EdgeInsets.only(
-                                                    top: 4),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 2),
+                                                margin: EdgeInsets.only(
+                                                    top: isMobile ? 2 : 4),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8, vertical: 2),
                                                 decoration: BoxDecoration(
                                                   color: Colors.deepPurple[50],
                                                   borderRadius:
@@ -279,8 +295,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                 ),
                                                 child: Text(
                                                   'x${item.quantity}',
-                                                  style: const TextStyle(
-                                                    fontSize: 13,
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        isMobile ? 11 : 13,
                                                     color: Colors.deepPurple,
                                                   ),
                                                 ),
@@ -290,16 +307,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       ],
                                     ),
                                   )),
-                              const SizedBox(height: 24),
-                              // Discount codes field
-                              const Text(
+                              SizedBox(height: isMobile ? 16 : 24),
+                              Text(
                                 'Discount codes',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                  fontSize: isMobile ? 14 : 16,
                                 ),
                               ),
-                              const SizedBox(height: 12),
+                              SizedBox(height: isMobile ? 8 : 12),
                               Row(
                                 children: [
                                   Expanded(
@@ -311,12 +327,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                               left: Radius.circular(4)),
                                         ),
                                         contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 14),
+                                            horizontal: 12,
+                                            vertical: isMobile ? 10 : 14),
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 48,
+                                    height: isMobile ? 38 : 48,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Color(0xFF4d2963),
@@ -326,126 +343,111 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                               right: Radius.circular(4)),
                                         ),
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 24),
+                                            horizontal: isMobile ? 12 : 24),
                                       ),
-                                      onPressed: () {
-                                        // TODO: handle apply discount action
-                                      },
-                                      child: const Text(
+                                      onPressed: () {},
+                                      child: Text(
                                         'Apply',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           letterSpacing: 1.2,
+                                          fontSize: isMobile ? 13 : 16,
                                         ),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 32),
-                              // Subtotal and Shipping
+                              SizedBox(height: isMobile ? 20 : 32),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    'Subtotal',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
+                                  Text('Subtotal',
+                                      style: TextStyle(
+                                          fontSize: isMobile ? 13 : 16)),
                                   Text(
-                                    // Calculate subtotal from cart items
                                     '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
-                                    style: const TextStyle(fontSize: 16),
+                                    style:
+                                        TextStyle(fontSize: isMobile ? 13 : 16),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 12),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'Shipping',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  Text(
-                                    'Enter shipping address',
-                                    style: TextStyle(
-                                        fontSize: 16, color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 24),
-                              // Grand Total
+                              SizedBox(height: isMobile ? 8 : 12),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    'Total',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                  Text(
-                                    // Grand total is just subtotal for now (no shipping/tax)
-                                    '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22,
-                                    ),
-                                  ),
+                                  Text('Shipping',
+                                      style: TextStyle(
+                                          fontSize: isMobile ? 13 : 16)),
+                                  Text('n/a',
+                                      style: TextStyle(
+                                          fontSize: isMobile ? 13 : 16,
+                                          color: Colors.grey)),
                                 ],
                               ),
-                              const SizedBox(height: 24),
-                              Center(
-                                child: SizedBox(
-                                  width: 220,
-                                  height: 48,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF4d2963),
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      textStyle: const TextStyle(
+                              SizedBox(height: isMobile ? 16 : 24),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Total',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: isMobile ? 18 : 22)),
+                                  Text(
+                                    '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
+                                    style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    onPressed: () async {
-                                      showDialog(
-                                        context: context,
-                                        barrierDismissible: false,
-                                        builder: (context) => AlertDialog(
-                                          content: Row(
-                                            children: const [
-                                              CircularProgressIndicator(),
-                                              SizedBox(width: 16),
-                                              Expanded(
-                                                child: Text(
-                                                    'Processing Order, Hold on for a moment'),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                      await Future.delayed(
-                                          const Duration(seconds: 3));
-                                      if (mounted) {
-                                        Navigator.of(context)
-                                            .pop(); // Close dialog
-                                        Navigator.pushNamed(
-                                          context,
-                                          '/order-summary',
-                                          arguments: {'cardEnding': '1234'},
-                                        );
-                                      }
-                                    },
-                                    child: const Text('Place Order'),
+                                        fontSize: isMobile ? 18 : 22),
                                   ),
+                                ],
+                              ),
+                              SizedBox(height: isMobile ? 16 : 24),
+                              SizedBox(
+                                width: double.infinity,
+                                height: isMobile ? 38 : 48,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF4d2963),
+                                    foregroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    textStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: isMobile ? 15 : 18),
+                                  ),
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (context) => AlertDialog(
+                                        content: Row(
+                                          children: const [
+                                            CircularProgressIndicator(),
+                                            SizedBox(width: 16),
+                                            Expanded(
+                                              child: Text(
+                                                  'Processing Order, Hold on for a moment'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                    await Future.delayed(
+                                        const Duration(seconds: 3));
+                                    if (mounted) {
+                                      Navigator.of(context).pop();
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/order-summary',
+                                        arguments: {'cardEnding': '1234'},
+                                      );
+                                    }
+                                  },
+                                  child: const Text('Place Order'),
                                 ),
                               ),
                             ],
