@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartItem {
   final String title;
@@ -29,6 +31,41 @@ class CartItem {
 class CartState {
   final ValueNotifier<List<CartItem>> items = ValueNotifier<List<CartItem>>([]);
 
+  CartState() {
+    _loadCart();
+    items.addListener(_saveCart);
+  }
+
+  Future<void> _saveCart() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cartJson = jsonEncode(items.value
+        .map((item) => {
+              'title': item.title,
+              'size': item.size,
+              'price': item.price,
+              'quantity': item.quantity,
+              'message': item.message,
+            })
+        .toList());
+    await prefs.setString('cart', cartJson);
+  }
+
+  Future<void> _loadCart() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cartJson = prefs.getString('cart');
+    if (cartJson == null) return;
+    final List<dynamic> decoded = jsonDecode(cartJson);
+    items.value = decoded
+        .map((item) => CartItem(
+              title: item['title'],
+              size: item['size'],
+              price: item['price'],
+              quantity: item['quantity'],
+              message: item['message'],
+            ))
+        .toList();
+  }
+
   void addItem(CartItem item) {
     final existingIndex = items.value.indexWhere(
       (i) =>
@@ -39,13 +76,11 @@ class CartState {
     );
 
     if (existingIndex != -1) {
-      // If all fields (including message) match, increment quantity
       final updated = [...items.value];
       updated[existingIndex] = updated[existingIndex]
           .copyWith(quantity: updated[existingIndex].quantity + 1);
       items.value = updated;
     } else {
-      // Otherwise, add as a new cart item
       items.value = [...items.value, item];
     }
   }
