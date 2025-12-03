@@ -489,40 +489,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Search Bar (always visible at the top)
             if (_showGlobalSearch)
-              Container(
-                color: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  children: [
-                    // Back button (to close search)
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.grey),
-                      onPressed: () {
-                        _closeSearch();
-                      },
-                    ),
-                    // Expanded search field
-                    Expanded(
-                      child: TextField(
-                        controller: _globalSearchController,
-                        focusNode: _globalSearchFocusNode,
-                        onChanged: _onSearchChanged,
-                        decoration: InputDecoration(
-                          hintText: 'Search products...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide.none,
-                          ),
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 12),
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          prefixIcon: const Icon(Icons.search,
-                              color: Colors.deepPurple),
-                        ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                child: SizedBox(
+                  height: 44,
+                  child: CompositedTransformTarget(
+                    link: _searchFieldLink,
+                    child: TextField(
+                      key: _searchFieldKey,
+                      controller: _globalSearchController,
+                      focusNode: _globalSearchFocusNode,
+                      decoration: const InputDecoration(
+                        hintText: 'Search the entire shop…',
+                        border: OutlineInputBorder(),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       ),
+                      onChanged: _onSearchChanged,
                     ),
-                  ],
+                  ),
                 ),
               ),
 
