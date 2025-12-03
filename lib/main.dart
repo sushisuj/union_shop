@@ -1074,121 +1074,128 @@ class FooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: Colors.grey[50],
-      padding: const EdgeInsets.all(24),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Opening Times (Left)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                'Opening Times',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 8),
-              Text('Mon-Fri: 9am - 5pm', style: TextStyle(color: Colors.grey)),
-              Text('Sat: 10am - 4pm', style: TextStyle(color: Colors.grey)),
-              Text('Sun: Closed', style: TextStyle(color: Colors.grey)),
-            ],
-          ),
-          // Spacer to push the subscribe box to the center
-          Expanded(child: Container()),
-          // Email subscribe box (center)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'Latest Offers',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                width: MediaQuery.of(context).size.width < 500
-                    ? double.infinity
-                    : 400,
-                child: Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+        return Container(
+          width: double.infinity,
+          color: Colors.grey[50],
+          padding: const EdgeInsets.all(24),
+          child: isMobile
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Email address',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.horizontal(
-                                left: Radius.circular(4)),
-                          ),
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 14),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 48,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF4d2963),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.horizontal(
-                                right: Radius.circular(4)),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 24),
-                        ),
-                        onPressed: () {
-                          // TODO: handle subscribe action
-                        },
-                        child: const Text(
-                          'SUBSCRIBE',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Opening Times
+                    _footerOpeningTimes(),
+                    const SizedBox(height: 24),
+                    // Latest Offers
+                    _footerOffers(context),
+                    const SizedBox(height: 24),
+                    // Help and Information
+                    _footerHelpAndInfo(),
+                  ],
+                )
+              : Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _footerOpeningTimes(),
+                    Expanded(child: Container()),
+                    _footerOffers(context),
+                    Expanded(child: Container()),
+                    _footerHelpAndInfo(),
                   ],
                 ),
-              ),
-            ],
-          ),
-          // Spacer to push the help/info column to the right
-          Expanded(child: Container()),
-          // Help and Information (Right)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Help and Information',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              _FooterLink(
-                text: 'Search',
-                onTap:
-                    onSearchTap, // <-- This triggers scroll-to-top and opens searchbar
-              ),
-              _FooterLink(text: 'Terms and Conditions'),
-              _FooterLink(text: 'Contact Us'),
-              _FooterLink(text: 'FAQ'),
-            ],
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
+
+  // Helper methods for each section:
+  Widget _footerOpeningTimes() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Opening Times',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold)),
+          SizedBox(height: 8),
+          Text('Mon-Fri: 9am - 5pm', style: TextStyle(color: Colors.grey)),
+          Text('Sat: 10am - 4pm', style: TextStyle(color: Colors.grey)),
+          Text('Sun: Closed', style: TextStyle(color: Colors.grey)),
+        ],
+      );
+
+  Widget _footerOffers(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text('Latest Offers',
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87)),
+          const SizedBox(height: 12),
+          SizedBox(
+            width:
+                MediaQuery.of(context).size.width < 500 ? double.infinity : 400,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Email address',
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.horizontal(left: Radius.circular(4)),
+                      ),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 48,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF4d2963),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.horizontal(right: Radius.circular(4)),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 24),
+                    ),
+                    onPressed: () {
+                      // TODO: handle subscribe action
+                    },
+                    child: const Text(
+                      'SUBSCRIBE',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+
+  Widget _footerHelpAndInfo() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Help and Information',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold)),
+          const SizedBox(height: 8),
+          _FooterLink(text: 'Search'),
+          _FooterLink(text: 'Terms and Conditions'),
+          _FooterLink(text: 'Contact Us'),
+          _FooterLink(text: 'FAQ'),
+        ],
+      );
 }
