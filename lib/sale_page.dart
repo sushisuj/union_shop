@@ -258,12 +258,8 @@ class ProductCard extends StatelessWidget {
     final bool isTablet = width >= 600 && width < 1024;
 
     // Responsive heights and paddings
-    final double imageHeight = isDesktop
-        ? 218.0
-        : (isTablet ? 180.0 : 140.0);
-    final double verticalPadding = isDesktop
-        ? 41.0
-        : (isTablet ? 24.0 : 12.0);
+    final double imageHeight = isDesktop ? 218.0 : (isTablet ? 180.0 : 140.0);
+    final double verticalPadding = isDesktop ? 41.0 : (isTablet ? 24.0 : 12.0);
 
     return InkWell(
       onTap: onTap,
@@ -273,74 +269,77 @@ class ProductCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Responsive product image
-            ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-              child: SizedBox(
-                height: imageHeight,
-                width: double.infinity,
-                child: Image.asset(
-                  imageUrl,
-                  fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Responsive product image
+              ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(12)),
+                child: SizedBox(
+                  height: imageHeight,
+                  width: double.infinity,
+                  child: Image.asset(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            // Text block anchored at the bottom
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 16, vertical: verticalPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  if (salePrice != null) ...[
-                    Row(
-                      children: [
-                        Text(
-                          price,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          salePrice!,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ] else ...[
+              // Text block anchored at the bottom
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                    horizontal: 16, vertical: verticalPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      price,
+                      title,
                       style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
+                    const SizedBox(height: 6),
+                    if (salePrice != null) ...[
+                      Row(
+                        children: [
+                          Text(
+                            price,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            salePrice!,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ] else ...[
+                      Text(
+                        price,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
