@@ -929,8 +929,8 @@ class _HeroCarouselState extends State<_HeroCarousel> {
 
   final List<Widget> _slides = const [
     _HeroSlide(
-      background: NetworkImage(
-        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+      background: AssetImage(
+        'assets/postcard.jpg',
       ),
       title: 'Welcome to the Union Shop',
       subtitle: 'Check out all of our collections',
