@@ -1177,7 +1177,11 @@ class FooterWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              _FooterLink(text: 'Search'),
+              _FooterLink(
+                text: 'Search',
+                onTap:
+                    onSearchTap, // <-- This triggers scroll-to-top and opens searchbar
+              ),
               _FooterLink(text: 'Terms and Conditions'),
               _FooterLink(text: 'Contact Us'),
               _FooterLink(text: 'FAQ'),
