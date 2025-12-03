@@ -1,3 +1,4 @@
+
 ## Prompt Bank
 - This document will act as a library of prompts used throughout the development of this coursework for documentation and future reference.
 
@@ -208,20 +209,26 @@
 
 - Private Notes: This pattern uses a Row with Expanded buttons for equal sizing and spacing, and a Row with Divider widgets and a padded "OR" for a clean, modern express checkout look. The buttons are placeholders for future payment integrations.
 
-6. I want my cart to persist between app restarts so users don't lose their items. How can I implement cart persistence in Flutter?
+34. I want my cart to persist between app restarts so users don't lose their items. How can I implement cart persistence in Flutter?
 
 - Explanation of Generation: Added cart persistence using the shared_preferences package. The AI updated pubspec.yaml to include shared_preferences, then modified CartState to save cart items as JSON to local storage whenever the cart changes, and to load them on app start. Cart items are serialized and deserialized automatically, so the cart is restored after closing and reopening the app.
 
 - Private Notes: shared_preferences is a simple way to store key-value data locally in Flutter. Cart items are converted to JSON and saved as a string. On app start, the cart is loaded from storage and updates the ValueNotifier. This approach works for small data and is easy to implement. For more complex needs, consider Hive or SQLite.
 
-7. I want to create an order summary page that shows the products ordered, the card ending in xxxx, a grand total, and a 'Continue Shopping' button that routes back to the homepage.
+35. I want to create an order summary page that shows the products ordered, the card ending in xxxx, a grand total, and a 'Continue Shopping' button that routes back to the homepage.
 
 - Explanation of Generation: Created a new OrderSummaryPage widget with a navbar, a title, and a list of ordered products. Added a field to display 'card ending in xxxx' using the value passed from checkout. Below the card info, a grand total is calculated from the cart items and displayed. At the bottom, a 'Continue Shopping' button was added, which routes the user back to the homepage when pressed. Navigation and argument passing were set up in main.dart and checkout.dart to ensure smooth flow.
 
 - Private Notes: The summary page uses the cart state to list products and calculate totals. The card ending is passed via route arguments. The button uses Navigator.pushNamed(context, '/') to return to the homepage. This pattern can be reused for other post-checkout flows or confirmation pages.
 
-8. I want to show a message when the user presses 'Place Order' on the checkout page. The message should say 'Processing Order, Hold on for a moment' for 3-5 seconds, then route to the order summary screen.
+36. I want to show a message when the user presses 'Place Order' on the checkout page. The message should say 'Processing Order, Hold on for a moment' for 3-5 seconds, then route to the order summary screen.
 
 - Explanation of Generation: Implemented a modal dialog with a spinner and the message 'Processing Order, Hold on for a moment' when the user presses 'Place Order'. The dialog appears for 3 seconds using Future.delayed, then automatically closes and routes to the order summary page. This provides feedback to the user and simulates a real-world order processing delay.
 
 - Private Notes: The dialog uses showDialog with barrierDismissible: false to prevent closing early. After the delay, Navigator.of(context).pop() closes the dialog, and Navigator.pushNamed routes to the summary. This pattern can be reused for other async actions or loading states in the app.
+
+37. After a user places an order and presses "Continue Shopping" on the order summary page, I want the cart to be automatically cleared.
+
+- Explanation of Generation: Added logic to the OrderSummaryPage so that when the "Continue Shopping" button is pressed, the cart is cleared by setting the cart items to an empty list before navigating to the home page.
+
+- Private Notes: This ensures users start with an empty cart after completing an order. The cart is managed using a ValueNotifier in CartState, and clearing is done by setting `cartState.items.value = []`. This logic is placed in the button's onPressed callback, so it runs every time the user continues shopping after an order.
