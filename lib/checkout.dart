@@ -373,7 +373,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       alignment: Alignment.centerRight,
                                       child: Text(
                                         '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
-                                        style: TextStyle(fontSize: isMobile ? 13 : 16),
+                                        style: TextStyle(
+                                            fontSize: isMobile ? 13 : 16),
                                       ),
                                     ),
                                   ),
