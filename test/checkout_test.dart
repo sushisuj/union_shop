@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/checkout.dart';
 import 'package:union_shop/cart_state.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 
 void main() {
   setUp(() {
+    // Mock shared_preferences before any test runs
+    SharedPreferences.setMockInitialValues({});
     cartState.items.value = [
       CartItem(
         title: 'Test Product',
@@ -67,6 +71,7 @@ void main() {
     ));
     final placeOrderButton = find.widgetWithText(ElevatedButton, 'Place Order');
     expect(placeOrderButton, findsOneWidget);
+    await tester.ensureVisible(placeOrderButton);
     await tester.tap(placeOrderButton);
     await tester.pump();
     // Dialog should appear

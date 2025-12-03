@@ -363,13 +363,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Subtotal',
-                                      style: TextStyle(
-                                          fontSize: isMobile ? 13 : 16)),
-                                  Text(
-                                    '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
-                                    style:
-                                        TextStyle(fontSize: isMobile ? 13 : 16),
+                                  Expanded(
+                                    child: Text('Subtotal',
+                                        style: TextStyle(
+                                            fontSize: isMobile ? 13 : 16)),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
+                                        style: TextStyle(fontSize: isMobile ? 13 : 16),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -378,13 +384,20 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Shipping',
-                                      style: TextStyle(
-                                          fontSize: isMobile ? 13 : 16)),
-                                  Text('n/a',
-                                      style: TextStyle(
-                                          fontSize: isMobile ? 13 : 16,
-                                          color: Colors.grey)),
+                                  Expanded(
+                                    child: Text('Shipping',
+                                        style: TextStyle(
+                                            fontSize: isMobile ? 13 : 16)),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text('n/a',
+                                          style: TextStyle(
+                                              fontSize: isMobile ? 13 : 16,
+                                              color: Colors.grey)),
+                                    ),
+                                  ),
                                 ],
                               ),
                               SizedBox(height: isMobile ? 16 : 24),
@@ -392,15 +405,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Total',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: isMobile ? 18 : 22)),
-                                  Text(
-                                    '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: isMobile ? 18 : 22),
+                                  Expanded(
+                                    child: Text('Total',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: isMobile ? 18 : 22)),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        '£${cartItems.fold<double>(0, (sum, item) => sum + (double.tryParse(item.price.replaceAll('£', '')) ?? 0) * item.quantity).toStringAsFixed(2)}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: isMobile ? 18 : 22),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
