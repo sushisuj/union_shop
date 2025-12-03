@@ -22,6 +22,15 @@ class OrderSummaryPage extends StatelessWidget {
               fontSize: 28,
             ),
           ),
+          const SizedBox(height: 16),
+          const Text(
+            'Order successfully placed',
+            style: TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
+          ),
           const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -95,7 +104,7 @@ class OrderSummaryPage extends StatelessWidget {
                     )),
                 const SizedBox(height: 32),
                 Text(
-                  'Card ending in $cardEnding',
+                  'Paid with card $cardEnding',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.black87,
@@ -124,27 +133,40 @@ class OrderSummaryPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 Center(
-                  child: SizedBox(
-                    width: 220,
-                    height: 48,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF4d2963),
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Not done Shopping?',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.deepPurple,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      onPressed: () {
-                        cartState.items.value = [];
-                        Navigator.pushNamed(context, '/');
-                      },
-                      child: const Text('Continue Shopping'),
-                    ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        width: 220,
+                        height: 48,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          onPressed: () {
+                            cartState.items.value = [];
+                            Navigator.pushNamed(context, '/');
+                          },
+                          child: const Text('Continue Shopping'),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
