@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/printshack_page.dart';
-import 'package:union_shop/cart_state.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 
 void main() {

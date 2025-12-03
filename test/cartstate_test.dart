@@ -2,8 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/cart_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter/widgets.dart';
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(() async {
