@@ -124,7 +124,7 @@
 - Private Notes: Inline search bars can be toggled with a boolean flag and AnimatedContainer; remember to dispose the TextEditingController and clear it when hiding the bar so future filtering logic starts fresh.
 
 
-20. I want the new collapsible search bar on the home page to actually search across every product. As I type (e.g., “fleece”), show matching products in a dropdown panel directly under the search bar, and let me tap a result to navigate to that product page. Keep the filtering logic scoped to HomeScreen for now.
+20. I want the new collapsible search bar to actually search across every product. As I type (e.g., “fleece”), show matching products in a dropdown panel directly under the search bar, and let me tap a result to navigate to that product page. Keep the filtering logic scoped to HomeScreen for now.
 
 - Explanation of Generation: Added a master _allProducts list and _filtered results inside HomeScreen, wired _onSearchChanged to lowercase-filter titles, and rendered a dropdown ListView beneath the expanded search bar showing matches. Selecting a result navigates to ProductPage with the tapped product’s data, clears the query, and collapses the bar.
 
@@ -219,3 +219,9 @@
 - Explanation of Generation: Created a new OrderSummaryPage widget with a navbar, a title, and a list of ordered products. Added a field to display 'card ending in xxxx' using the value passed from checkout. Below the card info, a grand total is calculated from the cart items and displayed. At the bottom, a 'Continue Shopping' button was added, which routes the user back to the homepage when pressed. Navigation and argument passing were set up in main.dart and checkout.dart to ensure smooth flow.
 
 - Private Notes: The summary page uses the cart state to list products and calculate totals. The card ending is passed via route arguments. The button uses Navigator.pushNamed(context, '/') to return to the homepage. This pattern can be reused for other post-checkout flows or confirmation pages.
+
+8. I want to show a message when the user presses 'Place Order' on the checkout page. The message should say 'Processing Order, Hold on for a moment' for 3-5 seconds, then route to the order summary screen.
+
+- Explanation of Generation: Implemented a modal dialog with a spinner and the message 'Processing Order, Hold on for a moment' when the user presses 'Place Order'. The dialog appears for 3 seconds using Future.delayed, then automatically closes and routes to the order summary page. This provides feedback to the user and simulates a real-world order processing delay.
+
+- Private Notes: The dialog uses showDialog with barrierDismissible: false to prevent closing early. After the delay, Navigator.of(context).pop() closes the dialog, and Navigator.pushNamed routes to the summary. This pattern can be reused for other async actions or loading states in the app.
