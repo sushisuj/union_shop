@@ -1,7 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/cart_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:flutter/widgets.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+  });
   group('CartState', () {
     late CartState cartState;
 
@@ -67,6 +74,26 @@ void main() {
       cartState.decrementQuantity(1);
       cartState.decrementQuantity(0);
       expect(cartState.items.value, isEmpty);
+    });
+
+    test('should persist cart items using shared_preferences', () async {
+      final item = CartItem(
+        title: 'Persistent Product',
+        size: 'XL',
+        price: '£20.00',
+        quantity: 2,
+      );
+      cartState.addItem(item);
+      // Wait for save
+      await Future.delayed(const Duration(milliseconds: 100));
+      // Create a new CartState to simulate app restart
+      final newCartState = CartState();
+      await Future.delayed(const Duration(milliseconds: 100));
+      expect(newCartState.items.value.length, greaterThanOrEqualTo(1));
+      expect(
+          newCartState.items.value
+              .any((i) => i.title == 'Persistent Product' && i.quantity == 2),
+          isTrue);
     });
   });
 }
