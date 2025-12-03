@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
-
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -95,6 +95,28 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: OutlinedButton.icon(
+                        icon: Image.network(
+                          'https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png',
+                          width: 24,
+                          height: 24,
+                        ),
+                        label: const Text(
+                          'Continue with Google',
+                          style: TextStyle(
+                            color: Color(0xFF5C1FEE),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        onPressed: () {
+                          signInWithGoogle();
+                        },
+                      ),
+                    ),
                     const SizedBox(height: 28),
                     Row(
                       children: [
@@ -146,5 +168,12 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+Future<void> signInWithGoogle() async {
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  if (googleUser != null) {
+    // Proceed with authentication and account creation
   }
 }
