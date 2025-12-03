@@ -207,3 +207,9 @@
 - Explanation of Generation: The AI created a Column containing a "Express checkout" title, followed by a Row with two Expanded ElevatedButton widgets (one purple, one black) labeled "Button 1" and "Button 2." Below the buttons, a horizontal divider with the text "OR" centered between two lines was added. No additional content was placed beneath this section, matching the provided reference image.
 
 - Private Notes: This pattern uses a Row with Expanded buttons for equal sizing and spacing, and a Row with Divider widgets and a padded "OR" for a clean, modern express checkout look. The buttons are placeholders for future payment integrations.
+
+6. I want my cart to persist between app restarts so users don't lose their items. How can I implement cart persistence in Flutter?
+
+- Explanation of Generation: Added cart persistence using the shared_preferences package. The AI updated pubspec.yaml to include shared_preferences, then modified CartState to save cart items as JSON to local storage whenever the cart changes, and to load them on app start. Cart items are serialized and deserialized automatically, so the cart is restored after closing and reopening the app.
+
+- Private Notes: shared_preferences is a simple way to store key-value data locally in Flutter. Cart items are converted to JSON and saved as a string. On app start, the cart is loaded from storage and updates the ValueNotifier. This approach works for small data and is easy to implement. For more complex needs, consider Hive or SQLite.
