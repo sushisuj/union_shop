@@ -78,7 +78,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           ),
                                           textStyle: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: isMobile ? 15 : 18,
+                                            fontSize: isMobile ? 12 : 18,
                                           ),
                                         ),
                                         onPressed: () {},
@@ -100,7 +100,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           ),
                                           textStyle: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: isMobile ? 15 : 18,
+                                            fontSize: isMobile ? 12 : 18,
                                           ),
                                         ),
                                         onPressed: () {},
