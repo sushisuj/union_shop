@@ -4,7 +4,8 @@ import 'package:union_shop/cart_state.dart';
 
 class OrderSummaryPage extends StatelessWidget {
   final String cardEnding;
-  const OrderSummaryPage({Key? key, required this.cardEnding}) : super(key: key);
+  const OrderSummaryPage({Key? key, required this.cardEnding})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,8 @@ class OrderSummaryPage extends StatelessWidget {
                                   fontSize: 14,
                                 ),
                               ),
-                              if (item.message != null && item.message!.isNotEmpty)
+                              if (item.message != null &&
+                                  item.message!.isNotEmpty)
                                 Text(
                                   item.message!,
                                   style: const TextStyle(
@@ -72,7 +74,8 @@ class OrderSummaryPage extends StatelessWidget {
                               if (item.quantity > 1)
                                 Container(
                                   margin: const EdgeInsets.only(top: 4),
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 2),
                                   decoration: BoxDecoration(
                                     color: Colors.deepPurple[50],
                                     borderRadius: BorderRadius.circular(8),
