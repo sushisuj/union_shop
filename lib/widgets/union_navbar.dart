@@ -36,6 +36,10 @@ class UnionNavBar extends StatelessWidget {
                 child: Image.network(
                   'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                   height: 26,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                      Icons.image_not_supported,
+                      size: 26,
+                      color: Colors.grey),
                 ),
               ),
               const Spacer(),

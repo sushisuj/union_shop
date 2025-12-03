@@ -2,12 +2,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:union_shop/about_page.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
+import 'package:union_shop/printshack_page.dart';
+import 'package:union_shop/login_page.dart';
+import 'package:union_shop/cart_page.dart';
 
 void main() {
   testWidgets('AboutPage displays all main text sections',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
+        routes: {
+          '/print-shack': (context) => const PersonalisationPage(),
+          '/about': (context) => const AboutPage(),
+        },
         home: AboutPage(),
       ),
     );
@@ -32,6 +39,10 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
+        routes: {
+          '/print-shack': (context) => const PersonalisationPage(),
+          '/about': (context) => const AboutPage(),
+        },
         home: AboutPage(),
       ),
     );
@@ -42,7 +53,8 @@ void main() {
     // Tap the link and verify navigation intent (route name)
     await tester.tap(personalisationFinder);
     await tester.pumpAndSettle();
-    // You may want to mock or check Navigator.pushNamed was called with '/print-shack'
+    // Check that the PersonalisationPage is now present
+    expect(find.byType(PersonalisationPage), findsOneWidget);
   });
 
   testWidgets('Navbar search icon is present and clickable',
@@ -50,6 +62,10 @@ void main() {
     bool searchTapped = false;
     await tester.pumpWidget(
       MaterialApp(
+        routes: {
+          '/login': (context) => const LoginPage(),
+          '/cart': (context) => CartPage(),
+        },
         home: Scaffold(
           body: UnionNavBar(onSearchIconTap: () {
             searchTapped = true;
@@ -69,6 +85,10 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
+        routes: {
+          '/login': (context) => const LoginPage(),
+          '/cart': (context) => CartPage(),
+        },
         home: Scaffold(
           body: UnionNavBar(onSearchIconTap: () {}),
         ),
