@@ -487,6 +487,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
+
             // Hero Section
             const _HeroCarousel(),
 
