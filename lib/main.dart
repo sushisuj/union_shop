@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/about_page.dart';
@@ -10,7 +9,8 @@ import 'package:union_shop/sale_page.dart';
 import 'package:union_shop/cart_page.dart';
 import 'package:union_shop/printshack_page.dart';
 import 'package:union_shop/widgets/cart_icon_button.dart';
-import 'package:union_shop/checkout.dart'; // Add this import
+import 'package:union_shop/checkout.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 // test commit
 void main() {
