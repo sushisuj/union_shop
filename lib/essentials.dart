@@ -128,137 +128,136 @@ class _EssentialsPageState extends State<EssentialsPage> {
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Column(
-                    children: [
-                      // Navbar
-                      UnionNavBar(onSearchIconTap: _openSearchBar),
-                      if (_showSearchBar)
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: 'Search the entire shop...',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
-                                  ),
+                  // Navbar
+                  UnionNavBar(onSearchIconTap: _openSearchBar),
+                  if (_showSearchBar)
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Search the entire shop...',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(24),
                                 ),
                               ),
-                              IconButton(
-                                icon: Icon(Icons.close),
-                                onPressed: _closeSearchBar,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.close),
+                            onPressed: _closeSearchBar,
+                          ),
+                        ],
+                      ),
+                    ),
+                  // Search and Filter
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: _searchController,
+                            onChanged: (value) {
+                              setState(() {});
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'Search products...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Colors.grey.shade400,
+                                ),
                               ),
-                            ],
+                              prefixIcon: Icon(Icons.search),
+                            ),
                           ),
                         ),
-                      // Search and Filter
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                controller: _searchController,
-                                onChanged: (value) {
-                                  setState(() {});
-                                },
-                                decoration: InputDecoration(
-                                  hintText: 'Search products...',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey.shade400,
-                                    ),
-                                  ),
-                                  prefixIcon: Icon(Icons.search),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            DropdownButton<String>(
-                              value: _selectedCategory,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  _selectedCategory = newValue!;
-                                });
-                              },
-                              items: <String>[
-                                'All',
-                                'Jumpers',
-                                'Tee',
-                                'Merchandise'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              underline: Container(
-                                height: 2,
-                                color: Colors.grey.shade400,
-                              ),
-                            ),
-                          ],
+                        const SizedBox(width: 16),
+                        DropdownButton<String>(
+                          value: _selectedCategory,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedCategory = newValue!;
+                            });
+                          },
+                          items: <String>[
+                            'All',
+                            'Jumpers',
+                            'Tee',
+                            'Merchandise'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.grey.shade400,
+                          ),
                         ),
-                      ),
-                      // Products
-                      Padding(
-                        padding: const EdgeInsets.all(40.0),
-                        child: Builder(
-                          builder: (context) {
-                            final width = MediaQuery.of(context).size.width;
-                            final bool isDesktop = width >= 1024;
-                            final bool isTablet = width >= 600 && width < 1024;
+                      ],
+                    ),
+                  ),
+                  // Products
+                  Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Builder(
+                      builder: (context) {
+                        final width = MediaQuery.of(context).size.width;
+                        final bool isDesktop = width >= 1024;
+                        final bool isTablet = width >= 600 && width < 1024;
 
-                            final crossAxisCount =
-                                isDesktop ? 3 : (isTablet ? 2 : 1);
-                            final childAspectRatio = isDesktop
-                                ? 1.55 // prevents 27px overflow on desktop
-                                : (isTablet
-                                    ? 1.25
-                                    : 0.9); // prevents 43px overflow on mobile
+                        final crossAxisCount =
+                            isDesktop ? 3 : (isTablet ? 2 : 1);
+                        final childAspectRatio = isDesktop
+              ? 1.55 // prevents 27px overflow on desktop
+              : (isTablet
+                ? 0.95
+                : 0.55); // even further reduced to prevent overflow on mobile
 
-                            return GridView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: crossAxisCount,
-                                crossAxisSpacing: 24,
-                                mainAxisSpacing: 32,
-                                childAspectRatio: childAspectRatio,
-                              ),
-                              itemCount: _filteredProducts.length,
-                              itemBuilder: (context, index) {
-                                final product = _filteredProducts[index];
-                                return ProductCard(
-                                  title: product.title,
-                                  price: product.price,
-                                  imageUrl: product.imageUrl,
-                                  onTap: () {
-                                    if (_productDetailsMap.containsKey(product.title)) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ProductPage(
-                                            initialProduct: _productDetailsMap[product.title]!,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                );
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 24,
+                            mainAxisSpacing: 32,
+                            childAspectRatio: childAspectRatio,
+                          ),
+                          itemCount: _filteredProducts.length,
+                          itemBuilder: (context, index) {
+                            final product = _filteredProducts[index];
+                            return ProductCard(
+                              title: product.title,
+                              price: product.price,
+                              imageUrl: product.imageUrl,
+                              onTap: () {
+                                if (_productDetailsMap
+                                    .containsKey(product.title)) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductPage(
+                                        initialProduct:
+                                            _productDetailsMap[product.title]!,
+                                      ),
+                                    ),
+                                  );
+                                }
                               },
                             );
                           },
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
                   ),
                   FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
                 ],
@@ -266,31 +265,6 @@ class _EssentialsPageState extends State<EssentialsPage> {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class _NavTab extends StatelessWidget {
-  final String title;
-  final VoidCallback onTap;
-  const _NavTab({required this.title, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Color(0xFF4d2963),
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            decoration: TextDecoration.underline,
-          ),
-        ),
       ),
     );
   }
@@ -317,11 +291,11 @@ class ProductCard extends StatelessWidget {
     final bool isTablet = width >= 600 && width < 1024;
 
     final double imageHeight = isDesktop
-        ? 200 // down from 220 to remove the last 21px overflow
-        : (isTablet ? 190 : 160);
+  ? 190 // slightly reduced for desktop
+  : (isTablet ? 160 : 130); // reduced for tablet/mobile
     final EdgeInsets contentPadding = EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: isDesktop ? 28 : (isTablet ? 24 : 18),
+  horizontal: 16,
+  vertical: isDesktop ? 20 : (isTablet ? 16 : 10),
     );
 
     return InkWell(
@@ -333,9 +307,11 @@ class ProductCard extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12)),
               child: SizedBox(
                 height: imageHeight,
                 width: double.infinity,
@@ -346,6 +322,7 @@ class ProductCard extends StatelessWidget {
               padding: contentPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     title,
