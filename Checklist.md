@@ -25,7 +25,7 @@
 ## Advanced (25%)
 
 - [ ] Authentication System: Full user authentication and account management
-- [ ] Cart Management: Full cart functionality with quantity editing, price calculations, and persistence
+- [x] Cart Management: Full cart functionality with quantity editing, price calculations, and persistence
 - [x] Search System: Complete search functionality on navbar and footer
 
 
