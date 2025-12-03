@@ -52,7 +52,8 @@ void main() {
       expect(find.text('Fleece Jacket Womens'), findsOneWidget);
     });
 
-    testWidgets('shows sale price and strikethrough', (WidgetTester tester) async {
+    testWidgets('shows sale price and strikethrough',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
