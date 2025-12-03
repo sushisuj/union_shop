@@ -715,27 +715,29 @@ class ProductCard extends StatelessWidget {
           Navigator.pushNamed(context, '/product');
         }
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          imageWidget,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: textSpacing),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
-              SizedBox(height: textSpacing),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
-            ],
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            imageWidget,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: textSpacing),
+                Text(
+                  title,
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                  maxLines: 2,
+                ),
+                SizedBox(height: textSpacing),
+                Text(
+                  price,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1103,15 +1105,18 @@ class FooterWidget extends StatelessWidget {
                     _footerHelpAndInfo(),
                   ],
                 )
-              : Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _footerOpeningTimes(),
-                    Expanded(child: Container()),
-                    _footerOffers(context),
-                    Expanded(child: Container()),
-                    _footerHelpAndInfo(),
-                  ],
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _footerOpeningTimes(),
+                      SizedBox(width: 32),
+                      _footerOffers(context),
+                      SizedBox(width: 32),
+                      _footerHelpAndInfo(),
+                    ],
+                  ),
                 ),
         );
       },
