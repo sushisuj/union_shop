@@ -43,12 +43,19 @@ void main() {
   testWidgets('clears cart and navigates on continue shopping',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
-      home: const OrderSummaryPage(cardEnding: '5678'),
-      routes: {'/': (context) => const Scaffold(body: Text('Home'))},
+      initialRoute: '/order-summary',
+      routes: {
+        '/': (context) => const Scaffold(body: Text('Home')),
+        '/order-summary': (context) =>
+            const OrderSummaryPage(cardEnding: '5678'),
+      },
     ));
     await tester.pumpAndSettle();
     expect(cartState.items.value.isNotEmpty, isTrue);
-    await tester.tap(find.text('Continue Shopping'));
+    // Ensure the button is visible by scrolling if needed
+    final continueButton = find.text('Continue Shopping');
+    await tester.ensureVisible(continueButton);
+    await tester.tap(continueButton);
     await tester.pumpAndSettle();
     expect(cartState.items.value, isEmpty);
     expect(find.text('Home'), findsOneWidget);
