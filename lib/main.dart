@@ -1136,8 +1136,9 @@ class FooterWidget extends StatelessWidget {
                   color: Colors.black87)),
           const SizedBox(height: 12),
           SizedBox(
-            width:
-                MediaQuery.of(context).size.width < 500 ? double.infinity : 400,
+            width: MediaQuery.of(context).size.width < 500
+                ? double.infinity
+                : 400,
             child: Row(
               children: [
                 Expanded(
@@ -1145,11 +1146,11 @@ class FooterWidget extends StatelessWidget {
                     decoration: InputDecoration(
                       hintText: 'Email address',
                       border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.horizontal(left: Radius.circular(4)),
+                        borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(4)),
                       ),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
                     ),
                   ),
                 ),
@@ -1160,8 +1161,8 @@ class FooterWidget extends StatelessWidget {
                       backgroundColor: Color(0xFF4d2963),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.horizontal(right: Radius.circular(4)),
+                        borderRadius: BorderRadius.horizontal(
+                            right: Radius.circular(4)),
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 24),
                     ),
@@ -1192,9 +1193,7 @@ class FooterWidget extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
-          _FooterLink(
-              text: 'Search',
-              onTap: onSearchTap), // <-- Fix: wire the callback here
+          _FooterLink(text: 'Search'),
           _FooterLink(text: 'Terms and Conditions'),
           _FooterLink(text: 'Contact Us'),
           _FooterLink(text: 'FAQ'),
