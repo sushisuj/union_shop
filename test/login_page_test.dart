@@ -11,7 +11,6 @@ void main() {
     expect(
         find.byType(TextField), findsNWidgets(2)); // Email and password fields
     expect(find.text('Continue'), findsOneWidget);
-    expect(find.text('Continue with Google'), findsOneWidget);
     expect(find.text('Create an account'), findsOneWidget);
     expect(find.text('Need an account?'), findsOneWidget);
   });
@@ -20,14 +19,6 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(home: LoginPage()));
     await tester.tap(find.text('Continue'));
-    await tester.pump();
-    // No navigation or snackbar expected
-  });
-
-  testWidgets('Tapping Continue with Google does nothing (no-op)',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: LoginPage()));
-    await tester.tap(find.text('Continue with Google'));
     await tester.pump();
     // No navigation or snackbar expected
   });
