@@ -10,8 +10,11 @@ class FooterWidget extends StatelessWidget {
       width: double.infinity,
       color: Colors.grey[50],
       padding: const EdgeInsets.all(24),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.start,
+        spacing: 32,
+        runSpacing: 24,
         children: [
           // Opening Times (Left)
           Column(
@@ -31,23 +34,22 @@ class FooterWidget extends StatelessWidget {
               Text('Sun: Closed', style: TextStyle(color: Colors.grey)),
             ],
           ),
-          Expanded(child: Container()),
           // Email subscribe box (center)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'Latest Offers',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+          SizedBox(
+            width: 340,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  'Latest Offers',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              SizedBox(
-                width: 400,
-                child: Row(
+                const SizedBox(height: 12),
+                Row(
                   children: [
                     Expanded(
                       child: TextField(
@@ -88,10 +90,9 @@ class FooterWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          Expanded(child: Container()),
           // Help and Information (Right)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

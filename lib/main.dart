@@ -1148,7 +1148,9 @@ class FooterWidget extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               SizedBox(
-                width: 400,
+                width: MediaQuery.of(context).size.width < 500
+                    ? double.infinity
+                    : 400,
                 child: Row(
                   children: [
                     Expanded(
