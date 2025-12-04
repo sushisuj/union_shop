@@ -17,7 +17,7 @@ class CartItem {
     this.message, // <-- Add this line
   });
 
-  CartItem copyWith({int? quantity}) {
+  CartItem copyWith({int? quantity}) {  // allows you to adjust quantity in the cart
     return CartItem(
       title: title,
       size: size,
@@ -36,7 +36,7 @@ class CartState {
     items.addListener(_saveCart);
   }
 
-  Future<void> _saveCart() async {
+  Future<void> _saveCart() async { //saves cart to shared preferences (with a key)
     final prefs = await SharedPreferences.getInstance();
     final cartJson = jsonEncode(items.value
         .map((item) => {
@@ -50,7 +50,7 @@ class CartState {
     await prefs.setString('cart', cartJson);
   }
 
-  Future<void> _loadCart() async {
+  Future<void> _loadCart() async { //loads cart from shared preferences
     final prefs = await SharedPreferences.getInstance();
     final cartJson = prefs.getString('cart');
     if (cartJson == null) return;

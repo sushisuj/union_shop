@@ -13,7 +13,7 @@ class CartIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<List<CartItem>>(
+    return ValueListenableBuilder<List<CartItem>>( //ValueListenableBuilder rebuilds the widget if there is a change in value
       valueListenable: cartState.items,
       builder: (_, items, __) {
         final count =
