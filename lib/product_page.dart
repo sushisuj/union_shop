@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';

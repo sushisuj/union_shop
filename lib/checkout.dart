@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/cart_state.dart'; // For CartItem and cart logic

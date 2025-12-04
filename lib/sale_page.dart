@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, unused_element
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/widgets/footer.dart';
