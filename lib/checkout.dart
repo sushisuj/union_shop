@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, unnecessary_null_comparison
+// ignore_for_file: unused_element, unnecessary_null_comparison, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
