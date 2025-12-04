@@ -65,7 +65,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       const TextField(
-                        obscureText: true,
+                        obscureText: true, // hides the password input from user
                         decoration: InputDecoration(
                           labelText: 'Password',
                           border: OutlineInputBorder(
