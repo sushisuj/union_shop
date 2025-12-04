@@ -205,6 +205,18 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           vertical: isMobile ? 10 : 14),
                                     ),
                                   ),
+                                  SizedBox(height: isMobile ? 8 : 12),
+                                  // New: Basic Address Field
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      labelText: 'Delivery Address',
+                                      border: OutlineInputBorder(),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: isMobile ? 10 : 14),
+                                    ),
+                                    maxLines: isMobile ? 2 : 3,
+                                  ),
                                 ],
                               ),
                             ],
