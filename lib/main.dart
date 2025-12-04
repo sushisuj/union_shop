@@ -927,7 +927,7 @@ class _HeroCarouselState extends State<_HeroCarousel> {
   late final PageController _controller;
   int _currentPage = 0;
 
-  final List<Widget> _slides = const [
+  final List<Widget> _slides = const [ // Hero Section (slide)
     _HeroSlide(
       background: AssetImage(
         'assets/postcard.jpg',
