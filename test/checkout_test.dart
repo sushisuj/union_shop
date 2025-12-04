@@ -103,4 +103,9 @@ void main() {
       tester.binding.window.clearDevicePixelRatioTestValue();
     });
   });
+
+  testWidgets('Delivery address field is present', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: CheckoutPage()));
+    expect(find.widgetWithText(TextField, 'Delivery Address'), findsOneWidget);
+  });
 }
