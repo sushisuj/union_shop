@@ -116,7 +116,7 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                         final crossAxisCount =
                             isDesktop ? 3 : (isTablet ? 2 : 1);
                         final childAspectRatio =
-                            isDesktop ? 1.55 : (isTablet ? 0.7 : 0.35);
+                            isDesktop ? 1.55 : (isTablet ? 0.7 : 1.2);
                         return GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -130,9 +130,9 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                           itemCount: 1,
                           itemBuilder: (context, index) {
                             return ProductCard(
-                              title: 'Essential Grey Hoodie Mens',
-                              price: '£29.99',
-                              imageUrl: 'assets/grey_hoodie.png',
+                              title: 'Sandwich',
+                              price: '£1.99',
+                              imageUrl: 'assets/veg.png',
                               onTap: () {
                                 // You can add navigation to ProductPage here if desired
                               },
