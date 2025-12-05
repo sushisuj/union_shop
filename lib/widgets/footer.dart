@@ -79,7 +79,6 @@ class FooterWidget extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 24),
                         ),
                         onPressed: () {
-                          // TODO: handle subscribe action
                         },
                         child: const Text(
                           'SUBSCRIBE',
@@ -139,7 +138,6 @@ class _FooterLink extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: InkWell(
         onTap: () {
-          // TODO: Implement navigation for footer links
         },
         child: Text(
           text,
@@ -165,7 +163,6 @@ class MyHomePage extends StatelessWidget {
       duration: Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
-    // TODO: Open search
   }
 
   @override

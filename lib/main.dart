@@ -1179,7 +1179,6 @@ class FooterWidget extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 24),
                     ),
                     onPressed: () {
-                      // TODO: handle subscribe action
                     },
                     child: const Text(
                       'SUBSCRIBE',

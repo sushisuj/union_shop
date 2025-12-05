@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/collections_page.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
-import 'dart:ui';
 
 void main() {
   testWidgets('CollectionsPage renders navbar, title, grid, and footer',
