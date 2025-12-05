@@ -51,7 +51,7 @@ class _ProductPageState extends State<ProductPage> {
 
     final sizeOptions = LinkedHashSet<String>.from(
       (product.sizes.isNotEmpty)
-          ? product.sizes!
+          ? product.sizes
           : const ['One Size'],
     ).toList();
 
