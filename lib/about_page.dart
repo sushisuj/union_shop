@@ -262,7 +262,6 @@ class _ShopDropdownState extends State<_ShopDropdown> {
             Navigator.pushNamed(context, '/collections');
             break;
           case 'Winter':
-            // TODO: add winter route when available
             break;
         }
       },
