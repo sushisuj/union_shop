@@ -79,6 +79,7 @@ class FooterWidget extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 24),
                         ),
                         onPressed: () {
+                        
                         },
                         child: const Text(
                           'SUBSCRIBE',
@@ -138,6 +139,7 @@ class _FooterLink extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: InkWell(
         onTap: () {
+        
         },
         child: Text(
           text,
