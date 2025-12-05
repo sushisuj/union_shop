@@ -221,7 +221,7 @@ class _EssentialsPageState extends State<EssentialsPage> {
                             ? 1.55 // prevents 27px overflow on desktop
                             : (isTablet
                                 ? 0.7
-                                : 0.35); // minimum aspect ratio for mobile
+                                : 1.2); // minimum aspect ratio for mobile
 
                         return GridView.builder(
                           shrinkWrap: true,
