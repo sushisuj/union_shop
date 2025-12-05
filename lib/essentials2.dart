@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/essentials.dart';
+import 'package:union_shop/product_page.dart';
 
 class EssentialsPage2 extends StatefulWidget {
   const EssentialsPage2({super.key});
@@ -134,7 +135,12 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                               price: '£1.99',
                               imageUrl: 'assets/veg.png',
                               onTap: () {
-                                // You can add navigation to ProductPage here if desired
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductPage(),
+                                  ),
+                                );
                               },
                             );
                           },
