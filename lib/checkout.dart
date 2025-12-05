@@ -264,7 +264,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                               ),
                                               if (item.size != null)
                                                 Text(
-                                                  item.size!,
+                                                  item.size,
                                                   style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize:

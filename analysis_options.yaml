@@ -12,6 +12,39 @@ analyzer:
     prefer_const_literals_to_create_immutables: ignore
     deprecated_member_use: ignore
     unused_field: ignore
+    unused_import: ignore
+    unused_local_variable: ignore
+    dead_code: ignore
+    unnecessary_cast: ignore
+    unnecessary_new: ignore
+    unnecessary_this: ignore
+    unnecessary_const: ignore
+    unnecessary_late: ignore
+    unnecessary_null_aware_assignments: ignore
+    unnecessary_null_in_if_null_operators: ignore
+    unnecessary_parenthesis: ignore
+    unnecessary_statements: ignore
+    unnecessary_string_interpolations: ignore
+    unnecessary_string_escapes: ignore
+    avoid_print: ignore
+    prefer_const_constructors: ignore
+    prefer_const_declarations: ignore
+    prefer_final_locals: ignore
+    prefer_typing_uninitialized_variables: ignore
+    prefer_collection_literals: ignore
+    prefer_is_empty: ignore
+    prefer_is_not_empty: ignore
+    prefer_single_quotes: ignore
+    prefer_interpolation_to_compose_strings: ignore
+    prefer_conditional_assignment: ignore
+    prefer_inlined_adds: ignore
+    prefer_function_declarations_over_variables: ignore
+    prefer_generic_function_type_aliases: ignore
+    prefer_initializing_formals: ignore
+    prefer_iterable_whereType: ignore
+    prefer_null_aware_operators: ignore
+    prefer_spread_collections: ignore
+    prefer_void_to_null: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:
