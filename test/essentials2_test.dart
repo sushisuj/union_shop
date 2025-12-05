@@ -19,10 +19,10 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(home: EssentialsPage2()),
     );
-    // Open dropdown and select 'Merchandise'
+    // Open dropdown and select 'Jumpers'
     await tester.tap(find.byType(DropdownButton<String>));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Merchandise').last);
+    await tester.tap(find.text('Jumpers').last);
     await tester.pumpAndSettle();
     expect(find.text('Sandwich'), findsNothing);
   });
