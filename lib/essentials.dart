@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/essentials2.dart';
 
 class EssentialsPage extends StatefulWidget {
   const EssentialsPage({super.key});
@@ -259,6 +260,33 @@ class _EssentialsPageState extends State<EssentialsPage> {
                       },
                     ),
                   ),
+                    // Pagination navigation
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFF4d2963),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EssentialsPage2(),
+                                ),
+                              );
+                            },
+                            child: const Text('Next Page'),
+                          ),
+                        ],
+                      ),
+                    ),
                   FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
                 ],
               ),
