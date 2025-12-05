@@ -260,33 +260,48 @@ class _EssentialsPageState extends State<EssentialsPage> {
                       },
                     ),
                   ),
-                    // Pagination navigation
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF4d2963),
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                  // Pagination navigation (always visible above footer)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        OutlinedButton(
+                          onPressed: null, // No previous page on page 1
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EssentialsPage2(),
-                                ),
-                              );
-                            },
-                            child: const Text('Next Page'),
                           ),
-                        ],
-                      ),
+                          child:
+                              const Icon(Icons.arrow_left, color: Colors.grey),
+                        ),
+                        const SizedBox(width: 32),
+                        const Text(
+                          'Page 1 of 2',
+                          style: TextStyle(fontSize: 18, color: Colors.black54),
+                        ),
+                        const SizedBox(width: 32),
+                        OutlinedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EssentialsPage2(),
+                              ),
+                            );
+                          },
+                          style: OutlinedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child:
+                              const Icon(Icons.arrow_right, color: Colors.grey),
+                        ),
+                      ],
                     ),
+                  ),
                   FooterWidget(onSearchTap: _scrollToTopAndOpenSearch),
                 ],
               ),
