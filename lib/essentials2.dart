@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/union_navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/essentials.dart';
 
 class EssentialsPage2 extends StatefulWidget {
   const EssentialsPage2({super.key});
@@ -91,6 +92,41 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                   ),
                 ),
               ],
+            ),
+          ),
+          // Single product card in a GridView for consistent sizing
+          Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final width = MediaQuery.of(context).size.width;
+                final bool isDesktop = width >= 1024;
+                final bool isTablet = width >= 600 && width < 1024;
+                final crossAxisCount = isDesktop ? 3 : (isTablet ? 2 : 1);
+                final childAspectRatio =
+                    isDesktop ? 1.55 : (isTablet ? 0.7 : 0.35);
+                return GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 32,
+                    childAspectRatio: childAspectRatio,
+                  ),
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                      title: 'Essential Grey Hoodie Mens',
+                      price: '£29.99',
+                      imageUrl: 'assets/grey_hoodie.png',
+                      onTap: () {
+                        // You can add navigation to ProductPage here if desired
+                      },
+                    );
+                  },
+                );
+              },
             ),
           ),
           // Large space for future product content
