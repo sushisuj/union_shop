@@ -14,7 +14,39 @@ class EssentialsPage2 extends StatefulWidget {
 class _EssentialsPage2State extends State<EssentialsPage2> {
   final TextEditingController _searchController = TextEditingController();
   String _selectedCategory = 'All';
+  final ScrollController _scrollController = ScrollController();
   bool _showSearchBar = false;
+
+  final List<_Product> _products = [
+    _Product(
+      title: 'Sandwich',
+      price: '£1.99',
+      imageUrl: 'assets/veg.png',
+      category: 'Merchandise',
+    ),
+  ];
+
+  List<_Product> get _filteredProducts {
+    final query = _searchController.text.toLowerCase();
+    return _products.where((product) {
+      final matchesCategory =
+          _selectedCategory == 'All' || product.category == _selectedCategory;
+      final matchesQuery = product.title.toLowerCase().contains(query);
+      return matchesCategory && matchesQuery;
+    }).toList();
+  }
+
+  void _openSearchBar() {
+    setState(() {
+      _showSearchBar = true;
+    });
+  }
+
+  void _closeSearchBar() {
+    setState(() {
+      _showSearchBar = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +54,14 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
+            controller: _scrollController,
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const UnionNavBar(),
+                  UnionNavBar(onSearchIconTap: _openSearchBar),
                   if (_showSearchBar)
                     Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -46,11 +79,7 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                           ),
                           IconButton(
                             icon: Icon(Icons.close),
-                            onPressed: () {
-                              setState(() {
-                                _showSearchBar = false;
-                              });
-                            },
+                            onPressed: _closeSearchBar,
                           ),
                         ],
                       ),
@@ -63,9 +92,7 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                           child: TextField(
                             controller: _searchController,
                             onChanged: (value) {
-                              setState(() {
-                                // Update search query
-                              });
+                              setState(() {});
                             },
                             decoration: InputDecoration(
                               hintText: 'Search products...',
@@ -91,7 +118,7 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                             'All',
                             'Jumpers',
                             'Tee',
-                            'Merchandise'
+                            'Merchandise',
                           ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -106,7 +133,6 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                       ],
                     ),
                   ),
-                  // Single product card in a GridView for consistent sizing
                   Padding(
                     padding: const EdgeInsets.all(40.0),
                     child: LayoutBuilder(
@@ -118,6 +144,7 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                             isDesktop ? 3 : (isTablet ? 2 : 1);
                         final childAspectRatio =
                             isDesktop ? 1.55 : (isTablet ? 0.7 : 1.2);
+                        final products = _filteredProducts;
                         return GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -128,12 +155,13 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                             mainAxisSpacing: 32,
                             childAspectRatio: childAspectRatio,
                           ),
-                          itemCount: 1,
+                          itemCount: products.length,
                           itemBuilder: (context, index) {
+                            final product = products[index];
                             return ProductCard(
-                              title: 'Sandwich',
-                              price: '£1.99',
-                              imageUrl: 'assets/veg.png',
+                              title: product.title,
+                              price: product.price,
+                              imageUrl: product.imageUrl,
                               onTap: () {
                                 Navigator.push(
                                   context,
@@ -148,7 +176,6 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
                       },
                     ),
                   ),
-                  // Pagination navigation (always visible above footer)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 24.0),
                     child: Row(
@@ -194,4 +221,18 @@ class _EssentialsPage2State extends State<EssentialsPage2> {
       ),
     );
   }
+}
+
+class _Product {
+  final String title;
+  final String price;
+  final String imageUrl;
+  final String category;
+
+  _Product({
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.category,
+  });
 }
